@@ -14,7 +14,7 @@ public class FlyWheel extends SubsystemBase{
         leftMotor = new CANSparkMax(0, MotorType.kBrushless);
     }
 
-    public void start(double shooterSpeed)
+    public void start()
     {
         rightMotor.set(0.25);
         leftMotor.set(0.25);
