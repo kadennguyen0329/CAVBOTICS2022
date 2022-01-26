@@ -8,7 +8,7 @@ public class Index extends SubsystemBase{
     private CANSparkMax motor1;
     private CANSparkMax motor2;
 
-    public FlyWheel()
+    public Index()
     {
         motor1 = new CANSparkMax(0, MotorType.kBrushless);
         motor2 = new CANSparkMax(0, MotorType.kBrushless);
