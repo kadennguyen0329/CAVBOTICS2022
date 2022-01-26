@@ -18,6 +18,7 @@ public class ExampleSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+    for(int i = 0; i < 5; i++)
     System.out.println("adssa");
   }
 }
