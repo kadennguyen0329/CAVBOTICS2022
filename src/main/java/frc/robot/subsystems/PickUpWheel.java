@@ -8,7 +8,7 @@ public class PickUpWheel extends SubsystemBase{
     private CANSparkMax pickUpSpark;
 
     public PickUpWheel(){
-        pickUpSpark = new CANSparkMax(1, MotorType.kBrushless)    
+        pickUpSpark = new CANSparkMax(1, MotorType.kBrushless);    
     }
 
     public void setPower(double power){
