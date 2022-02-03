@@ -3,14 +3,15 @@ package frc.robot.commands;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.PickUpWheel;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 
 public class PickUpWheelCommand extends CommandBase {
-  private final PickUpWheelCommand m_subsystem;
+  private final PickUpWheel m_subsystem;
  
 
   public PickUpWheelCommand(PickUpWheel subsystem) {
     m_subsystem = subsystem;
-    addRequirements(subsystem);
+    addRequirements(m_subsystem);
   }
 
   @Override
@@ -24,6 +25,6 @@ public class PickUpWheelCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return (Constants.controller.getYButton());
   }
 }
