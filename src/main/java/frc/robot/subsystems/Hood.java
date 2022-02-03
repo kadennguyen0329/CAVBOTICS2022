@@ -3,20 +3,21 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.Constants;
 
 public class Hood extends SubsystemBase{
     private CANSparkMax hoodSpark;
     private CANSparkMax hoodSpark2;
 
     public Hood(){
-        hoodSpark = new CANSparkMax(0, MotorType.kBrushless);
-        hoodSpark2 = new CANSparkMax(1, MotorType.kBrushless);
+        hoodSpark = new CANSparkMax(Constants.hoodPort, MotorType.kBrushless);
+        hoodSpark2 = new CANSparkMax(Constants.hoodPort2, MotorType.kBrushless);
 
     }
     
-    public void start(){
-        hoodSpark.set(0.20);
-        hoodSpark2.set(0.20);
+    public void set(double p){
+        hoodSpark.set(p);
+        hoodSpark2.set(p)
     }
 
     public void stop(){
