@@ -18,10 +18,15 @@ public class PickUpWheelCommand extends CommandBase {
   public void initialize() {}
 
   @Override
-  public void execute() {}
+  public void execute() {
+    m_subsystem.setSpeed(.8);
+  
+  }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_subsystem.setSpeed(0);
+  }
 
   @Override
   public boolean isFinished() {
