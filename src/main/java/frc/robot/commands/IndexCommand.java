@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.Index;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 
 public class IndexCommand extends CommandBase{
     private Index c;
@@ -36,6 +37,6 @@ public class IndexCommand extends CommandBase{
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-      return false;
+      return Constants.controller.getAButton();
     }
 }
