@@ -12,7 +12,7 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase{
     private CANSparkMax intake;
     private Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    private DoubleSolenoid mainSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, 0, 1);
+    private DoubleSolenoid mainSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, Constants.mainSolenoid1, Constants.mainSolenoid2);
     public Intake(){
     intake = new CANSparkMax(0,MotorType.kBrushless);
     }
