@@ -7,8 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+<<<<<<< HEAD
 import frc.robot.subsystems.SwerveDriveTrain;
 import edu.wpi.first.wpilibj.*;
+=======
+import frc.robot.subsystems.Intake;
+import frc.robot.commands.IntakeCommand;
+>>>>>>> isabelle/intake
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,8 +25,12 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+<<<<<<< HEAD
   public SwerveDriveTrain swerveDrive;
   private XboxController controller;
+=======
+  private Intake intake;
+>>>>>>> isabelle/intake
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -29,8 +38,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+<<<<<<< HEAD
     swerveDrive = new SwerveDriveTrain(1.5, 3, 4, 1, 2, 5, 6, 7, 8);
     controller = new XboxController(0);
+=======
+    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+    // autonomous chooser on the dashboard.
+    m_robotContainer = new RobotContainer();
+    intake = new Intake();
+>>>>>>> isabelle/intake
   }
 
   /**
@@ -47,6 +63,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
+    new IntakeCommand(intake);
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
