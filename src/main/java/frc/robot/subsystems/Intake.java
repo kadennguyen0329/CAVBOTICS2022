@@ -12,10 +12,7 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase{
     private CANSparkMax intake;
     private Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    private DoubleSolenoid leftSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, 0, 1);
-    private DoubleSolenoid rightSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
-    private DoubleSolenoid spindexerSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 6, 7);
-
+    private DoubleSolenoid mainSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, 0, 1);
     public Intake(){
     intake = new CANSparkMax(0,MotorType.kBrushless);
     }
@@ -29,14 +26,12 @@ public class Intake extends SubsystemBase{
     }
 
     public void extend() {
-        leftSolenoid.toggle();
-        rightSolenoid.toggle();
+        mainSolenoid.toggle();
     }
 
     public void retract()
     {
-        leftSolenoid.toggle();
-        rightSolenoid.toggle();
+        mainSolenoid.toggle();
     }
     
 }
