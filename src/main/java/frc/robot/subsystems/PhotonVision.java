@@ -5,6 +5,7 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonTrackedTarget;
 import java.util.List;
 import org.photonvision.PhotonUtils;
+import frc.robot.Constants;
 
 public class PhotonVision extends SubsystemBase{
     private PhotonCamera camera;
@@ -27,8 +28,7 @@ public class PhotonVision extends SubsystemBase{
     }
     public double distanceFromTarget(){
         var result = camera.getLatestResult();
-        ///return PhotonUtils.calculateDistanceToTargetMeters(CAMERA_HEIGHT_METERS,TARGET_HEIGHT_METERS,CAMERA_PITCH_RADIANS,Math.toRadians(result.getBestTarget().getPitch()));
-        return 0.0;
+        return PhotonUtils.calculateDistanceToTargetMeters(Constants.CAMERA_HEIGHT_METERS, Constants.TARGET_HEIGHT_METERS, Constants.CAMERA_PITCH_RADIANS, Math.toRadians(result.getBestTarget().getPitch()));
     }
 
 }
