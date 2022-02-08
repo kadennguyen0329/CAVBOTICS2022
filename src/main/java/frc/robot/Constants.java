@@ -24,8 +24,9 @@ public final class Constants {
     public static final int flyWheelPort = 3;
     public static final int flyWheelPort2 = 4;
     public static final int indexPort = 5;
-    public static final int indexPort2 = 6;
     public static final int pickUpWheelPort = 7;
+    public static final int mainSolenoid1 = 0;
+    public static final int mainSolenoid2 = 1;
 
 
 }
