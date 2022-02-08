@@ -1,8 +1,8 @@
-package frc.robot;
+package frc.robot.commands;
 import com.revrobotics.*;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.frc.wpilibj.*;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class SwerveModule {
 
@@ -27,7 +27,7 @@ public class SwerveModule {
     }
 
     public void setCurrentAngle(double encPosition){
-        currentAngle = getConvertedAngle(encoderPosition);
+        currentAngle = getConvertedAngle(encPosition);
     }
 
     public double getConvertedAngle(double encoderPosition){
