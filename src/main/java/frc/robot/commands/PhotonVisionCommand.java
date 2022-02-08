@@ -7,7 +7,7 @@ public class PhotonVisionCommand extends CommandBase{
     public PhotonVisionCommand(PhotonVision subsystem) {
         m_subsystem = subsystem;
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+        addRequirements(m_subsystem);
       }
     
       // Called when the command is initially scheduled.
