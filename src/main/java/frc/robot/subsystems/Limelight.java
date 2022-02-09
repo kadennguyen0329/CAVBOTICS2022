@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.controller.PIDController;
 import frc.robot.Constants;
 
 
@@ -16,9 +15,8 @@ public class Limelight extends SubsystemBase{
     private final NetworkTableEntry xOffset = table.getEntry("tx");
     private final NetworkTableEntry yOffset = table.getEntry("ty");
     private final NetworkTableEntry angleOffset = table.getEntry("ts");
-    private PIDController turnController;
 
-    public LimeLight()
+    public Limelight()
     {
         pipeline.setNumber(1);
         
