@@ -17,7 +17,7 @@ public class Hood extends SubsystemBase{
     
     public void set(double p){
         hoodSpark.set(p);
-        hoodSpark2.set(p)
+        hoodSpark2.set(p);
     }
 
     public void stop(){
