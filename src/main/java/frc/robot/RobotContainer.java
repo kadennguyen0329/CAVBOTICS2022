@@ -18,6 +18,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.PhotonVision;
 import frc.robot.subsystems.PickUpWheel;
+import frc.robot.subsystems.Sensor;
 import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.PhotonVisionCommand;
@@ -39,6 +40,7 @@ public class RobotContainer {
   public final static Limelight limelight = new Limelight();
   public final static PhotonVision photonvision = new PhotonVision();
   public final static PickUpWheel pickUpWheel = new PickUpWheel();
+  public final static Sensor ultrasonics = new Sensor();
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -59,7 +61,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(Constants.controller, 4).whenPressed(new PickUpWheelCommand(pickUpWheel));
-    new JoystickButton(Constants.controller, 3).whenPressed(new IntakeCommand(intake));
+    new JoystickButton(Constants.controller, 3).whenPressed(new IntakeCommand(intake, ultrasonics));
     new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));
   }
 
