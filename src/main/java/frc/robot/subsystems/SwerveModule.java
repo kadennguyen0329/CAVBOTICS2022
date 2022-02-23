@@ -52,8 +52,6 @@ public class SwerveModule {
         if (turnComponent == 4){
             drive.setInverted(false);
         }
-
-
     }
 
     public double getEncoderPosition(){
@@ -72,7 +70,6 @@ public class SwerveModule {
         tempAngle *= 360;
 
         tempAngle *= -1;
-
         
         return tempAngle;
     }

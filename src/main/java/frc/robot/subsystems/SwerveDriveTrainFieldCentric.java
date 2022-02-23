@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.swerveDrive;
+import frc.robot.commands.SwerveDrive;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -58,7 +58,7 @@ public class SwerveDriveTrainFieldCentric extends SubsystemBase{
         mod3.reset();
         mod3.reset(); 
     
-        setDefaultCommand(new swerveDrive(this));
+        setDefaultCommand(new SwerveDrive(this));
     }
 
 

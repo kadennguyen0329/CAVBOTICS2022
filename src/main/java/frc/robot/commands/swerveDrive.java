@@ -4,11 +4,11 @@ import frc.robot.subsystems.SwerveDriveTrainFieldCentric;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class swerveDrive extends CommandBase {
+public class SwerveDrive extends CommandBase {
   private final SwerveDriveTrainFieldCentric swerveDriveTrainFieldCentric;
   private final XboxController remote;
   
-  public swerveDrive(SwerveDriveTrainFieldCentric _swerveDriveTrainFieldCentric) {
+  public SwerveDrive(SwerveDriveTrainFieldCentric _swerveDriveTrainFieldCentric) {
     swerveDriveTrainFieldCentric = _swerveDriveTrainFieldCentric;
     remote = new XboxController(0);
     addRequirements(_swerveDriveTrainFieldCentric);
