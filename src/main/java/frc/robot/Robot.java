@@ -7,12 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.*;
-=======
 import frc.robot.subsystems.Ultrasonic;
 import frc.robot.commands.UltrasonicCommand;
->>>>>>> neyugnnad31/Ultrasonic
+
+// Swerve Field Centric
+import frc.robot.subsystems.SwerveDriveTrainFieldCentric;
+import frc.robot.subsystems.SwerveModule;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -24,11 +25,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-<<<<<<< HEAD
+  SwerveDriveTrainFieldCentric swerve;
   private XboxController controller;
-=======
   private Ultrasonic ultrasonic;
->>>>>>> neyugnnad31/Ultrasonic
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -36,16 +35,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-<<<<<<< HEAD
     m_robotContainer = new RobotContainer();
+    swerve = new SwerveDriveTrainFieldCentric(1.5, 1, 2, 3, 4, 5, 6, 7, 8);
     controller = new XboxController(0);
-=======
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     ultrasonic = new Ultrasonic();
     new UltrasonicCommand(ultrasonic);
->>>>>>> neyugnnad31/Ultrasonic
   }
 
   /**
@@ -62,10 +59,6 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-<<<<<<< HEAD
-=======
-
->>>>>>> neyugnnad31/Ultrasonic
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -104,10 +97,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-<<<<<<< HEAD
-=======
-   
->>>>>>> neyugnnad31/Ultrasonic
+    swerve.updatePeriodic(controller.getLeftX(), controller.getLeftY(), controller.getRightX());
   }
 
   @Override
