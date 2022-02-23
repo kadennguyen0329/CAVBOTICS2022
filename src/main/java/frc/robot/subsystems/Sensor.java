@@ -13,7 +13,7 @@ public class Sensor extends SubsystemBase{
         Ultrasonic.setAutomaticMode(true);
     }
 
-    public boolean interIsClosed(){
+    public boolean innerIsClosed(){
         if(ultrasonic.getRangeInches()<3){
             return true;
         }

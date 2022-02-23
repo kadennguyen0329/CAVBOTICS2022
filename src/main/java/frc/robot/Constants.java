@@ -18,12 +18,13 @@ public final class Constants {
 
 
     public static final int intakePort = 0;
+    public static final int intakePort2 = 1;
     public static final XboxController controller = new XboxController(0);
-    public static final int hoodPort = 1;
-    public static final int hoodPort2 = 2;
-    public static final int flyWheelPort = 3;
-    public static final int flyWheelPort2 = 4;
-    public static final int indexPort = 5;
+    public static final int hoodPort = 2;
+    public static final int hoodPort2 = 3;
+    public static final int flyWheelPort = 4;
+    public static final int flyWheelPort2 = 5;
+    public static final int indexPort = 6;
     public static final int pickUpWheelPort = 7;
     public static final int mainSolenoid1 = 0;
     public static final int mainSolenoid2 = 1;
