@@ -18,32 +18,20 @@ public class IntakeCommand extends CommandBase{
       // Called when the command is initially scheduled.
       @Override
       public void initialize() {
-        intake.startInner();
-        intake.startOuter();
+        intake.spinIntake();
         intake.extend();
       }
     
       // Called every time the scheduler runs while the command is scheduled.
       @Override
       public void execute() {
-          if(ultrasonics.innerIsClosed()){
-            intake.stopInner();
-          }else{
-            intake.startInner();
-          }
-
-          if(ultrasonics.outerIsClosed()){
-            intake.stopOuter();
-          }else{
-            intake.startOuter();
-          }
+          intake.spinIntake();
       }
     
       // Called once the command ends or is interrupted.
       @Override
       public void end(boolean interrupted) {
-          intake.stopInner();
-          intake.stopOuter();
+          intake.stopIntake();
           intake.retract();
       }
     

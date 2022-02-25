@@ -10,32 +10,19 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase{
-    private CANSparkMax innerIntake;
-    private CANSparkMax outerIntake;
+    private CANSparkMax intake;    
     private Compressor compressor;
     private DoubleSolenoid mainSolenoid;
     
     public Intake(){
-    innerIntake = new CANSparkMax(Constants.intakePort,MotorType.kBrushless);
-    outerIntake = new CANSparkMax(Constants.intakePort2, MotorType.kBrushless);
+    intake = new CANSparkMax(Constants.intakePort,MotorType.kBrushless);
     mainSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, Constants.mainSolenoid1, Constants.mainSolenoid2);
     compressor = new Compressor(PneumaticsModuleType.CTREPCM);
     compressor.enableDigital();
     }
 
-    public void startInner(){
-        innerIntake.set(0.20);
-    }
-    public void startOuter(){
-        outerIntake.set(0.20);
-    }
-
-    public void stopInner(){
-        innerIntake.set(0.0);
-    }
-
-    public void stopOuter(){
-        outerIntake.set(0);
+    public void spinIntake(){
+        intake.set(.20);
     }
 
     public void extend() {
@@ -45,6 +32,10 @@ public class Intake extends SubsystemBase{
     public void retract()
     {
         mainSolenoid.toggle();
+    }
+
+    public void stopIntake(){
+        intake.set(0);
     }
     
 }

@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 
 public class IndexCommand extends CommandBase{
-    private Index c;
+    private Index indexer;
 
       /**
     * Creates a new ExampleCommand.
@@ -13,9 +13,9 @@ public class IndexCommand extends CommandBase{
     * @param subsystem The subsystem used by this command.
     */
     public IndexCommand(Index y) {
-    c = y;
+    indexer = y;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(y);
+    addRequirements(indexer);
     }
 
     // Called when the command is initially scheduled.
@@ -25,7 +25,7 @@ public class IndexCommand extends CommandBase{
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        c.start();
+        indexer.startInnerIndexer();
     }
 
     // Called once the command ends or is interrupted.
