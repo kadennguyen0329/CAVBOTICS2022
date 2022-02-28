@@ -1,17 +1,17 @@
 package frc.robot.commands;
-import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.Index;
 
-public class IntakeCommand extends CommandBase{
-    private Intake intake; 
+public class IndexCommand extends CommandBase{
+    private Index index; 
    // private Sensor ultrasonics;
     
-    public IntakeCommand(Intake x) {
-        intake = x;
+    public IndexCommand(Index x) {
+        index = x;
         //ultrasonics = y;
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(intake);
+        addRequirements(index);
       }
     
       // Called when the command is initially scheduled.
@@ -23,13 +23,13 @@ public class IntakeCommand extends CommandBase{
       // Called every time the scheduler runs while the command is scheduled.
       @Override
       public void execute() {
-          intake.spinIntake();
+          index.spinInnerIndex();
       }
     
       // Called once the command ends or is interrupted.
       @Override
       public void end(boolean interrupted) {
-          intake.stopIntake();
+          index.stopInnerIndex();
          // intake.retract();
       }
     

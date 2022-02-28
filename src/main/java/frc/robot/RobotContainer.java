@@ -11,20 +11,20 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.Flywheel;
-import frc.robot.subsystems.Hood;
+// import frc.robot.subsystems.Flywheel;
+// import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.PhotonVision;
-import frc.robot.subsystems.PickUpWheel;
-import frc.robot.subsystems.Sensor;
+// import frc.robot.subsystems.Limelight;
+// import frc.robot.subsystems.PhotonVision;
+// import frc.robot.subsystems.PickUpWheel;
+// import frc.robot.subsystems.Sensor;
 import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.PhotonVisionCommand;
-import frc.robot.commands.PickUpWheelCommand;
-import frc.robot.commands.TurnOnFlywheel;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+// import frc.robot.commands.PhotonVisionCommand;
+// import frc.robot.commands.PickUpWheelCommand;
+// import frc.robot.commands.TurnOnFlywheel;
+// import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -33,14 +33,14 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  public final static Flywheel flywheel = new Flywheel();
-  public final static Hood hood = new Hood();
+  /*public final static Flywheel flywheel = new Flywheel();
+  public final static Hood hood = new Hood(); */
   public final static Index index = new Index();
   public final static Intake intake = new Intake();
-  public final static Limelight limelight = new Limelight();
+  /*public final static Limelight limelight = new Limelight();
   public final static PhotonVision photonvision = new PhotonVision();
   public final static PickUpWheel pickUpWheel = new PickUpWheel();
-  public final static Sensor ultrasonics = new Sensor();
+  public final static Sensor ultrasonics = new Sensor();*/
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -60,9 +60,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(Constants.controller, 4).whenPressed(new PickUpWheelCommand(pickUpWheel));
+   /* new JoystickButton(Constants.controller, 4).whenPressed(new PickUpWheelCommand(pickUpWheel));
     new JoystickButton(Constants.controller, 3).whenPressed(new IntakeCommand(intake, ultrasonics));
-    new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));
+    new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));*/
+
+    new JoystickButton(Constants.controller, XboxController.Button.kX.value).whenPressed(new IndexCommand(index));
+    
   }
 
   /**

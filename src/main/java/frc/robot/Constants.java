@@ -23,7 +23,7 @@ public final class Constants {
     public static final int hoodPort2 = 3;
     public static final int flyWheelPort = 4;
     public static final int flyWheelPort2 = 5;
-    public static final int innerIndexPort = 6;
+    public static final int innerIndexPort = 9;
     public static final int outerIndexPort = 7;
     public static final int mainSolenoid1 = 0;
     public static final int mainSolenoid2 = 1;

@@ -12,13 +12,13 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase{
     private CANSparkMax intake;    
     private Compressor compressor;
-    private DoubleSolenoid mainSolenoid;
+    //private DoubleSolenoid mainSolenoid;
     
     public Intake(){
     intake = new CANSparkMax(Constants.intakePort,MotorType.kBrushless);
-    mainSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, Constants.mainSolenoid1, Constants.mainSolenoid2);
-    compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    compressor.enableDigital();
+    //mainSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, Constants.mainSolenoid1, Constants.mainSolenoid2);
+    //compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+    //compressor.enableDigital();
     }
 
     public void spinIntake(){
@@ -26,12 +26,12 @@ public class Intake extends SubsystemBase{
     }
 
     public void extend() {
-        mainSolenoid.toggle();
+        //mainSolenoid.toggle();
     }
 
     public void retract()
     {
-        mainSolenoid.toggle();
+        //mainSolenoid.toggle();
     }
 
     public void stopIntake(){

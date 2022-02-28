@@ -8,26 +8,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 
 public class Index extends SubsystemBase {
-   private CANSparkMax outerIndex;
    private CANSparkMax innerIndex; 
 
    public Index(){
        innerIndex = new CANSparkMax(Constants.innerIndexPort, MotorType.kBrushless);
-       outerIndex = new CANSparkMax(Constants.outerIndexPort, MotorType.kBrushless);
-
-
-   }
-
-   public void spinOuterIndex(){
-       outerIndex.set(.5);
    }
 
    public void spinInnerIndex(){
-       innerIndex.set(.5);
-   }
-
-   public void stopOuterIndex(){
-       outerIndex.set(0.0);
+       innerIndex.set(.2);
    }
 
    public void stopInnerIndex(){
