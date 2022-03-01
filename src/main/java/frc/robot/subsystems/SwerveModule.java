@@ -16,41 +16,25 @@ public class SwerveModule {
     private PIDController cont;
     private final double encoderTurnsPerModuleTurn;
     private double numRotations;
-    private int id;
 
-    public SwerveModule(int turnComponent, int driveComponent, int _id){
+    public SwerveModule(int turnComponent, int driveComponent){
 
         turn = new CANSparkMax(turnComponent, MotorType.kBrushless);
         drive = new CANSparkMax(driveComponent, MotorType.kBrushless);
-        id = _id;
         encoder = turn.getEncoder();
         //encoder will output 0 <= x <= 360, instantiating it to 90 to match WPILIB's Swerve Kinematics methods
-        MAX_SPEED = 12;
+        MAX_SPEED = 20;
         currentAngle = new Rotation2d(Math.PI / 2 * -1);
         //set the current angle to -90 to match swerve kinematics
-
-        if(id == 1) {
-            cont = new PIDController(0.004000, 0.00002, 0.00001);
-        }
-        else if(id == 2) {
-            cont = new PIDController(0.004000, 0.00002, 0.00001);
-        }
-        else if(id == 3) {
-            cont = new PIDController(0.004000, 0.00002, 0.00001);
-        }
-        else if(id == 4) {
-            cont = new PIDController(0.004000, 0.00002, 0.00001);
-        }
-
+        cont = new PIDController(0.004, 0.00002, 0.00001);
         cont.enableContinuousInput(-180, 180);
         encoderTurnsPerModuleTurn = 15;
         encoder.setPositionConversionFactor(1);
         numRotations = 11;
-        if (turnComponent == 6){
+        
+        
+        if (driveComponent == 2){
             drive.setInverted(true);
-        }
-        if (turnComponent == 4){
-            drive.setInverted(false);
         }
     }
 
@@ -70,7 +54,9 @@ public class SwerveModule {
         tempAngle *= 360;
 
         tempAngle *= -1;
+
         
+        //System.out.println("newGet() " + tempAngle);
         return tempAngle;
     }
 
@@ -93,7 +79,7 @@ public class SwerveModule {
             temp = 360 - temp;
         }
 
-        System.out.println("getAngle() " + temp);
+        //System.out.println("getAngle() " + temp);
         return temp;
     }
 
@@ -112,7 +98,17 @@ public class SwerveModule {
     //method to set the module angle and drive speed
     public void setModule(Rotation2d angle, double speed){
         //System.out.println("Setpoint: " + angle.getDegrees());
+        // if (cont.calculate(getAngle()) < 0){
+        //     turn.set(Math.max(cont.calculate(getAngle(), angle.getDegrees()), -0.15));    
+        // }
+        // else{
+        //     turn.set(Math.max(cont.calculate(getAngle(), angle.getDegrees()), 0.15));
+        // }
         turn.set(cont.calculate(getAngle(), angle.getDegrees()));
+
+        // System.out.println(getAngle());
+        // System.out.println(angle.getDegrees());
+        // System.out.println(cont.calculate(getAngle(), angle.getDegrees()));
         drive.set(speed / MAX_SPEED);
         this.setCurrentAngle();
         
