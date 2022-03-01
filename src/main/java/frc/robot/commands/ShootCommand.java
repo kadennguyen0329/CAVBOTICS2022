@@ -5,7 +5,6 @@ import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Flywheel;
 import frc.robot.subsystems.Sensor;
 
-
 public class ShootCommand extends CommandBase {
     private Flywheel flywheel;
     private Index index; 
@@ -22,7 +21,6 @@ public class ShootCommand extends CommandBase {
     public void initialize(){
         flywheel.start();
         
-
     }
 
     @Override
