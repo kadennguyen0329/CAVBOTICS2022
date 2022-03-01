@@ -27,6 +27,6 @@ public final class Constants {
     public static final int outerIndexPort = 7;
     public static final int mainSolenoid1 = 0;
     public static final int mainSolenoid2 = 1;
-
+    public static boolean isShooterReady = false;
 
 }
