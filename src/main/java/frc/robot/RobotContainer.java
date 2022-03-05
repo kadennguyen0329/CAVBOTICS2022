@@ -13,14 +13,16 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import frc.robot.subsystems.Flywheel;
 // import frc.robot.subsystems.Hood;
-import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Intake;
 // import frc.robot.subsystems.Limelight;
 // import frc.robot.subsystems.PhotonVision;
 // import frc.robot.subsystems.PickUpWheel;
 // import frc.robot.subsystems.Sensor;
-import frc.robot.commands.IndexCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.InnerIndexCommand;
+import frc.robot.commands.OuterIndexCommand;
+import frc.robot.subsystems.OuterIndex;
+import frc.robot.subsystems.InnerIndex;
 // import frc.robot.commands.PhotonVisionCommand;
 // import frc.robot.commands.PickUpWheelCommand;
 // import frc.robot.commands.TurnOnFlywheel;
@@ -37,9 +39,10 @@ import frc.robot.subsystems.Shooter;
 public class RobotContainer {
   /*public final static Flywheel flywheel = new Flywheel();
   public final static Hood hood = new Hood(); */
-  public final static Index index = new Index();
   public final static Intake intake = new Intake();
   public final static Shooter shooter = new Shooter();
+  public final static InnerIndex innerIndex = new InnerIndex();
+  public final static OuterIndex outerIndex = new OuterIndex();
   /*public final static Limelight limelight = new Limelight();
   public final static PhotonVision photonvision = new PhotonVision();
   public final static PickUpWheel pickUpWheel = new PickUpWheel();
@@ -68,9 +71,10 @@ public class RobotContainer {
     new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));*/
 
 
-    new JoystickButton(Constants.controller, 4).toggleWhenPressed(new ShootCommand(index, shooter, Constants.desiredRPM));
-    new JoystickButton(Constants.controller, 3).whenPressed(new IntakeCommand(intake));
-    new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));
+    new JoystickButton(Constants.controller, 4).toggleWhenPressed(new ShootCommand(innerIndex, outerIndex, shooter, Constants.desiredRPM));
+    new JoystickButton(Constants.controller, 3).toggleWhenPressed(new IntakeCommand(intake));
+    new JoystickButton(Constants.controller, 1).toggleWhenPressed(new InnerIndexCommand(innerIndex));
+    new JoystickButton(Constants.controller, 2).toggleWhenPressed(new OuterIndexCommand(outerIndex));
     
   }
 
