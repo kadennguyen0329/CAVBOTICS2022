@@ -11,8 +11,8 @@ public class Index extends SubsystemBase {
     private CANSparkMax outerIndex;
 
     public Index() {
-        innerIndex = new CANSparkMax(Constants.innerIndexPort, MotorType.kBrushless);
-        outerIndex = new CANSparkMax(Constants.outerIndexPort, MotorType.kBrushless);
+        innerIndex = new CANSparkMax(Constants.innerIndexId, MotorType.kBrushless);
+        outerIndex = new CANSparkMax(Constants.outerIndexId, MotorType.kBrushless);
     }
 
     public void spinInnerIndex() {

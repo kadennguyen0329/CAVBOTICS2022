@@ -14,9 +14,9 @@ public class Intake extends SubsystemBase {
     private DoubleSolenoid mainSolenoid;
 
     public Intake() {
-        intake = new CANSparkMax(Constants.intakePort, MotorType.kBrushless);
-        mainSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, Constants.mainSolenoid1,
-                Constants.mainSolenoid2);
+        intake = new CANSparkMax(Constants.intakeId, MotorType.kBrushless);
+        mainSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, Constants.mainSolenoidOne,
+                Constants.mainSolenoidTwo);
         compressor = new Compressor(PneumaticsModuleType.CTREPCM);
         compressor.enableDigital();
     }

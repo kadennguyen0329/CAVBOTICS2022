@@ -4,9 +4,7 @@ import frc.robot.subsystems.AutoAim;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SimpleHood;
 import frc.robot.subsystems.SwerveDriveTrain;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SwerveDrive extends CommandBase {
@@ -47,21 +45,18 @@ public class SwerveDrive extends CommandBase {
         System.out.println("Setting to : " + angle);
         // //SmartDashboard.putNumber("Hood", angle);
         hood.setHoodAngle(angle);
-        //System.out.println("Distance: " + aim.testDistance());
+        // System.out.println("Distance: " + aim.testDistance());
 
         // if (remote.getBButton()) {
-        //   double RPM = aim.getRPM();
-        //   // wheel.setWheel(RPM);
+        // double RPM = aim.getRPM();
+        // // wheel.setWheel(RPM);
         // }
       }
-    } 
-    else if(remote.getYButton()){
+    } else if (remote.getYButton()) {
       hood.hoodReset();
-    }
-    else if(remote.getStartButton()){
+    } else if (remote.getStartButton()) {
       wheel.setWheel(0.6);
-    }
-    else {
+    } else {
       swerveDriveTrain.updatePeriodic(remote.getLeftX(), remote.getLeftY(), -1 * remote.getRightX());
     }
   }

@@ -15,8 +15,8 @@ public class Flywheel extends SubsystemBase{
 
     public Flywheel(int v)
     {
-        rightMotor = new CANSparkMax(Constants.flyWheelPort, MotorType.kBrushless);
-        leftMotor = new CANSparkMax(Constants.flyWheelPort2, MotorType.kBrushless);
+        rightMotor = new CANSparkMax(Constants.flyWheelIdOne, MotorType.kBrushless);
+        leftMotor = new CANSparkMax(Constants.flyWheelIdTwo, MotorType.kBrushless);
         desiredRPM = v;
     }
 

@@ -10,8 +10,8 @@ public class Hood extends SubsystemBase{
     private CANSparkMax hoodSpark2;
 
     public Hood(){
-        hoodSpark = new CANSparkMax(Constants.hoodPort, MotorType.kBrushless);
-        hoodSpark2 = new CANSparkMax(Constants.hoodPort2, MotorType.kBrushless);
+        hoodSpark = new CANSparkMax(Constants.hoodIdOne, MotorType.kBrushless);
+        hoodSpark2 = new CANSparkMax(Constants.hoodIdTwo, MotorType.kBrushless);
 
     }
     
