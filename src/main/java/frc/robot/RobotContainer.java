@@ -25,6 +25,8 @@ import frc.robot.commands.IntakeCommand;
 // import frc.robot.commands.PickUpWheelCommand;
 // import frc.robot.commands.TurnOnFlywheel;
 // import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.ShootCommand;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -37,6 +39,7 @@ public class RobotContainer {
   public final static Hood hood = new Hood(); */
   public final static Index index = new Index();
   public final static Intake intake = new Intake();
+  public final static Shooter shooter = new Shooter();
   /*public final static Limelight limelight = new Limelight();
   public final static PhotonVision photonvision = new PhotonVision();
   public final static PickUpWheel pickUpWheel = new PickUpWheel();
@@ -64,7 +67,10 @@ public class RobotContainer {
     new JoystickButton(Constants.controller, 3).whenPressed(new IntakeCommand(intake, ultrasonics));
     new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));*/
 
-    new JoystickButton(Constants.controller, XboxController.Button.kX.value).whenPressed(new IndexCommand(index));
+
+    new JoystickButton(Constants.controller, 4).toggleWhenPressed(new ShootCommand(index, shooter, Constants.desiredRPM));
+    new JoystickButton(Constants.controller, 3).whenPressed(new IntakeCommand(intake));
+    new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));
     
   }
 

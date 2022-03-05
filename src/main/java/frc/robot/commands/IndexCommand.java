@@ -1,4 +1,5 @@
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Index;
@@ -9,15 +10,15 @@ public class IndexCommand extends CommandBase{
     
     public IndexCommand(Index x) {
         index = x;
-        //ultrasonics = y;
-        // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(index);
       }
     
       // Called when the command is initially scheduled.
       @Override
       public void initialize() {
-        //intake.extend();
+        index.spinOuterIndex();
+        Timer.delay(3);
+        index.spinInnerIndex();
       }
     
       // Called every time the scheduler runs while the command is scheduled.
@@ -30,7 +31,6 @@ public class IndexCommand extends CommandBase{
       @Override
       public void end(boolean interrupted) {
           index.stopInnerIndex();
-         // intake.retract();
       }
     
       // Returns true when the command should end.

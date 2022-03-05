@@ -22,9 +22,8 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Constants.controller.getYButton()) {
+  //bind to Y
       intake.spinIntake();
-    }
   }
 
   // Called once the command ends or is interrupted.
@@ -37,6 +36,6 @@ public class IntakeCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Constants.controller.getXButton();
+    return false;
   }
 }
