@@ -5,6 +5,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import frc.robot.classes.AnalogEncoder;
+import edu.wpi.first.wpilibj.ADIS16448_IMU;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SwerveModule {
 
@@ -12,38 +15,42 @@ public class SwerveModule {
     private CANSparkMax drive;
     public Rotation2d currentAngle;
     private final double MAX_SPEED;
-    private RelativeEncoder encoder;
+    private AnalogEncoder encoder;
     private PIDController cont;
-    private final double encoderTurnsPerModuleTurn;
-    private double numRotations;
+    private int port;
 
-    public SwerveModule(int turnComponent, int driveComponent){
+    public SwerveModule(int turnComponent, int driveComponent, int encoderPort){
 
         turn = new CANSparkMax(turnComponent, MotorType.kBrushless);
         drive = new CANSparkMax(driveComponent, MotorType.kBrushless);
-        encoder = turn.getEncoder();
+        encoder = new AnalogEncoder(encoderPort);
+        encoder.reset();
+        port = encoderPort;
         //encoder will output 0 <= x <= 360, instantiating it to 90 to match WPILIB's Swerve Kinematics methods
-        MAX_SPEED = 20;
+        MAX_SPEED = 8;
         currentAngle = new Rotation2d(Math.PI / 2 * -1);
         //set the current angle to -90 to match swerve kinematics
         cont = new PIDController(0.004, 0.00002, 0.00001);
-        cont.enableContinuousInput(-180, 180);
-        encoderTurnsPerModuleTurn = 15;
-        encoder.setPositionConversionFactor(1);
-        numRotations = 11;
-        
-        
-        if (driveComponent == 2){
+        cont.enableContinuousInput(-180, 180); // need to change this to correspond
+        if (turnComponent == 6){
             drive.setInverted(true);
         }
-    }
+        if (turnComponent == 4){
+            drive.setInverted(false);
+        }
+    
+        if (turnComponent == 5){
+            drive.setInverted(true);
+        }
 
-    public double getEncoderPosition(){
-        return encoder.getPosition();
+        if (turnComponent == 1){
+            drive.setInverted(false);
+        }
+
     }
 
     //convert current module position into 0 to 360
-    public double newGet(){
+    /*public double newGet(){
         double nativeUnits = 11.654; //the native units that equates to a full module rotation
         double tempAngle = encoder.getPosition();
         if (Math.abs(encoder.getPosition()) > nativeUnits){ //if the current encoder position is greater than one full rotation
@@ -56,14 +63,17 @@ public class SwerveModule {
         tempAngle *= -1;
 
         
-        //System.out.println("newGet() " + tempAngle);
+        System.out.println("newGet() " + tempAngle);
         return tempAngle;
-    }
+    } */
 
     // Gets the current radian value of the module using the current encoder value, converts to swerve kinematics's 0 to -180, 180 to 0 
     public double getAngle(){
-        double temp = this.newGet(); ///should be an angle between 0 and 360 for the full moduile
-        
+        encoder.update();
+        double temp = encoder.getBigAngle(); ///should be an angle between 0 and 360 for the full moduile
+        // if (this.port == 1){
+        //     SmartDashboard.putNumber("big angle", temp);
+        // }
         //first rotate the module angle by 90 degrees
         temp += 90;
 
@@ -78,8 +88,6 @@ public class SwerveModule {
         else{
             temp = 360 - temp;
         }
-
-        //System.out.println("getAngle() " + temp);
         return temp;
     }
 
@@ -98,14 +106,14 @@ public class SwerveModule {
     //method to set the module angle and drive speed
     public void setModule(Rotation2d angle, double speed){
         //System.out.println("Setpoint: " + angle.getDegrees());
-        // if (cont.calculate(getAngle()) < 0){
-        //     turn.set(Math.max(cont.calculate(getAngle(), angle.getDegrees()), -0.15));    
-        // }
-        // else{
-        //     turn.set(Math.max(cont.calculate(getAngle(), angle.getDegrees()), 0.15));
-        // }
-        turn.set(cont.calculate(getAngle(), angle.getDegrees()));
 
+        double setPoint = cont.calculate(getAngle(), angle.getDegrees());
+        if (setPoint < 0){
+            turn.set(Math.max(setPoint, -0.12));
+        }
+        else{
+            turn.set(Math.min(0.13, setPoint));
+        }
         // System.out.println(getAngle());
         // System.out.println(angle.getDegrees());
         // System.out.println(cont.calculate(getAngle(), angle.getDegrees()));
@@ -115,7 +123,5 @@ public class SwerveModule {
     }
 
     //creates a new analog potentiometer object to reinstantiate it to 90
-    public void reset(){
-        encoder.setPosition(0);
-    }
+
 }
