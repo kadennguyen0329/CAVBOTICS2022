@@ -19,9 +19,8 @@ public class IntakeCommand extends CommandBase {
 
   @Override
   public void execute() {
-    if (Constants.controller.getYButton()) {
+  //bind to Y
       intake.spinIntake();
-    }
   }
 
   @Override
@@ -32,6 +31,6 @@ public class IntakeCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Constants.controller.getXButton();
+    return false;
   }
 }

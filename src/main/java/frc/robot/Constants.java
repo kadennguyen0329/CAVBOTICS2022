@@ -51,4 +51,6 @@ public final class Constants {
     public static final int driveMotorThree = 6;
     public static final int turnMotorFour = 7;
     public static final int driveMotorFour = 8;
+
+    public static final int desiredRPM = 100;
 }
