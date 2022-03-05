@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public final class Constants {
 
 
-    public static final int intakePort = 0;
+    public static final int intakePort = 12;
     public static final XboxController controller = new XboxController(0);
     public static final int hoodPort = 2;
     public static final int hoodPort2 = 3;
@@ -27,6 +27,7 @@ public final class Constants {
     public static final int outerIndexPort = 7;
     public static final int mainSolenoid1 = 0;
     public static final int mainSolenoid2 = 1;
-    public static boolean isShooterReady = false;
-
+    public static final int pickupWheelId = 13;
+    public static final int shooterIdOne = 10;
+    public static final int shooterIdTwo = 14;
 }
