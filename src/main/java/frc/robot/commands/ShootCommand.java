@@ -2,17 +2,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Index;
+import frc.robot.subsystems.InnerIndex;
+import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
+import frc.robot.Constants;
 
 public class ShootCommand extends CommandBase {
-    private Index index;
+    private InnerIndex innerIndex;
+    private OuterIndex outerIndex;
     private Shooter shooter;
 
-    public ShootCommand(Index i, Shooter sh, int desiredRPM) {
-        index = i;
+    public ShootCommand(InnerIndex i, OuterIndex o, Shooter sh, int desiredRPM) {
+        innerIndex = i;
+        outerIndex = o;
         shooter = sh;
-        addRequirements(index, shooter);
+        addRequirements(innerIndex, outerIndex, shooter);
 
     }
 
@@ -24,14 +28,16 @@ public class ShootCommand extends CommandBase {
 
     @Override
     public void execute() {
-        index.spinInnerIndex();
-        index.spinOuterIndex();
+        if (shooter.isDesiredRPM(Constants.desiredRPM)) {
+            innerIndex.spin();
+            outerIndex.spin();
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
-        index.stopOuterIndex();
-        index.stopInnerIndex();
+        innerIndex.stop();
+        outerIndex.stop();
         shooter.setWheel(0);
     }
 

@@ -27,4 +27,9 @@ public class Shooter extends SubsystemBase {
         shooterLeft.set(RPM);
         shooterRight.set(-RPM);
     }
+
+    public boolean isDesiredRPM(double d){
+        return (shooterLeft.getEncoder().getVelocity() > d);
+
+    }
 }
