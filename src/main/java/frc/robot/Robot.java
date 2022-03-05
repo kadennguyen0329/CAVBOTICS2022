@@ -48,11 +48,6 @@ public class Robot extends TimedRobot {
 
   private int id;
 
-  /**
-   * This function is run when the robot is first started up and should be used
-   * for any
-   * initialization code.
-   */
   @Override
   public void robotInit() {
     motor1 = new CANSparkMax(1, MotorType.kBrushless);
@@ -98,7 +93,6 @@ public class Robot extends TimedRobot {
     if (Constants.controller.getRightBumperPressed())
       id--;
 
-    
     if (Constants.controller.getAButton()) {
 
       if (id == 0)
@@ -131,24 +125,23 @@ public class Robot extends TimedRobot {
         motor14.set(0.1);
       else if (id == 14)
         motor15.set(0.1);
-    }
-    else {
-        motor1.stopMotor();
-        motor2.stopMotor();
-        motor3.stopMotor();
-        motor4.stopMotor();
-        motor5.stopMotor();
-        motor6.stopMotor();
-        motor7.stopMotor();
-        motor8.stopMotor();
-        motor9.stopMotor();
-        motor10.stopMotor();
-        motor11.stopMotor();
-        motor12.stopMotor();
-        motor13.stopMotor();
-        motor14.stopMotor();
-        motor15.stopMotor();
-  
+    } else {
+      motor1.stopMotor();
+      motor2.stopMotor();
+      motor3.stopMotor();
+      motor4.stopMotor();
+      motor5.stopMotor();
+      motor6.stopMotor();
+      motor7.stopMotor();
+      motor8.stopMotor();
+      motor9.stopMotor();
+      motor10.stopMotor();
+      motor11.stopMotor();
+      motor12.stopMotor();
+      motor13.stopMotor();
+      motor14.stopMotor();
+      motor15.stopMotor();
+
     }
 
     SmartDashboard.putNumber("ID", id + 1);

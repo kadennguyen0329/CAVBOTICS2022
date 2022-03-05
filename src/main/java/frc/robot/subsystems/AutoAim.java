@@ -42,10 +42,11 @@ public class AutoAim {
         return Math.abs(distance * 2);
     }
 
-    public double testDistance(){
+    public double testDistance() {
         double distance = getXDistance();
         return distance;
     }
+
     public double getSpeed() {
         // Don't move the drivetrain if it's already within the tolerance
         return pid.calculate(this.getXOffset());
@@ -55,5 +56,11 @@ public class AutoAim {
         double baseRPM = 1500;
         double distance = getXDistance();
         return baseRPM + (distance * 50);
+    }
+
+    public double getHoodAngle()
+    {
+        //input the formula
+        return 0;
     }
 }

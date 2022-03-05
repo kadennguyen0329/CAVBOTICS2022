@@ -1,14 +1,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import frc.robot.Constants;
 
-
-public class Limelight extends SubsystemBase{
+public class Limelight extends SubsystemBase {
 
     private final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight-sam");
     private final NetworkTableEntry pipeline = table.getEntry("pipeline");
@@ -16,24 +13,20 @@ public class Limelight extends SubsystemBase{
     private final NetworkTableEntry yOffset = table.getEntry("ty");
     private final NetworkTableEntry angleOffset = table.getEntry("ts");
 
-    public Limelight()
-    {
+    public Limelight() {
         pipeline.setNumber(1);
-        
     }
 
-
-    public double getXOffset(){
+    public double getXOffset() {
         return xOffset.getDouble(-999);
     }
 
-    public double getYOffset(){
+    public double getYOffset() {
         return yOffset.getDouble(-999);
     }
 
-    public double getAngleOffset(){
+    public double getAngleOffset() {
         return angleOffset.getDouble(-999);
     }
 
-    
 }

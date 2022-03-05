@@ -52,13 +52,6 @@ public class SwerveDriveTrain extends SubsystemBase {
         var optimized3 = SwerveModuleState.optimize(moduleState[2], moduleBottomLeft.currentAngle);
         var optimized4 = SwerveModuleState.optimize(moduleState[3], moduleBottomRight.currentAngle);
 
-        // System.out.println("Current Angle: " +
-        // Math.toDegrees(mod1.currentAngle.getDegrees()));
-        // mod1.setCurrentAngle();
-        // System.out.println("Passing through these values, Angle: " +
-        // optimized1.angle.getDegrees() + " Speed: " + optimized1.speedMetersPerSecond
-        // + " Current Position: " + mod1.currentAngle.getDegrees());
-        // System.out.println("Setting angle to: " + optimized1.angle.getDegrees());
         moduleTopRight.setModule(optimized1.angle, optimized1.speedMetersPerSecond);
         moduleTopLeft.setModule(optimized2.angle, optimized2.speedMetersPerSecond);
         moduleBottomLeft.setModule(optimized3.angle, optimized3.speedMetersPerSecond);

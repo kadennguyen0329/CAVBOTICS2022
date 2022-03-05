@@ -19,9 +19,7 @@ public final class Constants {
     public static final XboxController controller = new XboxController(0);
 
     // Hood
-    public static final int hoodIdOne = 2;
-    public static final int hoodIdTwo = 3;
-
+    public static final int hoodId = 11;
     // Flywheel
     public static final int flyWheelIdOne = 4;
     public static final int flyWheelIdTwo = 5;
