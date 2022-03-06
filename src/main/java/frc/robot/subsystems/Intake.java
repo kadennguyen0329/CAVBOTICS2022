@@ -25,17 +25,18 @@ public class Intake extends SubsystemBase {
     }
 
     public void spinIntake() {
-        intake.set(.35);
+        intake.set(-.35);
     }
 
     public void extend() {
-        compressor.enableDigital();
-        mainSolenoid.toggle();
+        //mainSolenoid.toggle();
+        mainSolenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     public void retract() {
         //compressor.disable();
-        mainSolenoid.toggle();
+        //mainSolenoid.toggle();
+        mainSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void stopIntake() {
