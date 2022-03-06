@@ -8,7 +8,16 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.HoodCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.OuterIndexCommand;
+import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.AutoAim;
+import frc.robot.subsystems.Hood;
+import frc.robot.subsystems.InnerIndex;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.OuterIndex;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveDriveTrain;
 
 import edu.wpi.first.wpilibj.*;
@@ -56,6 +65,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putBoolean("Intake Status", Constants.intakeStatus);
+    SmartDashboard.putBoolean("Outer Index Status", Constants.outerIndexStatus);
+    SmartDashboard.putBoolean("Inner Index Status", Constants.innerIndexStatus);
     // Runs the Scheduler. This is responsible for polling buttons, adding
     // newly-scheduled
     // commands, running already-scheduled commands, removing finished or
@@ -81,6 +93,44 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    Intake intake = Constants.intake;
+    OuterIndex outerIndex = Constants.outerIndex;
+    Hood hood = Constants.hood;
+    InnerIndex innerIndex = Constants.innerIndex;
+    double desiredRPM = 0;
+    Shooter shooter = Constants.shooter;
+
+    Timer timer = new Timer();
+    timer.reset();
+
+    Command intakeCommand = new IntakeCommand(intake);
+    Command outerIndexCommand = new OuterIndexCommand(outerIndex);
+
+    while (timer.get() <= 2) {
+      swerve.updatePeriodic(0, 0.2, 0);
+    }
+
+    intakeCommand.cancel();
+    outerIndexCommand.cancel();
+
+    while (autoAim.hasTarget() == 0) {
+      swerve.updatePeriodic(0, 0, 0.3);
+    }
+
+    while (Math.abs(autoAim.getXOffset()) > 3) {
+      if (autoAim.getXOffset() < 0) {
+        swerve.updatePeriodic(0, 0, 0.2);
+      } else {
+        swerve.updatePeriodic(0, 0, -0.2);
+      }
+    }
+
+    Command hoodCommand = new HoodCommand(hood, autoAim);
+
+    Command shootCommand = new ShootCommand(innerIndex, outerIndex, shooter, desiredRPM);
+
+    hoodCommand.cancel();
+    shootCommand.cancel();
 
   }
 

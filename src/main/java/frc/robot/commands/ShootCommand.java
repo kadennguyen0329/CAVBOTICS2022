@@ -15,7 +15,7 @@ public class ShootCommand extends CommandBase {
     private double power;
     //private Hood hood;
 
-    public ShootCommand(InnerIndex i, OuterIndex o, Shooter sh, int desiredRPM) {
+    public ShootCommand(InnerIndex i, OuterIndex o, Shooter sh, double desiredRPM) {
         innerIndex = i;
         outerIndex = o;
         shooter = sh;
@@ -33,7 +33,7 @@ public class ShootCommand extends CommandBase {
     public void execute() {
         
         shooter.setWheel(power);
-        if (shooter.isDesiredRPM(Constants.desiredRPM)) {
+        if (power >= 0.6) {
             innerIndex.spin();
             outerIndex.spin();
         }else{
@@ -58,7 +58,7 @@ public class ShootCommand extends CommandBase {
          * }
          * return false;
          */
-        return Constants.controller.getYButtonPressed();
+        return false;
     }
 
 }

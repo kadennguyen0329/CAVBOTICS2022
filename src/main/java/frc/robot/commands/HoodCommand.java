@@ -29,6 +29,10 @@ public class HoodCommand extends CommandBase {
             angle = aim.setHoodAim();
             hood.setHoodAngle(angle);
         }
+        if (Constants.controller.getRightBumper()) {
+            angle = aim.setHoodAim();
+            hood.setHoodAngle(angle);
+        }
     }
 
     @Override

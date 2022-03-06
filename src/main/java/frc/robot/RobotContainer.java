@@ -44,11 +44,18 @@ public class RobotContainer {
   // private final ExampleCommand m_autCommand = new ExampleCommand(m_exampleSubsystem);
   /*public final static Flywheel flywheel = new Flywheel();
   public final static Hood hood = new Hood(); */
+  /*
   public final static Intake intake = new Intake();
   public final static Shooter shooter = new Shooter();
   public final static InnerIndex innerIndex = new InnerIndex();
   public final static OuterIndex outerIndex = new OuterIndex();
   public final static Climber climber = new Climber();
+  */
+  public final static Intake intake = Constants.intake;
+  public final static Shooter shooter = Constants.shooter;
+  public final static InnerIndex innerIndex = Constants.innerIndex;
+  public final static OuterIndex outerIndex = Constants.outerIndex;
+  public final static Climber climber = Constants.climber;
   /*public final static Limelight limelight = new Limelight();
   public final static PhotonVision photonvision = new PhotonVision();
   public final static PickUpWheel pickUpWheel = new PickUpWheel();
@@ -84,9 +91,9 @@ public class RobotContainer {
     // Start button outer intake 
     new JoystickButton(Constants.controller, XboxController.Button.kStart.value).toggleWhenPressed(new OuterIndexCommand(outerIndex));
     //Right bumper Extend Climber
-    new JoystickButton(Constants.controller, XboxController.Button.kRightBumper.value).toggleWhenPressed(new ExtendClimberCommand(climber));
+    //new JoystickButton(Constants.controller, XboxController.Button.kRightBumper.value).toggleWhenPressed(new ExtendClimberCommand(climber));
     //Left bumper Retract Climber
-    new JoystickButton(Constants.controller, XboxController.Button.kLeftBumper.value).toggleWhenPressed(new RetractClimberCommand(climber));
+    //new JoystickButton(Constants.controller, XboxController.Button.kLeftBumper.value).toggleWhenPressed(new RetractClimberCommand(climber));
 
 
   }

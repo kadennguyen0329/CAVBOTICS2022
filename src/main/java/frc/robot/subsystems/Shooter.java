@@ -30,7 +30,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public boolean isDesiredRPM(double d){
-        return (shooterLeft.getEncoder().getVelocity() > d);
+        return (shooterLeft.get() > d);
 
     }
 }

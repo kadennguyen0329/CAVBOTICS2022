@@ -17,7 +17,7 @@ public class OuterIndex extends SubsystemBase{
     }
 
     public void spin(){
-        innerIndex.set(-0.25);
+        innerIndex.set(-0.2);
     }
 
     public void stop(){

@@ -23,7 +23,7 @@ public class Hood extends SubsystemBase {
         encoder = hood.getEncoder();
         pid = hood.getPIDController();
         pid.setOutputRange(-0.30, 0.30);
-        pid.setP(0.17);
+        pid.setP(0.3);
         conversion = hoodRange / hoodLength;
     }
 

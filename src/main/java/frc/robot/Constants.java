@@ -2,6 +2,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Hood;
+import frc.robot.subsystems.InnerIndex;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.OuterIndex;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -57,5 +63,18 @@ public final class Constants {
     public static final int turnMotorFour = 7;
     public static final int driveMotorFour = 8;
 
-    public static final int desiredRPM = 100;
+    public static final double desiredRPM = 0.4;
+
+    // Smartdashboard states
+    public static boolean intakeStatus = false;
+    public static boolean outerIndexStatus = false;
+    public static boolean innerIndexStatus = false;
+
+    // Global subsytems
+    public final static Intake intake = new Intake();
+    public final static Shooter shooter = new Shooter();
+    public final static InnerIndex innerIndex = new InnerIndex();
+    public final static OuterIndex outerIndex = new OuterIndex();
+    public final static Climber climber = new Climber();
+    public final static Hood hood = new Hood();
 }
