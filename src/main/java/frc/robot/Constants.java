@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -17,6 +18,9 @@ import edu.wpi.first.wpilibj.XboxController;
 public final class Constants {
     // Xbox controller
     public static final XboxController controller = new XboxController(0);
+
+    // Swerve controller
+    public static final Joystick swerveController = new Joystick(1);
 
     // Hood
     public static final int hoodId = 11;

@@ -14,7 +14,6 @@ public class SwerveDrive extends CommandBase {
 
   public SwerveDrive(SwerveDriveTrain _swerveDriveTrainFieldCentric, AutoAim _autoAim) {
     swerveDriveTrain = _swerveDriveTrainFieldCentric;
-    // remote = new XboxController(0);
     aim = _autoAim;
     addRequirements(_swerveDriveTrainFieldCentric);
   }
@@ -39,7 +38,7 @@ public class SwerveDrive extends CommandBase {
       }
     }
 
-    swerveDriveTrain.updatePeriodic(Constants.controller.getLeftX(), Constants.controller.getLeftY(), Constants.controller.getRightX()*-1);
+    swerveDriveTrain.updatePeriodic(Constants.swerveController.getRawAxis(2), Constants.swerveController.getRawAxis(3), Constants.swerveController.getRawAxis(0)*-1);
   }
 
   @Override
