@@ -15,6 +15,7 @@ public class IntakeCommand extends CommandBase {
 
   @Override
   public void initialize() {
+    System.out.println("Solenoid current state: " + intake.getValue());
     intake.extend();
   }
 
@@ -34,6 +35,6 @@ public class IntakeCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return (Constants.controller.getBButtonPressed());
+    return false;
   }
 }

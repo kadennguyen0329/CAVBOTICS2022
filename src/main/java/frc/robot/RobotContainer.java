@@ -72,13 +72,13 @@ public class RobotContainer {
     new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));*/
 
     // Y button
-    new JoystickButton(Constants.controller, XboxController.Button.kY.value).whenPressed(new ShootCommand(innerIndex, outerIndex, shooter, Constants.desiredRPM));
+    new JoystickButton(Constants.controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootCommand(innerIndex, outerIndex, shooter, Constants.desiredRPM));
     // B button
-    new JoystickButton(Constants.controller, XboxController.Button.kB.value).whenPressed(new IntakeCommand(intake));
+    new JoystickButton(Constants.controller, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand(intake));
     // X button
     new JoystickButton(Constants.controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand(innerIndex));
-    // A button
-    new JoystickButton(Constants.controller, XboxController.Button.kStart.value).whenPressed(new OuterIndexCommand(outerIndex));
+    // Start button
+    new JoystickButton(Constants.controller, XboxController.Button.kStart.value).toggleWhenPressed(new OuterIndexCommand(outerIndex));
     
   }
 

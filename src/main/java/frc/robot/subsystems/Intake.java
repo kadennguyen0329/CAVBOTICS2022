@@ -18,6 +18,10 @@ public class Intake extends SubsystemBase {
         mainSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.mainSolenoidOne, Constants.mainSolenoidTwo);
         compressor = new Compressor(PneumaticsModuleType.REVPH);
         compressor.enableDigital();
+        System.out.println(getValue());
+        System.out.println(getValue());
+        System.out.println(getValue());
+        System.out.println(getValue());
     }
 
     public void spinIntake() {
@@ -30,12 +34,16 @@ public class Intake extends SubsystemBase {
     }
 
     public void retract() {
-        compressor.disable();
+        //compressor.disable();
         mainSolenoid.toggle();
     }
 
     public void stopIntake() {
         intake.set(0);
+    }
+
+    public DoubleSolenoid.Value getValue(){
+        return mainSolenoid.get();
     }
 
 }

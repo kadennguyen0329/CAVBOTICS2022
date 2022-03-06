@@ -31,6 +31,6 @@ public class OuterIndexCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (Constants.controller.getStartButtonPressed());
+        return false;
     }
 }
