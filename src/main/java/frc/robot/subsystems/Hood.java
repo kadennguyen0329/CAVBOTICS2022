@@ -15,7 +15,7 @@ public class Hood extends SubsystemBase {
 
     // The rotations of the motor per one length of the hood multiplied by the
     // native units of the encoder
-    private final double hoodLength = 5.8;
+    private final double hoodLength = 2.5;
     private final double hoodRange = 35;
 
     public Hood() {
@@ -23,7 +23,7 @@ public class Hood extends SubsystemBase {
         encoder = hood.getEncoder();
         pid = hood.getPIDController();
         pid.setOutputRange(-0.30, 0.30);
-        pid.setP(0.3);
+        pid.setP(0.18);
         conversion = hoodRange / hoodLength;
     }
 

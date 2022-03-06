@@ -29,7 +29,7 @@ public class SwerveDrive extends CommandBase {
   @Override
   public void execute() {
     if (Constants.controller.getAButton()) {
-      //if (aim.hasTarget() == 1) {
+      if (aim.hasTarget() == 1) {
         // while (aim.getXOffset() > 3) {
         //   double x = aim.getXOffset();
         //   if (x < 0) {
@@ -39,17 +39,17 @@ public class SwerveDrive extends CommandBase {
         //   }
         // }
 
-        //double angle = aim.setHoodAim();
-        double angle = 30;
+        double angle = aim.setHoodAim();
+        // double angle = 15;
         hood.setHoodAngle(angle);
         SmartDashboard.putNumber("angle", angle);
         System.out.println("Setting to: " + angle);
-        if (Constants.controller.getBButton()) {
-          double RPM = aim.getRPM();
-          // wheel.setWheel(RPM);
-        }
+        // if (Constants.controller.getBButton()) {
+        //   double RPM = aim.getRPM();
+        //   // wheel.setWheel(RPM);
+        // }
       }
-    //}
+    }
     if (Constants.controller.getRightBumper()) {
       hood.hoodReset();
     }
@@ -65,8 +65,8 @@ public class SwerveDrive extends CommandBase {
     //     }
     //   }
     // }
-    swerveDriveTrain.updatePeriodic(Constants.controller.getLeftX(), Constants.controller.getLeftY(),
-        Constants.controller.getRightX() * -1);
+    swerveDriveTrain.updatePeriodic(Constants.swerveController.getLeftX(), Constants.swerveController.getLeftY(),
+        Constants.swerveController.getRightX() * -1);
     // swerveDriveTrain.updatePeriodic(Constants.swerveController.getRawAxis(2),
     // Constants.swerveController.getRawAxis(3),
     // Constants.swerveController.getRawAxis(0)*-1);

@@ -63,7 +63,7 @@ public final class Constants {
     public static final int turnMotorFour = 7;
     public static final int driveMotorFour = 8;
 
-    public static final double desiredRPM = 0.4;
+    public static final double desiredRPM = 0.5;
 
     // Smartdashboard states
     public static boolean intakeStatus = false;

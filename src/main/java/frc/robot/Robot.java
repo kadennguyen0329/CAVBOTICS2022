@@ -65,9 +65,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putBoolean("Intake Status", Constants.intakeStatus);
-    SmartDashboard.putBoolean("Outer Index Status", Constants.outerIndexStatus);
-    SmartDashboard.putBoolean("Inner Index Status", Constants.innerIndexStatus);
+    SmartDashboard.putBoolean("Intake (B) Status", Constants.intakeStatus);
+    SmartDashboard.putBoolean("Outer Index (START) Status", Constants.outerIndexStatus);
+    SmartDashboard.putBoolean("Inner Index (X) Status", Constants.innerIndexStatus);
     // Runs the Scheduler. This is responsible for polling buttons, adding
     // newly-scheduled
     // commands, running already-scheduled commands, removing finished or

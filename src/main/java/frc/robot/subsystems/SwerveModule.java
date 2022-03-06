@@ -117,10 +117,10 @@ public class SwerveModule {
         double setPoint = cont.calculate(getAngle(), angle.getDegrees());
         if (setPoint < 0) {
             // 0.17
-            turn.set(Math.max(setPoint, -0.2));
+            turn.set(Math.max(setPoint, -0.17));
         } else {
             // 0.17 on normal surface
-            turn.set(Math.min(0.2, setPoint));
+            turn.set(Math.min(0.17, setPoint));
         }
         drive.set(speed / MAX_SPEED);
         this.setCurrentAngle();
