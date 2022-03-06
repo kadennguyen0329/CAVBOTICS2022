@@ -20,7 +20,7 @@ public final class Constants {
     public static final XboxController controller = new XboxController(0);
 
     // Swerve controller
-    public static final Joystick swerveController = new Joystick(1);
+    public static final XboxController swerveController = new XboxController(1);
 
     // Hood
     public static final int hoodId = 11;

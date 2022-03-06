@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ExtendClimberCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -21,6 +22,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.InnerIndexCommand;
 import frc.robot.commands.OuterIndexCommand;
+import frc.robot.commands.RetractClimberCommand;
 import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.InnerIndex;
 // import frc.robot.commands.PhotonVisionCommand;
@@ -29,6 +31,7 @@ import frc.robot.subsystems.InnerIndex;
 // import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Climber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -45,6 +48,7 @@ public class RobotContainer {
   public final static Shooter shooter = new Shooter();
   public final static InnerIndex innerIndex = new InnerIndex();
   public final static OuterIndex outerIndex = new OuterIndex();
+  public final static Climber climber = new Climber();
   /*public final static Limelight limelight = new Limelight();
   public final static PhotonVision photonvision = new PhotonVision();
   public final static PickUpWheel pickUpWheel = new PickUpWheel();
@@ -71,15 +75,20 @@ public class RobotContainer {
     new JoystickButton(Constants.controller, 3).whenPressed(new IntakeCommand(intake, ultrasonics));
     new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));*/
 
-    // Y button
+    // Y button shoot
     new JoystickButton(Constants.controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootCommand(innerIndex, outerIndex, shooter, Constants.desiredRPM));
-    // B button
+    // B button intake
     new JoystickButton(Constants.controller, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand(intake));
-    // X button
+    // X button inner index
     new JoystickButton(Constants.controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand(innerIndex));
-    // Start button
+    // Start button outer intake 
     new JoystickButton(Constants.controller, XboxController.Button.kStart.value).toggleWhenPressed(new OuterIndexCommand(outerIndex));
-    
+    //Right bumper Extend Climber
+    new JoystickButton(Constants.controller, XboxController.Button.kRightBumper.value).toggleWhenPressed(new ExtendClimberCommand(climber));
+    //Left bumper Retract Climber
+    new JoystickButton(Constants.controller, XboxController.Button.kLeftBumper.value).toggleWhenPressed(new RetractClimberCommand(climber));
+
+
   }
 
   /**

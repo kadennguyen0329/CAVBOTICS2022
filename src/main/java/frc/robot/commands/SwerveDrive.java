@@ -37,8 +37,11 @@ public class SwerveDrive extends CommandBase {
         }
       }
     }
-
-    swerveDriveTrain.updatePeriodic(Constants.swerveController.getRawAxis(2), Constants.swerveController.getRawAxis(3), Constants.swerveController.getRawAxis(0)*-1);
+    swerveDriveTrain.updatePeriodic(Constants.swerveController.getLeftX(), Constants.swerveController.getLeftY(),
+        Constants.swerveController.getRightX() * -1);
+    // swerveDriveTrain.updatePeriodic(Constants.swerveController.getRawAxis(2),
+    // Constants.swerveController.getRawAxis(3),
+    // Constants.swerveController.getRawAxis(0)*-1);
   }
 
   @Override
