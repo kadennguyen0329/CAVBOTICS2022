@@ -25,22 +25,23 @@ public final class Constants {
     public static final int flyWheelIdTwo = 5;
 
     // Index IDs
-    public static final int innerIndexId = 9;
-    public static final int outerIndexId = 7;
+    public static final int innerIndexId = 12;
+    public static final int outerIndexId = 15;
     
     // Intake
-    public static final int intakeId = 12;
+    public static final int intakeId = 16;
 
     // Solenoid
-    public static final int mainSolenoidOne = 0;
-    public static final int mainSolenoidTwo = 1;
+    public static final int mainSolenoidOne = 14;
+    public static final int mainSolenoidTwo = 15;
 
-    // Pickup wheel
-    public static final int pickupWheelId = 13;
+    // Climber
+    public static final int leftArmID = 13;
+    public static final int rightArmID = 9;
 
     // Shooter
-    public static final int shooterIdOne = 10;
-    public static final int shooterIdTwo = 14;
+    public static final int shooterIdOne = 14;
+    public static final int shooterIdTwo = 10;
 
     // Swerve modules
     public static final int turnMotorOne = 1;

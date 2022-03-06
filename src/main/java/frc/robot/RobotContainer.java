@@ -37,6 +37,8 @@ import frc.robot.subsystems.Shooter;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  
+  // private final ExampleCommand m_autCommand = new ExampleCommand(m_exampleSubsystem);
   /*public final static Flywheel flywheel = new Flywheel();
   public final static Hood hood = new Hood(); */
   public final static Intake intake = new Intake();
@@ -46,7 +48,6 @@ public class RobotContainer {
   /*public final static Limelight limelight = new Limelight();
   public final static PhotonVision photonvision = new PhotonVision();
   public final static PickUpWheel pickUpWheel = new PickUpWheel();
-  public final static Sensor ultrasonics = new Sensor();*/
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -70,11 +71,14 @@ public class RobotContainer {
     new JoystickButton(Constants.controller, 3).whenPressed(new IntakeCommand(intake, ultrasonics));
     new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));*/
 
-
-    new JoystickButton(Constants.controller, 4).toggleWhenPressed(new ShootCommand(innerIndex, outerIndex, shooter, Constants.desiredRPM));
-    new JoystickButton(Constants.controller, 3).toggleWhenPressed(new IntakeCommand(intake));
-    new JoystickButton(Constants.controller, 1).toggleWhenPressed(new InnerIndexCommand(innerIndex));
-    new JoystickButton(Constants.controller, 2).toggleWhenPressed(new OuterIndexCommand(outerIndex));
+    // Y button
+    new JoystickButton(Constants.controller, XboxController.Button.kY.value).whenPressed(new ShootCommand(innerIndex, outerIndex, shooter, Constants.desiredRPM));
+    // B button
+    new JoystickButton(Constants.controller, XboxController.Button.kB.value).whenPressed(new IntakeCommand(intake));
+    // X button
+    new JoystickButton(Constants.controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand(innerIndex));
+    // A button
+    new JoystickButton(Constants.controller, XboxController.Button.kStart.value).whenPressed(new OuterIndexCommand(outerIndex));
     
   }
 
@@ -83,8 +87,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }
+  // public Command getAutonomousCommand() {
+  //   // An ExampleCommand will run in autonomous
+  //   return m_autoCommand;
+  // }
 }

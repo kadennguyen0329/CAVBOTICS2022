@@ -11,9 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.AutoAim;
 import frc.robot.subsystems.SwerveDriveTrain;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.*;
 
 // Swerve Field Centric
@@ -30,44 +27,15 @@ import edu.wpi.first.wpilibj.*;
 public class Robot extends TimedRobot {
   private SwerveDriveTrain swerve;
   private AutoAim autoAim;
-  private CANSparkMax motor1;
-  private CANSparkMax motor2;
-  private CANSparkMax motor3;
-  private CANSparkMax motor4;
-  private CANSparkMax motor5;
-  private CANSparkMax motor6;
-  private CANSparkMax motor7;
-  private CANSparkMax motor8;
-  private CANSparkMax motor9;
-  private CANSparkMax motor10;
-  private CANSparkMax motor11;
-  private CANSparkMax motor12;
-  private CANSparkMax motor13;
-  private CANSparkMax motor14;
-  private CANSparkMax motor15;
-
+  private RobotContainer m_RobotContainer;
+  private Command m_autoCommand;
   private int id;
 
   @Override
   public void robotInit() {
-    motor1 = new CANSparkMax(1, MotorType.kBrushless);
-    motor2 = new CANSparkMax(2, MotorType.kBrushless);
-    motor3 = new CANSparkMax(3, MotorType.kBrushless);
-    motor4 = new CANSparkMax(4, MotorType.kBrushless);
-    motor5 = new CANSparkMax(5, MotorType.kBrushless);
-    motor6 = new CANSparkMax(6, MotorType.kBrushless);
-    motor7 = new CANSparkMax(7, MotorType.kBrushless);
-    motor8 = new CANSparkMax(8, MotorType.kBrushless);
-    motor9 = new CANSparkMax(9, MotorType.kBrushless);
-    motor10 = new CANSparkMax(10, MotorType.kBrushless);
-    motor11 = new CANSparkMax(11, MotorType.kBrushless);
-    motor12 = new CANSparkMax(12, MotorType.kBrushed);
-    motor13 = new CANSparkMax(13, MotorType.kBrushless);
-    motor14 = new CANSparkMax(14, MotorType.kBrushless);
-    motor15 = new CANSparkMax(16, MotorType.kBrushless);
-    id = 0;
-
-    // swerve = new SwerveDriveTrain(1.5, 1, 2, 3, 4, 5, 6, 7, 8);
+    swerve = new SwerveDriveTrain(1.5);
+    m_RobotContainer = new RobotContainer();
+    // RobotContainer m_robotContainer = new RobotContainer();
     // swerve = new SwerveDriveTrainFieldCentric(1.5, 1, 2, 3, 4, 5, 6, 7, 8);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
@@ -88,64 +56,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if (Constants.controller.getLeftBumperPressed())
-      id++;
-    if (Constants.controller.getRightBumperPressed())
-      id--;
-
-    if (Constants.controller.getAButton()) {
-
-      if (id == 0)
-        motor1.set(0.1);
-      else if (id == 1)
-        motor2.set(0.1);
-      else if (id == 2)
-        motor3.set(0.1);
-      else if (id == 3)
-        motor4.set(0.1);
-      else if (id == 4)
-        motor5.set(0.1);
-      else if (id == 5)
-        motor6.set(0.1);
-      else if (id == 6)
-        motor7.set(0.1);
-      else if (id == 7)
-        motor8.set(0.1);
-      else if (id == 8)
-        motor9.set(0.1);
-      else if (id == 9)
-        motor10.set(0.1);
-      else if (id == 10)
-        motor11.set(0.1);
-      else if (id == 11)
-        motor12.set(0.1);
-      else if (id == 12)
-        motor13.set(0.1);
-      else if (id == 13)
-        motor14.set(0.1);
-      else if (id == 14)
-        motor15.set(0.1);
-    } else {
-      motor1.stopMotor();
-      motor2.stopMotor();
-      motor3.stopMotor();
-      motor4.stopMotor();
-      motor5.stopMotor();
-      motor6.stopMotor();
-      motor7.stopMotor();
-      motor8.stopMotor();
-      motor9.stopMotor();
-      motor10.stopMotor();
-      motor11.stopMotor();
-      motor12.stopMotor();
-      motor13.stopMotor();
-      motor14.stopMotor();
-      motor15.stopMotor();
-
-    }
-
-    SmartDashboard.putNumber("ID", id + 1);
-    // System.out.println(SmartDashboard.getNumber("motors1", 0));
     // Runs the Scheduler. This is responsible for polling buttons, adding
     // newly-scheduled
     // commands, running already-scheduled commands, removing finished or

@@ -15,14 +15,13 @@ public class Intake extends SubsystemBase {
 
     public Intake() {
         intake = new CANSparkMax(Constants.intakeId, MotorType.kBrushless);
-        mainSolenoid = new DoubleSolenoid(10, PneumaticsModuleType.CTREPCM, Constants.mainSolenoidOne,
-                Constants.mainSolenoidTwo);
-        compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+        mainSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.mainSolenoidOne, Constants.mainSolenoidTwo);
+        compressor = new Compressor(PneumaticsModuleType.REVPH);
         compressor.enableDigital();
     }
 
     public void spinIntake() {
-        intake.set(.20);
+        intake.set(.35);
     }
 
     public void extend() {

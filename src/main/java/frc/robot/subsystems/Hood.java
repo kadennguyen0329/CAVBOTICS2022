@@ -42,6 +42,7 @@ public class Hood extends SubsystemBase {
     }
 
     public void hoodReset() {
+        this.setHoodAngle(0);
         encoder.setPosition(0);
     }
 

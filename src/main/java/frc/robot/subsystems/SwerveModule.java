@@ -16,6 +16,7 @@ public class SwerveModule {
     private AnalogEncoder encoder;
     private PIDController cont;
     private int port;
+    private double currentSpeed;
 
     public SwerveModule(int turnComponent, int driveComponent, int encoderPort) {
 
@@ -24,6 +25,7 @@ public class SwerveModule {
         encoder = new AnalogEncoder(encoderPort);
         encoder.reset();
         port = encoderPort;
+        currentSpeed = 0;
         // encoder will output 0 <= x <= 360, instantiating it to 90 to match WPILIB's
         // Swerve Kinematics methods
         MAX_SPEED = 8;
@@ -109,14 +111,17 @@ public class SwerveModule {
     // method to set the module angle and drive speed
     public void setModule(Rotation2d angle, double speed) {
 
+        // if (Math.abs(speed) <= 0.002){
+        //     speed = currentSpeed-0.008;
+        // }
         double setPoint = cont.calculate(getAngle(), angle.getDegrees());
         if (setPoint < 0) {
-            turn.set(Math.max(setPoint, -0.12));
+            turn.set(Math.max(setPoint, -0.17));
         } else {
-            turn.set(Math.min(0.13, setPoint));
+            turn.set(Math.min(0.17, setPoint));
         }
         drive.set(speed / MAX_SPEED);
         this.setCurrentAngle();
-
+        // this.currentSpeed = speed;
     }
 }

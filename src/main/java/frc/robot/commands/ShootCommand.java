@@ -5,32 +5,40 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.InnerIndex;
 import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Hood;
 import frc.robot.Constants;
 
 public class ShootCommand extends CommandBase {
     private InnerIndex innerIndex;
     private OuterIndex outerIndex;
     private Shooter shooter;
+    private double power;
+    //private Hood hood;
 
     public ShootCommand(InnerIndex i, OuterIndex o, Shooter sh, int desiredRPM) {
         innerIndex = i;
         outerIndex = o;
         shooter = sh;
+        //this.hood = hood;
+        power = 0;
         addRequirements(innerIndex, outerIndex, shooter);
 
     }
 
     @Override
     public void initialize() {
-        shooter.setWheel(9);
-        Timer.delay(3);
     }
 
     @Override
     public void execute() {
+        
+        shooter.setWheel(power);
         if (shooter.isDesiredRPM(Constants.desiredRPM)) {
             innerIndex.spin();
             outerIndex.spin();
+        }else{
+            power += 0.09;
+            Timer.delay(0.2);
         }
     }
 
@@ -39,6 +47,7 @@ public class ShootCommand extends CommandBase {
         innerIndex.stop();
         outerIndex.stop();
         shooter.setWheel(0);
+        power = 0;
     }
 
     @Override
@@ -49,7 +58,7 @@ public class ShootCommand extends CommandBase {
          * }
          * return false;
          */
-        return false;
+        return Constants.controller.getYButtonPressed();
     }
 
 }

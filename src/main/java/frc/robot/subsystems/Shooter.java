@@ -24,6 +24,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setWheel(double RPM) {
+        
         shooterLeft.set(RPM);
         shooterRight.set(-RPM);
     }

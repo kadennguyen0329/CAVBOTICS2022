@@ -31,8 +31,8 @@ public class AutoAim {
 
     public double getXDistance() {
         // limelight is fixed at 30 degrees
-        double realAngle = 21 + getYOffset();
-        return 7.4 / Math.tan(Math.toRadians(realAngle));
+        double realAngle = 20 + getYOffset();
+        return 7 / Math.tan(Math.toRadians(realAngle));
     }
 
     public double setHoodAim() {
