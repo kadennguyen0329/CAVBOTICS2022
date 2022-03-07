@@ -1,43 +1,44 @@
 package frc.robot.commands;
+
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Sensor;
+
+import com.fasterxml.jackson.databind.util.ClassUtil.Ctor;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 
-public class IntakeCommand extends CommandBase{
-    private Intake intake; 
-    private Sensor ultrasonics;
-    
-    public IntakeCommand(Intake x, Sensor y) {
-        intake = x;
-        ultrasonics = y;
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(intake, ultrasonics);
-      }
-    
-      // Called when the command is initially scheduled.
-      @Override
-      public void initialize() {
-        intake.spinIntake();
-        intake.extend();
-      }
-    
-      // Called every time the scheduler runs while the command is scheduled.
-      @Override
-      public void execute() {
-          intake.spinIntake();
-      }
-    
-      // Called once the command ends or is interrupted.
-      @Override
-      public void end(boolean interrupted) {
-          intake.stopIntake();
-          intake.retract();
-      }
-    
-      // Returns true when the command should end.
-      @Override
-      public boolean isFinished() {
-        return (Constants.controller.getXButton() || (ultrasonics.outerIsClosed() && ultrasonics.innerIsClosed()));
-      }
+public class IntakeCommand extends CommandBase {
+  private Intake intake;
+
+  public IntakeCommand(Intake x) {
+    intake = x;
+    addRequirements(intake);
+  }
+
+  @Override
+  public void initialize() {
+    Constants.intakeStatus = true;
+    System.out.println("Solenoid current state: " + intake.getValue());
+    intake.extend();
+  }
+
+  @Override
+  public void execute() {
+    // SmartDashboard.putBoolean("Intake Status", Constants.intakeStatus);
+    System.out.println("execute intake command");
+    intake.spinIntake();
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    Constants.intakeStatus = false;
+    intake.stopIntake();
+    intake.retract();
+  }
+
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
 }

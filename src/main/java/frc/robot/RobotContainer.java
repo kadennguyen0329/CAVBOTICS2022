@@ -8,23 +8,30 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ExtendClimberCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.Flywheel;
-import frc.robot.subsystems.Hood;
-import frc.robot.subsystems.Index;
+// import frc.robot.subsystems.Flywheel;
+// import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.PhotonVision;
-import frc.robot.subsystems.PickUpWheel;
-import frc.robot.subsystems.Sensor;
-import frc.robot.commands.IndexCommand;
+// import frc.robot.subsystems.Limelight;
+// import frc.robot.subsystems.PhotonVision;
+// import frc.robot.subsystems.PickUpWheel;
+// import frc.robot.subsystems.Sensor;
 import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.PhotonVisionCommand;
-import frc.robot.commands.PickUpWheelCommand;
-import frc.robot.commands.TurnOnFlywheel;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.InnerIndexCommand;
+import frc.robot.commands.OuterIndexCommand;
+import frc.robot.commands.RetractClimberCommand;
+import frc.robot.subsystems.OuterIndex;
+import frc.robot.subsystems.InnerIndex;
+// import frc.robot.commands.PhotonVisionCommand;
+// import frc.robot.commands.PickUpWheelCommand;
+// import frc.robot.commands.TurnOnFlywheel;
+// import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.ShootCommand;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Climber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -33,14 +40,25 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  public final static Flywheel flywheel = new Flywheel();
-  public final static Hood hood = new Hood();
-  public final static Index index = new Index();
+  
+  // private final ExampleCommand m_autCommand = new ExampleCommand(m_exampleSubsystem);
+  /*public final static Flywheel flywheel = new Flywheel();
+  public final static Hood hood = new Hood(); */
+  /*
   public final static Intake intake = new Intake();
-  public final static Limelight limelight = new Limelight();
+  public final static Shooter shooter = new Shooter();
+  public final static InnerIndex innerIndex = new InnerIndex();
+  public final static OuterIndex outerIndex = new OuterIndex();
+  public final static Climber climber = new Climber();
+  */
+  public final static Intake intake = Constants.intake;
+  public final static Shooter shooter = Constants.shooter;
+  public final static InnerIndex innerIndex = Constants.innerIndex;
+  public final static OuterIndex outerIndex = Constants.outerIndex;
+  public final static Climber climber = Constants.climber;
+  /*public final static Limelight limelight = new Limelight();
   public final static PhotonVision photonvision = new PhotonVision();
   public final static PickUpWheel pickUpWheel = new PickUpWheel();
-  public final static Sensor ultrasonics = new Sensor();
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -60,9 +78,24 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(Constants.controller, 4).whenPressed(new PickUpWheelCommand(pickUpWheel));
+   /* new JoystickButton(Constants.controller, 4).whenPressed(new PickUpWheelCommand(pickUpWheel));
     new JoystickButton(Constants.controller, 3).whenPressed(new IntakeCommand(intake, ultrasonics));
-    new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));
+    new JoystickButton(Constants.controller, 1).whenPressed(new IndexCommand(index));*/
+
+    // Y button shoot
+    new JoystickButton(Constants.controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootCommand(innerIndex, outerIndex, shooter, Constants.desiredRPM));
+    // B button intake
+    new JoystickButton(Constants.controller, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand(intake));
+    // X button inner index
+    new JoystickButton(Constants.controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand(innerIndex));
+    // Start button outer intake 
+    new JoystickButton(Constants.controller, XboxController.Button.kStart.value).toggleWhenPressed(new OuterIndexCommand(outerIndex));
+    //Right bumper Extend Climber
+    //new JoystickButton(Constants.controller, XboxController.Button.kRightBumper.value).toggleWhenPressed(new ExtendClimberCommand(climber));
+    //Left bumper Retract Climber
+    //new JoystickButton(Constants.controller, XboxController.Button.kLeftBumper.value).toggleWhenPressed(new RetractClimberCommand(climber));
+
+
   }
 
   /**
@@ -70,8 +103,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }
+  // public Command getAutonomousCommand() {
+  //   // An ExampleCommand will run in autonomous
+  //   return m_autoCommand;
+  // }
 }
