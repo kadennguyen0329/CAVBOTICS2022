@@ -4,8 +4,9 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class AutoAim {
+public class AutoAim extends SubsystemBase {
     private NetworkTable table;
     private NetworkTableEntry pipeline;
     private PIDController pid;

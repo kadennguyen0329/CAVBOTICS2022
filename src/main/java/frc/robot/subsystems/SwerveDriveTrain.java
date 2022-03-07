@@ -27,7 +27,7 @@ public class SwerveDriveTrain extends SubsystemBase {
         Translation2d topLeft = new Translation2d(-distanceFromOrigin, distanceFromOrigin);
         Translation2d bottomLeft = new Translation2d(-distanceFromOrigin, -distanceFromOrigin);
         Translation2d bottomRight = new Translation2d(distanceFromOrigin, -distanceFromOrigin);
-        aim = new AutoAim();
+        aim = Constants.autoAim;
         MAX_SPEED = 3;
         MAX_RADIANS = 1;
         kin = new SwerveDriveKinematics(topRight, topLeft, bottomLeft, bottomRight);
