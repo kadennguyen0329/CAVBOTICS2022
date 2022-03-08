@@ -34,6 +34,7 @@ import edu.wpi.first.wpilibj.*;
  * project.
  */
 public class Robot extends TimedRobot {
+  private Command m_autonomousCommand;
   private SwerveDriveTrain swerve;
   private AutoAim autoAim;
   private RobotContainer m_RobotContainer;
@@ -42,7 +43,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    swerve = new SwerveDriveTrain(1.5);
+    swerve = Constants.swerveDrive;
     m_RobotContainer = new RobotContainer();
     // RobotContainer m_robotContainer = new RobotContainer();
     // swerve = new SwerveDriveTrainFieldCentric(1.5, 1, 2, 3, 4, 5, 6, 7, 8);
@@ -93,45 +94,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    Intake intake = Constants.intake;
-    OuterIndex outerIndex = Constants.outerIndex;
-    Hood hood = Constants.hood;
-    InnerIndex innerIndex = Constants.innerIndex;
-    double desiredRPM = 0;
-    Shooter shooter = Constants.shooter;
+    m_autonomousCommand = m_RobotContainer.getAutonomousCommand();
 
-    Timer timer = new Timer();
-    timer.reset();
-
-    Command intakeCommand = new IntakeCommand(intake);
-    Command outerIndexCommand = new OuterIndexCommand(outerIndex);
-
-    while (timer.get() <= 2) {
-      swerve.updatePeriodic(0, 0.2, 0);
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
     }
-
-    intakeCommand.cancel();
-    outerIndexCommand.cancel();
-
-    while (autoAim.hasTarget() == 0) {
-      swerve.updatePeriodic(0, 0, 0.3);
-    }
-
-    while (Math.abs(autoAim.getXOffset()) > 3) {
-      if (autoAim.getXOffset() < 0) {
-        swerve.updatePeriodic(0, 0, 0.2);
-      } else {
-        swerve.updatePeriodic(0, 0, -0.2);
-      }
-    }
-
-    Command hoodCommand = new HoodCommand(hood, autoAim);
-
-    Command shootCommand = new ShootCommand(innerIndex, outerIndex, shooter, desiredRPM);
-
-    hoodCommand.cancel();
-    shootCommand.cancel();
-
   }
 
   /** This function is called periodically during autonomous. */
@@ -145,6 +112,9 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.cancel();
+    }
 
   }
 
@@ -164,5 +134,6 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
+    
   }
 }

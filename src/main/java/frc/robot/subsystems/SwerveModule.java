@@ -126,4 +126,11 @@ public class SwerveModule {
         this.setCurrentAngle();
         // this.currentSpeed = speed;
     }
+
+    public double getDriveDistance(){
+        return drive.getEncoder().getPosition();
+    }
+
+    
+    
 }

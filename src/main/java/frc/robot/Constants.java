@@ -8,6 +8,7 @@ import frc.robot.subsystems.InnerIndex;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.SwerveDriveTrain;
 import frc.robot.subsystems.AutoAim;
 
 /**
@@ -79,4 +80,5 @@ public final class Constants {
     public final static Climber climber = new Climber();
     public final static Hood hood = new Hood();
     public final static AutoAim autoAim = new AutoAim();
+    public final static SwerveDriveTrain swerveDrive = new SwerveDriveTrain(1.5);
 }

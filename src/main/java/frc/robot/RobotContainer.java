@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ExtendClimberCommand;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -103,8 +104,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  // public Command getAutonomousCommand() {
-  //   // An ExampleCommand will run in autonomous
-  //   return m_autoCommand;
-  // }
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    return new AutonomousCommand(Constants.autoAim, Constants.climber, Constants.hood, Constants.innerIndex, Constants.intake, Constants.outerIndex, Constants.shooter, Constants.swerveDrive);
+  }
 }

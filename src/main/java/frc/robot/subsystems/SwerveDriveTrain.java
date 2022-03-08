@@ -64,6 +64,12 @@ public class SwerveDriveTrain extends SubsystemBase {
 
     }
 
+    public double getDriveDistance(){
+        return moduleTopRight.getDriveDistance();
+    }
+
+
+
 
 
     
