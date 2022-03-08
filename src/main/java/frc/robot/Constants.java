@@ -8,6 +8,7 @@ import frc.robot.subsystems.InnerIndex;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.AutoAim;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -77,4 +78,5 @@ public final class Constants {
     public final static OuterIndex outerIndex = new OuterIndex();
     public final static Climber climber = new Climber();
     public final static Hood hood = new Hood();
+    public final static AutoAim autoAim = new AutoAim();
 }

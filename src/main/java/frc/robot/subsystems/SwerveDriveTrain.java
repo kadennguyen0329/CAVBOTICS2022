@@ -58,4 +58,13 @@ public class SwerveDriveTrain extends SubsystemBase {
         moduleBottomRight.setModule(optimized4.angle, optimized4.speedMetersPerSecond);
 
     }
+
+    public double getAngle(){
+        return moduleTopRight.getAngle();
+
+    }
+
+
+
+    
 }

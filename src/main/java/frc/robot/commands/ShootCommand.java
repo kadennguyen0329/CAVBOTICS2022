@@ -34,6 +34,7 @@ public class ShootCommand extends CommandBase {
         
         shooter.setWheel(power);
         if (power >= 0.6) {
+            
             innerIndex.spin();
             outerIndex.spin();
         }else{

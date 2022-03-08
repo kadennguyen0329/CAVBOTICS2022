@@ -4,7 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
 
-public class Climber {
+public class Climber extends SubsystemBase{
     private CANSparkMax leftArm;
     private CANSparkMax rightArm;
 
@@ -14,12 +14,12 @@ public class Climber {
     }
 
     public void extend(){
-        leftArm.set(0.2);
-        rightArm.set(0.2);
+        leftArm.set(0.05);
+        rightArm.set(0.05);
     }
     public void retract(){
-        leftArm.set(-0.2);
-        rightArm.set(-0.2);
+        leftArm.set(-0.05);
+        rightArm.set(-0.05);
     }
     public void stop(){
         leftArm.set(0);
