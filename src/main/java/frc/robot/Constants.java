@@ -8,7 +8,7 @@ import frc.robot.subsystems.InnerIndex;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.SwerveDriveTrain;
+import frc.robot.subsystems.SwerveDrive;
 import frc.robot.subsystems.AutoAim;
 
 /**
@@ -56,14 +56,19 @@ public final class Constants {
     public static final int shooterIdTwo = 10;
 
     // Swerve modules
-    public static final int turnMotorOne = 1;
-    public static final int driveMotorOne = 2;
-    public static final int turnMotorTwo = 3;
-    public static final int driveMotorTwo = 4;
-    public static final int turnMotorThree = 5;
-    public static final int driveMotorThree = 6;
-    public static final int turnMotorFour = 7;
-    public static final int driveMotorFour = 8;
+    public static final int frontRightTurn = 1;
+    public static final int frontRightDrive = 2;
+    public static final int frontLeftTurn = 3;
+    public static final int frontLeftDrive = 4;
+    public static final int backLeftTurn = 5;
+    public static final int backLeftDrive = 6;
+    public static final int backRightTurn = 7;
+    public static final int backRightDrive = 8;
+
+    public static final int frontRightEncoder = 0;
+    public static final int frontLeftEncoder = 1;
+    public static final int backLeftEncoder = 2;
+    public static final int backRightEncoder = 3;
 
     public static final double desiredRPM = 0.5;
 
@@ -80,5 +85,5 @@ public final class Constants {
     public final static Climber climber = new Climber();
     public final static Hood hood = new Hood();
     public final static AutoAim autoAim = new AutoAim();
-    public final static SwerveDriveTrain swerveDrive = new SwerveDriveTrain(1.5);
+    public final static SwerveDrive swerveDrive = new SwerveDrive(1.5);
 }

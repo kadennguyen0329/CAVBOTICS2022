@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.subsystems.AutoAim;
 import frc.robot.subsystems.Hood;
 
@@ -10,10 +11,10 @@ public class HoodCommand extends CommandBase {
     private AutoAim aim;
     private double angle;
 
-    public HoodCommand(Hood h, AutoAim _aim) {
-        hood = h;
-        aim = _aim;
-        angle = h.getHoodAngle();
+    public HoodCommand() {
+        hood = Robot.hood;
+        aim = Robot.autoAim;
+        angle = hood.getHoodAngle();
         addRequirements(hood);
     }
 
@@ -25,11 +26,11 @@ public class HoodCommand extends CommandBase {
     @Override
     public void execute() {
         // aim the shooter on left bumper
-        if (Constants.controller.getLeftBumper()) {
+        if (Robot.controller.getLeftBumper()) {
             angle = aim.setHoodAim();
             hood.setHoodAngle(angle);
         }
-        if (Constants.controller.getRightBumper()) {
+        if (Robot.controller.getRightBumper()) {
             angle = aim.setHoodAim();
             hood.setHoodAngle(angle);
         }

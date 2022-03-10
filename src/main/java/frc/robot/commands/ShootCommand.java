@@ -7,19 +7,20 @@ import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Hood;
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class ShootCommand extends CommandBase {
-    private InnerIndex innerIndex;
-    private OuterIndex outerIndex;
-    private Shooter shooter;
-    private double power;
-    //private Hood hood;
+    private static InnerIndex innerIndex;
+    private static OuterIndex outerIndex;
+    private static Shooter shooter;
+    private static double power;
+    private static Hood hood;
 
-    public ShootCommand(InnerIndex i, OuterIndex o, Shooter sh, double desiredRPM) {
-        innerIndex = i;
-        outerIndex = o;
-        shooter = sh;
-        //this.hood = hood;
+    public ShootCommand() {
+        innerIndex = Robot.innerIndex;
+        outerIndex = Robot.outerIndex;
+        shooter = Robot.shooter;
+        hood = Robot.hood;
         power = 0;
         addRequirements(innerIndex, outerIndex, shooter);
 
@@ -53,12 +54,6 @@ public class ShootCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        /*
-         * if (Constants.controller.getBButton()) {
-         * return true;
-         * }
-         * return false;
-         */
         return false;
     }
 

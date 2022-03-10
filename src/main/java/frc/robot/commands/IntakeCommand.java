@@ -7,13 +7,13 @@ import com.fasterxml.jackson.databind.util.ClassUtil.Ctor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class IntakeCommand extends CommandBase {
   private Intake intake;
 
-  public IntakeCommand(Intake x) {
-    intake = x;
-    addRequirements(intake);
+  public IntakeCommand() {
+    intake = Robot.intake;
   }
 
   @Override

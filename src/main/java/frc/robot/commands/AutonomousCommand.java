@@ -4,38 +4,35 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-
+import frc.robot.Robot;
 import frc.robot.subsystems.*;
 
 public class AutonomousCommand extends CommandBase {
-    private AutoAim autoaim;
-    private Climber climber;
-    private Hood hood;
-    private InnerIndex innerIndex;
-    private Intake intake;
-    private OuterIndex outerIndex;
-    private Shooter shooter;
-    private SwerveDriveTrain swerveDrive;
-    private Timer timer;
-    private double power;
-    private int step;
+    private static AutoAim autoAim;
+    private static Climber climber;
+    private static Hood hood;
+    private static InnerIndex innerIndex;
+    private static Intake intake;
+    private static OuterIndex outerIndex;
+    private static Shooter shooter;
+    private static SwerveDrive swerveDrive;
+    private static Timer timer;
+    private static int step;
 
     
 
-    public AutonomousCommand(AutoAim a, Climber c, Hood h, InnerIndex i, Intake in, OuterIndex o, Shooter s, SwerveDriveTrain swerve){
-        autoaim = a;
-        climber = c;
-        hood = h;
-        innerIndex = i;
-        intake = in;
-        outerIndex = o;
-        shooter = s;
-        swerveDrive = swerve;
+    public AutonomousCommand(){
+        autoAim = Robot.autoAim;
+        climber = Robot.climber;
+        hood = Robot.hood;
+        innerIndex = Robot.innerIndex;
+        intake = Robot.intake;
+        outerIndex = Robot.outerIndex;
+        shooter = Robot.shooter;
+        swerveDrive = Robot.swerveDrive;
         timer = new Timer();
-        power = 0;
         step = 0;
 
-        addRequirements(autoaim, climber, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
     }
 
     @Override

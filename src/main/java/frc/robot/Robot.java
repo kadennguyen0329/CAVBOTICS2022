@@ -13,13 +13,13 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.OuterIndexCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.AutoAim;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.InnerIndex;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.SwerveDriveTrain;
-
+import frc.robot.subsystems.SwerveDrive;
 import edu.wpi.first.wpilibj.*;
 
 // Swerve Field Centric
@@ -34,22 +34,38 @@ import edu.wpi.first.wpilibj.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
-  private SwerveDriveTrain swerve;
-  private AutoAim autoAim;
-  private RobotContainer m_RobotContainer;
-  private Command m_autoCommand;
-  private int id;
+
+  // Global subsytems
+  public static Intake intake;
+  public static Shooter shooter;
+  public static InnerIndex innerIndex;
+  public static OuterIndex outerIndex;
+  public static Climber climber;
+  public static Hood hood;
+  public static AutoAim autoAim;
+  public static SwerveDrive swerveDrive;
+  public static XboxController controller;
+  public static XboxController swerveController;
 
   @Override
   public void robotInit() {
-    swerve = Constants.swerveDrive;
-    m_RobotContainer = new RobotContainer();
-    // RobotContainer m_robotContainer = new RobotContainer();
-    // swerve = new SwerveDriveTrainFieldCentric(1.5, 1, 2, 3, 4, 5, 6, 7, 8);
+  
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
+    intake = new Intake();
+    shooter = new Shooter();
+    innerIndex = new InnerIndex();
+    outerIndex = new OuterIndex();
+    climber = new Climber();
+    hood = new Hood();
+    autoAim = new AutoAim();
+    swerveDrive = new SwerveDrive(1.5);
+    controller = new XboxController(0);
+    swerveController = new XboxController(1);
+    RobotContainer m_RobotContainer = new RobotContainer();
+
+
 
   }
 
