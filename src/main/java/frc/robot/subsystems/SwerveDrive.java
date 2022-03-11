@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.*;
 import com.kauailabs.navx.frc.*;
 
-public class SwerveDriveTrainFieldCentric extends SubsystemBase{
+public class SwerveDrive extends SubsystemBase{
 
     private SwerveModuleState[] moduleState;
     private ChassisSpeeds speeds;
@@ -30,7 +30,7 @@ public class SwerveDriveTrainFieldCentric extends SubsystemBase{
     private AHRS gyro;
 
     
-    public SwerveDriveTrainFieldCentric(double distanceFromOrigin){
+    public SwerveDrive(double distanceFromOrigin){
         
         // (Y,X) format
         Translation2d frontLeftLocation = new Translation2d(distanceFromOrigin, distanceFromOrigin);
@@ -101,5 +101,10 @@ public class SwerveDriveTrainFieldCentric extends SubsystemBase{
         if(angle > 180) angle = -(360 - angle);
        
         return angle;
+    }
+
+
+    public double getRawAngle() {
+      return gyro.getAngle();
     }
 }

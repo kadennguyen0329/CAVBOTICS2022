@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import java.math.BigDecimal;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -18,6 +20,7 @@ public class AutonomousCommand extends CommandBase {
     private static SwerveDrive swerveDrive;
     private static Timer timer;
     private static int step;
+    private static double power;
 
     
 
@@ -46,7 +49,7 @@ public class AutonomousCommand extends CommandBase {
         switch(step){
             //aim
             case 0:
-            if (autoaim.hasTarget() == 1) {
+            if (autoAim.hasTarget() == 1) {
                 // while (aim.getXOffset() > 3) {
                 //   double x = aim.getXOffset();
                 //   if (x < 0) {
@@ -56,7 +59,7 @@ public class AutonomousCommand extends CommandBase {
                 //   }
                 // }
         
-                double angle = autoaim.setHoodAim();
+                double angle = autoAim.setHoodAim();
                 // double angle = 15;
                 hood.setHoodAngle(angle);
                 SmartDashboard.putNumber("angle", angle);
@@ -91,7 +94,7 @@ public class AutonomousCommand extends CommandBase {
 
                 //turn around 180 degrees
             case 2:
-                if(swerveDrive.getAngle() < 180.0){
+                if(swerveDrive.getRawAngle() < 180.0){
                     swerveDrive.updatePeriodic(0, 0, 0.3);
                 }else{
                     step = 3;
@@ -130,7 +133,7 @@ public class AutonomousCommand extends CommandBase {
 
             //turn around again
             case 6:
-                if(swerveDrive.getAngle() < 360.0){
+                if(swerveDrive.getRawAngle() < 360.0){
                     swerveDrive.updatePeriodic(0, 0, 0.3);
                 }else{
                     swerveDrive.updatePeriodic(0,0,0);
@@ -141,7 +144,7 @@ public class AutonomousCommand extends CommandBase {
             //autoaim again 
 
             case 7:
-                if (autoaim.hasTarget() == 1) {
+                if (autoAim.hasTarget() == 1) {
                     // while (aim.getXOffset() > 3) {
                     //   double x = aim.getXOffset();
                     //   if (x < 0) {
@@ -151,7 +154,7 @@ public class AutonomousCommand extends CommandBase {
                     //   }
                     // }
         
-                    double angle = autoaim.setHoodAim();
+                    double angle = autoAim.setHoodAim();
                     // double angle = 15;
                     hood.setHoodAngle(angle);
                     SmartDashboard.putNumber("angle", angle);

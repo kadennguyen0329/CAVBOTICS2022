@@ -24,11 +24,6 @@ import frc.robot.subsystems.AutoAim;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // Xbox controller
-    public static final XboxController controller = new XboxController(0);
-
-    // Swerve controller
-    public static final XboxController swerveController = new XboxController(1);
 
     // Hood
     public static final int hoodId = 11;
@@ -77,13 +72,5 @@ public final class Constants {
     public static boolean outerIndexStatus = false;
     public static boolean innerIndexStatus = false;
 
-    // Global subsytems
-    public final static Intake intake = new Intake();
-    public final static Shooter shooter = new Shooter();
-    public final static InnerIndex innerIndex = new InnerIndex();
-    public final static OuterIndex outerIndex = new OuterIndex();
-    public final static Climber climber = new Climber();
-    public final static Hood hood = new Hood();
-    public final static AutoAim autoAim = new AutoAim();
-    public final static SwerveDrive swerveDrive = new SwerveDrive(1.5);
+    
 }
