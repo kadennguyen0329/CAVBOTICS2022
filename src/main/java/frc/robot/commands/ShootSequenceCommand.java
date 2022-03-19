@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.InnerIndex;
@@ -33,6 +34,7 @@ public class ShootSequenceCommand extends CommandBase {
 
     @Override
     public void execute() {
+        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
         if(limelight.getXDistance() <= 6)
         {
             shooter.set(4.5);
@@ -63,6 +65,7 @@ public class ShootSequenceCommand extends CommandBase {
         innerIndex.stop();
         outerIndex.stop();
         shooter.set(0);
+        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
     }
 
     @Override

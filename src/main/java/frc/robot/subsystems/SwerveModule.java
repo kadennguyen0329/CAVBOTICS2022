@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.classes.AnalogEncoder;
@@ -21,6 +22,9 @@ public class SwerveModule extends SubsystemBase {
 
     public SwerveModule(int turnComponent, int driveComponent, int encoderPort) {
 
+        double p = 0.004;
+        double i = 0;
+        double d = 0.00001;
         turn = new CANSparkMax(turnComponent, MotorType.kBrushless);
         drive = new CANSparkMax(driveComponent, MotorType.kBrushless);
         enc = turn.getEncoder();
@@ -38,10 +42,18 @@ public class SwerveModule extends SubsystemBase {
         // drive.setClosedLoopRampRate(0.75);
         currentAngle = new Rotation2d(Math.PI/ 2 * -1);
         //ont = new PIDController(0.9, 0.00, 0);
-        cont = new PIDController(0.004 , 0, 0.00001);
+        
+        p = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("P").getNumber(0.004);
+        i = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("I").getNumber(0);
+        d = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("D").getNumber(0.00001);
+
+        //cont = new PIDController(0.004 , 0, 0.00001);
+        cont = new PIDController(p,i,d);
         cont.enableContinuousInput(-180, 180);
 
     }
+
+    
 
     public double newGet(){
         double nativeUnits = 11.654; //the native units that equates to a full module rotation
@@ -157,5 +169,9 @@ public class SwerveModule extends SubsystemBase {
     public void stop(){
         turn.set(0);
         drive.set(0);
+    }
+
+    public void setPID(double p, double i, double d){
+        cont.setPID(p,i,d);
     }
 }

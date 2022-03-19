@@ -4,6 +4,7 @@ import frc.robot.subsystems.Intake;
 
 import com.fasterxml.jackson.databind.util.ClassUtil.Ctor;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -27,6 +28,8 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     // SmartDashboard.putBoolean("Intake Status", Constants.intakeStatus);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("IntakeCommand").setBoolean(true);
+
 
     intake.spinIntake();
   }
@@ -36,6 +39,8 @@ public class IntakeCommand extends CommandBase {
    // Constants.intakeStatus = false;
     intake.stopIntake();
     intake.retract();
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("IntakeCommand").setBoolean(false);
+
   }
 
   @Override

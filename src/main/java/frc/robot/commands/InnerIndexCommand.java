@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -23,11 +24,15 @@ public class InnerIndexCommand extends CommandBase {
     @Override
     public void execute() {
         index.spin();
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("InnerIndexCommand").setBoolean(true);
+
     }
 
     @Override
     public void end(boolean interrupted) {
         index.stop();
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("InnerIndexCommand").setBoolean(false);
+
     }
 
     @Override

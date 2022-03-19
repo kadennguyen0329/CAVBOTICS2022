@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -21,12 +23,16 @@ public class DeclineHoodCommand extends CommandBase {
 
     @Override
     public void execute() {
-        hood.manualMove(-0.05);
+        hood.manualMove(-0.12);
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("DeclineHoodCommand").setBoolean(true);
+
     }
 
     @Override
     public void end(boolean interrupted) {
         hood.manualMove(0);
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("DeclineHoodCommand").setBoolean(false);
+
     }
 
     @Override

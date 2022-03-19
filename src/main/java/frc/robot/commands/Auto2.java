@@ -1,5 +1,8 @@
 package frc.robot.commands;
 import java.lang.invoke.ConstantCallSite;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -47,6 +50,9 @@ public class Auto2 extends CommandBase {
 
     @Override
     public void execute(){
+        
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(true);
+
 
         switch(step){
             case 0:
@@ -154,6 +160,8 @@ public class Auto2 extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(false);
+
     }
 
     @Override

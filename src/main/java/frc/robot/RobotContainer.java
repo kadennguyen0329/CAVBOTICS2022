@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -61,7 +62,7 @@ public class RobotContainer {
 
   
     // // Y button shoot
-   new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
+   new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootCommand());
     // // B button intake
      new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new IntakeCommand());
     // // X button inner index
@@ -74,7 +75,7 @@ public class RobotContainer {
     new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
     new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
     //left bumper decline hood
-    new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value).whenHeld(new DeclineHoodCommand());
+    new JoystickButton(controller, XboxController.Axis.kRightTrigger.value).whenHeld(new DeclineHoodCommand());
     //right bumper raise hood
     new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value).whenHeld(new RaiseHoodCommand());
     
@@ -94,7 +95,19 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     //System.out.println("Runing command");
-    return new Auto2(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+    switch((int)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").getNumber(0)){
+      case 1:
+      return new OneBallAuto(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+      case 2:
+      return new Auto1(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+      case 3:
+      return new Auto2(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+      default:
+      return new DoNothingCommand();
 
+
+    
+    
+    }
   }
 }

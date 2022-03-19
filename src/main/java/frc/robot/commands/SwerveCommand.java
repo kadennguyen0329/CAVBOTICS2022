@@ -5,6 +5,7 @@ import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.SwerveDrive;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -12,6 +13,9 @@ public class SwerveCommand extends CommandBase {
   private static SwerveDrive swerveDrive;
   private static XboxController remote;
   private static Limelight light;
+  private double p = 0.004;
+  private double i = 0;
+  private double d = 0.00001;
 
   public SwerveCommand() {
     light = RobotContainer.limelight;
@@ -34,7 +38,15 @@ public class SwerveCommand extends CommandBase {
 
   @Override
   public void execute() {
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("SwerveCommand").setBoolean(true);
+
+    
+    p = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("P").getNumber(0.004);
+    i = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("I").getNumber(0);
+    d = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("D").getNumber(0.00001);
+    swerveDrive.setPID(p, i, d);
     if (RobotContainer.controller.getLeftStickButton()){
+      NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
       if (light.hasTarget() == 1){
         double offset = light.getXOffset();
         if (Math.abs(offset) > 3){
@@ -59,6 +71,9 @@ public class SwerveCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("SwerveCommand").setBoolean(false);
+
   }
 
   @Override

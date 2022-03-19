@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -24,12 +26,16 @@ public class HoodCommand extends CommandBase {
     @Override
     public void execute() {
         hood.adjustAngle(limelight.getXDistance());
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("HoodCommand").setBoolean(true);
+
     }
 
     @Override
     public void end(boolean interrupted) {
         // if (interrupted)
         // hood.hoodReset();
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("HoodCommand").setBoolean(false);
+
     }
 
     @Override

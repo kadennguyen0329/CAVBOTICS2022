@@ -23,6 +23,8 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveDrive;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.*;
 
 // Swerve Field Centric
@@ -39,17 +41,17 @@ import edu.wpi.first.wpilibj.*;
 public class Robot extends TimedRobot {
 
   // Global subsytems
-  public static Intake intake;
-  public static Shooter shooter;
-  public static InnerIndex innerIndex;
-  public static OuterIndex outerIndex;
-  public static Climber climber;
-  public static Hood hood;
+  // public static Intake intake;
+  // public static Shooter shooter;
+  // public static InnerIndex innerIndex;
+  // public static OuterIndex outerIndex;
+  // public static Climber climber;
+  // public static Hood hood;
 
-  // public static AutoAim autoAim;
-  public static SwerveDrive swerveDrive;
-  public static XboxController controller;
-  public static XboxController swerveController;
+  // // public static AutoAim autoAim;
+  // public static SwerveDrive swerveDrive;
+  // public static XboxController controller;
+  // public static XboxController swerveController;
   RobotContainer m_RobotContainer;
   Command m_autonomousCommand;
 
@@ -61,19 +63,20 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
-    intake = new Intake();
-    shooter = new Shooter();
-    innerIndex = new InnerIndex();
-    outerIndex = new OuterIndex();
-    climber = new Climber();
-    hood = new Hood();
+    // intake = new Intake();
+    // shooter = new Shooter();
+    // innerIndex = new InnerIndex();
+    // outerIndex = new OuterIndex();
+    // climber = new Climber();
+    // hood = new Hood();
 
-    // autoAim = new AutoAim();
-    swerveDrive = new SwerveDrive(1.5);
-    controller = new XboxController(0);
-    swerveController = new XboxController(1);
-    m_RobotContainer = new RobotContainer();
-
+    // // autoAim = new AutoAim();
+    // swerveDrive = new SwerveDrive(1.5);
+    // controller = new XboxController(0);
+    // swerveController = new XboxController(1);
+    // m_RobotContainer = new RobotContainer();
+    CameraServer.startAutomaticCapture();
+    NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
 
 
 
@@ -103,6 +106,8 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

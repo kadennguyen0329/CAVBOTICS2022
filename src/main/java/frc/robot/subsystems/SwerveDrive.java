@@ -118,4 +118,11 @@ public class SwerveDrive extends SubsystemBase{
     m_backLeftLocation.stop();
     m_backRightLocation.stop();
   }
+
+  public void setPID(double p, double i, double d){
+    m_frontLeftLocation.setPID(p, i, d);
+    m_frontRightLocation.setPID(p, i, d);
+    m_backLeftLocation.setPID(p, i, d);
+    m_backRightLocation.setPID(p, i, d);
+  }
 }

@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.InnerIndex;
 import frc.robot.subsystems.Intake;
@@ -32,6 +33,8 @@ public class KickOutBallsCommand extends CommandBase{
     intake.reverseIntake();
     innerIndex.reverse();
     outerIndex.reverse();
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("KickOutBallsCommand").setBoolean(true);
+
   }
 
   @Override
@@ -40,6 +43,8 @@ public class KickOutBallsCommand extends CommandBase{
     intake.stopIntake();
     innerIndex.stop();
     outerIndex.stop();
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("KickOutBallsCommand").setBoolean(false);
+
   }
 
   @Override

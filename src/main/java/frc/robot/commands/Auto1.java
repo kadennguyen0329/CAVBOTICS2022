@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import java.lang.invoke.ConstantCallSite;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -49,6 +50,9 @@ public class Auto1 extends CommandBase {
 
     @Override
     public void execute(){
+        
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto1").setBoolean(true);
+
         
         switch(step){
 
@@ -165,6 +169,8 @@ public class Auto1 extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto1").setBoolean(false);
+
     }
 
     @Override
