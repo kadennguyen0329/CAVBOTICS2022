@@ -77,6 +77,7 @@ public class Robot extends TimedRobot {
     // m_RobotContainer = new RobotContainer();
     CameraServer.startAutomaticCapture();
     NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+    m_RobotContainer = new RobotContainer();
 
 
 

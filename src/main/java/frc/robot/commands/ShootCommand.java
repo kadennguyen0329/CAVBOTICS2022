@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.InnerIndex;
 import frc.robot.subsystems.Limelight;
@@ -30,14 +31,17 @@ public class ShootCommand extends CommandBase {
     public void execute() {
         NetworkTableInstance.getDefault().getTable("/datatable").getEntry("ShootCommand").setBoolean(true);
         NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
+        SmartDashboard.putBoolean("shoot", true);
         if (limelight.getXDistance() <= 6)
             shooter.set(4.5);
+            
 
         else if (limelight.getXDistance() <= 12)
             shooter.set(4.8);
 
         else
             shooter.set(5);
+            
 
     }
 

@@ -72,12 +72,12 @@ public class RobotContainer {
     // // A button outer intake 
      new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
     // //Left bumper Extend Climber swerve controller
-    new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
-    new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
+    new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new RaiseHoodCommand());
+    new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new DeclineHoodCommand());
     //left bumper decline hood
-    new JoystickButton(controller, XboxController.Axis.kRightTrigger.value).whenHeld(new DeclineHoodCommand());
+    new JoystickButton(controller, 3).whenActive(new DeclineHoodCommand());
     //right bumper raise hood
-    new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value).whenHeld(new RaiseHoodCommand());
+    new JoystickButton (controller, 2).whenActive(new RaiseHoodCommand());
     
     //start button, start swerve
     new JoystickButton(controller, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
