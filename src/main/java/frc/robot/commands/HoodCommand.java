@@ -29,7 +29,7 @@ public class HoodCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         // if (interrupted)
-        hood.hoodReset();
+        // hood.hoodReset();
     }
 
     @Override

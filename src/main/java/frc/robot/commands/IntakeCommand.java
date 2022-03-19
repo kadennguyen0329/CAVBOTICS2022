@@ -1,4 +1,3 @@
-
 package frc.robot.commands;
 
 import frc.robot.subsystems.Intake;
@@ -15,7 +14,6 @@ public class IntakeCommand extends CommandBase {
 
   public IntakeCommand() {
     intake = RobotContainer.intake;
-    addRequirements(intake);
   }
 
   @Override

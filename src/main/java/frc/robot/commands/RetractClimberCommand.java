@@ -10,7 +10,6 @@ public class RetractClimberCommand extends CommandBase{
 
     public RetractClimberCommand(){
         climber = RobotContainer.climber;
-        addRequirements(climber);
     }
 
     @Override
@@ -29,4 +28,3 @@ public class RetractClimberCommand extends CommandBase{
     }
     
 }
-

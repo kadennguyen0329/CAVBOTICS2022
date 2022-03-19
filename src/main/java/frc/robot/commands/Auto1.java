@@ -53,7 +53,7 @@ public class Auto1 extends CommandBase {
         switch(step){
 
             case 0:
-                swerveDrive.resetGyro();
+                swerveDrive.gyro.reset();
                 hood.setHoodAngle(20);
                 shooter.set(4.5);
                 if(shooter.getRPM() > 1900) {

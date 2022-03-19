@@ -34,7 +34,7 @@ public class SwerveCommand extends CommandBase {
 
   @Override
   public void execute() {
-    if (remote.getLeftStickButton()){
+    if (RobotContainer.controller.getLeftStickButton()){
       if (light.hasTarget() == 1){
         double offset = light.getXOffset();
         if (Math.abs(offset) > 3){
@@ -45,10 +45,16 @@ public class SwerveCommand extends CommandBase {
           }
         }
       }
-    }else{
-    swerveDrive.updatePeriodic(remote.getLeftX(), remote.getLeftY() * -1, remote.getRightX() * -1);
+    } else{
+      //swerveDrive.updatePeriodic(remote.getLeftX(), remote.getLeftY() * -1, remote.getRightX() * -1);
+      if (Math.abs(remote.getRawAxis(0)) >= 0.1 || Math.abs(remote.getRawAxis(1)) >= 0.1 || Math.abs(remote.getRawAxis(2)) >= 0.1){
+        swerveDrive.updatePeriodic(remote.getRawAxis(0), remote.getRawAxis(1), remote.getRawAxis(2) * -1);
+      } else{
+        swerveDrive.stopAll();
+      }
     }
-    //swerveDrive.updatePeriodic(remote.getRawAxis(0), remote.getRawAxis(1), remote.getRawAxis(2) * -1);
+    
+    
   }
 
   @Override

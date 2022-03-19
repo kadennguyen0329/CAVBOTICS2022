@@ -42,7 +42,7 @@ public class Auto2 extends CommandBase {
     public void initialize(){
         hood.hoodReset();
         intake.extend();
-        swerveDrive.resetGyro();
+        swerveDrive.gyro.reset();
     }
 
     @Override

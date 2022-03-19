@@ -15,9 +15,9 @@ public class SwerveModule extends SubsystemBase {
     private CANSparkMax turn;
     private CANSparkMax drive;
     private RelativeEncoder enc;
-    private RelativeEncoder driveEnc;
     private PIDController cont;
     public Rotation2d currentAngle;
+    public RelativeEncoder driveEnc;
 
     public SwerveModule(int turnComponent, int driveComponent, int encoderPort) {
 
@@ -41,11 +41,6 @@ public class SwerveModule extends SubsystemBase {
         cont = new PIDController(0.004 , 0, 0.00001);
         cont.enableContinuousInput(-180, 180);
 
-    }
-
-    public void stop(){
-        turn.set(0);
-        drive.set(0);
     }
 
     public double newGet(){
@@ -87,6 +82,39 @@ public class SwerveModule extends SubsystemBase {
         return temp;
     }
 
+    // convert current module position into 0 to 360
+    // public double getAngle() {
+    //     enc.update();
+    //     double temp = enc.getBigAngle();
+    //     temp += 90;
+
+    //     if (temp > 360){
+    //         temp = temp - 360;
+    //     }
+
+    //     if (temp <= 180){
+    //         temp *= -1;
+    //     } else{
+    //         temp = 360 - temp;
+    //     }
+    //     return temp;
+    // }
+
+    // public double convertedAngle() {
+    //     double temp = enc.getBigAngle();
+    //     if (temp > 180)
+    //         temp = -(360 - temp);
+
+    //     return temp;
+    // }
+    // long lastRun;
+    // public void update() {
+    //     long t1 = System.currentTimeMillis();
+    //     enc.update();
+    //     SmartDashboard.putNumber("timer", lastRun-t1);
+    //     lastRun = t1;
+    // }
+
     public void setCurrentAngle(){
         double temp = Math.toRadians(getAngle());
         currentAngle = new Rotation2d(temp);
@@ -95,14 +123,21 @@ public class SwerveModule extends SubsystemBase {
     // method to set the module angle and drive speed
     public void setModule(Rotation2d angle, double speed) {
 
+        
+            
+                // SmartDashboard.putNumber("Module " + turn.getDeviceId(), this.getAngle());
+                // SmartDashboard.putNumber("Module " + turn.getDeviceId() + " desiredAngle", angle.getDegrees());
+                // SmartDashboard.putNumber("Module " + turn.getDeviceId() + " speed", speed);
+
             double setPoint = cont.calculate(getAngle(), angle.getDegrees());
             if (setPoint < 0){
-                turn.set(Math.max(setPoint, -0.17));
+                turn.set(Math.max(setPoint, -0.15));
             } else{
-                turn.set(Math.min(0.17, setPoint));
+                turn.set(Math.min(0.15, setPoint));
             }
-            drive.set(speed / 4);
+            drive.set(speed / 8);
             this.setCurrentAngle();
+        
     }
     public void reset(){
         enc.setPosition(0);
@@ -118,5 +153,9 @@ public class SwerveModule extends SubsystemBase {
     public void driveRest(){
         driveEnc.setPosition(0);
     }
-}
 
+    public void stop(){
+        turn.set(0);
+        drive.set(0);
+    }
+}

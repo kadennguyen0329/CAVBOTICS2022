@@ -35,4 +35,3 @@ public class OuterIndexCommand extends CommandBase {
         return false;
     }
 }
-

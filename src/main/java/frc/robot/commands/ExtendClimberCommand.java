@@ -1,4 +1,3 @@
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -11,7 +10,6 @@ public class ExtendClimberCommand extends CommandBase{
 
     public ExtendClimberCommand(){
         climber = RobotContainer.climber;
-        addRequirements(climber);
     }
 
     @Override
@@ -30,4 +28,3 @@ public class ExtendClimberCommand extends CommandBase{
     }
     
 }
-

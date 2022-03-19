@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,9 +8,9 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.kauailabs.navx.frc.*;
 
 import com.revrobotics.*;
-import com.kauailabs.navx.frc.*;
 
 public class SwerveDrive extends SubsystemBase{
 
@@ -28,6 +24,8 @@ public class SwerveDrive extends SubsystemBase{
   private final double MAX_SPEED;
   private final double MAX_RADIANS;
   public AHRS gyro;
+  
+
 
   public SwerveDrive(double distanceFromOrigin) {
 
@@ -40,7 +38,7 @@ public class SwerveDrive extends SubsystemBase{
     kinematics = new SwerveDriveKinematics(frontRightLocation, frontLeftLocation, backLeftLocation, backRightLocation);
 
     MAX_SPEED = 3;
-    MAX_RADIANS = 1.5;
+    MAX_RADIANS = 1;
 
     moduleState = new SwerveModuleState[4];
     m_frontRightLocation = new SwerveModule(1, 2,
@@ -66,6 +64,7 @@ public class SwerveDrive extends SubsystemBase{
         System.out.println("NavX not plugged in");
         System.out.println("--------------");
     }
+
   }
 
   public void updatePeriodic(double translateY, double translateX, double yaw) {
@@ -118,9 +117,5 @@ public class SwerveDrive extends SubsystemBase{
     m_frontLeftLocation.stop();
     m_backLeftLocation.stop();
     m_backRightLocation.stop();
-  }
-
-  public void resetGyro(){
-    gyro.reset();
   }
 }

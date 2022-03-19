@@ -21,7 +21,7 @@ public class InnerIndex extends SubsystemBase {
     }
 
     public void reverse(){
-        innerIndex.set(0.20);
+        innerIndex.set(.20);
     }
 
     public void stop() {
@@ -29,4 +29,3 @@ public class InnerIndex extends SubsystemBase {
     }
 
 }
-
