@@ -7,11 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+
 import edu.wpi.first.wpilibj.simulation.XboxControllerSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
+
 
 
 /**
@@ -21,6 +23,7 @@ import frc.robot.commands.*;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
 
   public static Intake intake;
   public static Shooter shooter;
@@ -34,6 +37,7 @@ public class RobotContainer {
   public static XboxController swerveController;
   public static SwerveCommand swerveCommand;
   
+
 
   public RobotContainer() {
 
@@ -53,6 +57,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
+
   
     // // Y button shoot
    new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
@@ -77,6 +82,8 @@ public class RobotContainer {
     //start button, start swerve
     new JoystickButton(controller, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
 
+   
+
 
   }
 
@@ -89,5 +96,6 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     //System.out.println("Runing command");
     return new Auto2(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+
   }
 }

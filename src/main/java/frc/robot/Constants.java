@@ -9,6 +9,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveDrive;
+
 import frc.robot.subsystems.Limelight;
 
 /**
@@ -49,6 +50,7 @@ public final class Constants {
     // Shooter
     public static final int shooterIdOne = 14;
     public static final int shooterIdTwo = 10;
+
     public static final double bigShooterVoltage = 5;
     public static final double smallShooterVoltage = 5;
     public static final double bigRPM = 2000;
@@ -76,6 +78,7 @@ public final class Constants {
     public static boolean intakeStatus = false;
     public static boolean outerIndexStatus = false;
     public static boolean innerIndexStatus = false;
+
     public static boolean shooterStarted = false;
     public static boolean shooterDelay = false;
     public static double startTime = 0;

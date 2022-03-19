@@ -55,4 +55,5 @@ public class Hood extends SubsystemBase {
     public void manualMove(double p){
         hood.set(p);
     }
+
 }

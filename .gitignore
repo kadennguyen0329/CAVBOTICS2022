@@ -138,7 +138,6 @@ $RECYCLE.BIN/
 ### Gradle ###
 .gradle
 /build/
-/vendordeps/
 
 # Ignore Gradle GUI config
 gradle-app.setting
