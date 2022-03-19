@@ -4,25 +4,30 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class OuterIndex extends SubsystemBase{
 
-    private CANSparkMax innerIndex;
+    private CANSparkMax outerIndex;
 
     public OuterIndex(){
-        innerIndex = new CANSparkMax(Constants.outerIndexId, MotorType.kBrushless);
-
+        outerIndex = new CANSparkMax(Constants.outerIndexId, MotorType.kBrushless);
+        outerIndex.enableVoltageCompensation(12);
     }
 
     public void spin(){
-        innerIndex.set(-0.2);
+        outerIndex.set(-0.35);
+    }
+
+    public void reverse(){
+        outerIndex.set(0.35);
     }
 
     public void stop(){
-        innerIndex.set(0);
+        outerIndex.setVoltage(0);
     }
 
     
 }
+

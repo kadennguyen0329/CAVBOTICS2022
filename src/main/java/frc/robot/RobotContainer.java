@@ -7,32 +7,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.ExtendClimberCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+
+import edu.wpi.first.wpilibj.simulation.XboxControllerSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-// import frc.robot.subsystems.Flywheel;
-// import frc.robot.subsystems.Hood;
-import frc.robot.subsystems.Intake;
-// import frc.robot.subsystems.Limelight;
-// import frc.robot.subsystems.PhotonVision;
-// import frc.robot.subsystems.PickUpWheel;
-// import frc.robot.subsystems.Sensor;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.InnerIndexCommand;
-import frc.robot.commands.OuterIndexCommand;
-import frc.robot.commands.RetractClimberCommand;
-import frc.robot.subsystems.OuterIndex;
-import frc.robot.subsystems.InnerIndex;
-// import frc.robot.commands.PhotonVisionCommand;
-// import frc.robot.commands.PickUpWheelCommand;
-// import frc.robot.commands.TurnOnFlywheel;
-// import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ShootCommand;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.*;
+import frc.robot.commands.*;
+
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -41,30 +23,66 @@ import frc.robot.subsystems.Climber;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+
+  public static Intake intake;
+  public static Shooter shooter;
+  public static InnerIndex innerIndex;
+  public static OuterIndex outerIndex;
+  public static Climber climber;
+  public static Hood hood;
+  public static Limelight limelight;
+  public static SwerveDrive swerveDrive;
+  public static XboxController controller;
+  public static XboxController swerveController;
+  public static SwerveCommand swerveCommand;
   
 
+
   public RobotContainer() {
-    // Configure the button bindings
+
+    controller = new XboxController(0);
+    swerveController = new XboxController(1);
+    intake = new Intake();
+    shooter = new Shooter();
+    innerIndex = new InnerIndex();
+    outerIndex = new OuterIndex();
+    climber = new Climber();
+    hood = new Hood();
+    limelight = new Limelight();
+    swerveDrive = new SwerveDrive(0.413);
+    intake.retract();
+    
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
-   /* new JoystickButton(Robot.controller, 4).whenPressed(new PickUpWheelCommand(pickUpWheel));
-    new JoystickButton(Robot.controller, 3).whenPressed(new IntakeCommand(intake, ultrasonics));
-    new JoystickButton(Robot.controller, 1).whenPressed(new IndexCommand(index));*/
 
-    // Y button shoot
-    new JoystickButton(Robot.controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootCommand());
-    // B button intake
-    new JoystickButton(Robot.controller, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
-    // X button inner index
-    new JoystickButton(Robot.controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
-    // Start button outer intake 
-    new JoystickButton(Robot.controller, XboxController.Button.kStart.value).toggleWhenPressed(new OuterIndexCommand());
-    //Right bumper Extend Climber
-    //new JoystickButton(Robot.controller, XboxController.Button.kRightBumper.value).toggleWhenPressed(new ExtendClimberCommand(climber));
-    //Left bumper Retract Climber
-    //new JoystickButton(Robot.controller, XboxController.Button.kLeftBumper.value).toggleWhenPressed(new RetractClimberCommand(climber));
+  
+    // // Y button shoot
+   new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
+    // // B button intake
+     new JoystickButton(controller, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
+    // // X button inner index
+     new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
+     // A button kick out ball
+     new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new KickOutBallsCommand());
+    // // Start button outer intake 
+     new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
+    // //Left bumper Extend Climber swerve controller
+    new JoystickButton(swerveController, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
+    //left bumper decline hood
+    new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new DeclineHoodCommand());
+    //right bumper raise hood
+    new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RaiseHoodCommand());
+    //hood back button
+    new JoystickButton(controller, XboxController.Button.kBack.value).whenHeld(new HoodCommand());
+    //Right bumper retract climber swerve controller
+    new JoystickButton(swerveController, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
+    //start button, start swerve
+    new JoystickButton(controller, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
+
+   
 
 
   }
@@ -76,6 +94,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    //System.out.println("Runing command");
+    return new Auto2(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+
   }
 }

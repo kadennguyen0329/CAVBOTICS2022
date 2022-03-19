@@ -3,8 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -18,93 +18,109 @@ import com.kauailabs.navx.frc.*;
 
 public class SwerveDrive extends SubsystemBase{
 
-    private SwerveModuleState[] moduleState;
-    private ChassisSpeeds speeds;
-    private SwerveDriveKinematics kinematics;
-  //  private SwerveModule m_frontRightLocation;
-    private SwerveModule m_frontLeftLocation;
-    private SwerveModule m_backLeftLocation;
-   // private SwerveModule m_backRightLocation;
-    private final double MAX_SPEED;
-    private final double MAX_RADIANS;
-    private AHRS gyro;
+  private SwerveModuleState[] moduleState;
+  private ChassisSpeeds speeds;
+  private SwerveDriveKinematics kinematics;
+  public SwerveModule m_frontRightLocation;
+  public SwerveModule m_frontLeftLocation;
+  public SwerveModule m_backLeftLocation;
+  public SwerveModule m_backRightLocation;
+  private final double MAX_SPEED;
+  private final double MAX_RADIANS;
+  public AHRS gyro;
+
+  public SwerveDrive(double distanceFromOrigin) {
+
+    // (Y,X) format
+    Translation2d frontRightLocation = new Translation2d(distanceFromOrigin, distanceFromOrigin);
+    Translation2d frontLeftLocation = new Translation2d(-distanceFromOrigin, distanceFromOrigin);
+    Translation2d backLeftLocation = new Translation2d(-distanceFromOrigin, -distanceFromOrigin);
+    Translation2d backRightLocation = new Translation2d(distanceFromOrigin, -distanceFromOrigin);
+
+    kinematics = new SwerveDriveKinematics(frontRightLocation, frontLeftLocation, backLeftLocation, backRightLocation);
+
+    MAX_SPEED = 3;
+    MAX_RADIANS = 1.5;
+
+    moduleState = new SwerveModuleState[4];
+    m_frontRightLocation = new SwerveModule(1, 2,
+        0);
+    m_frontLeftLocation = new SwerveModule(3, 4,
+        1);
+    //m_backLeftLocation = new SwerveModule(Constants.backLeftTurn, Constants.backLeftDrive, Constants.backLeftEncoder);
+    m_backLeftLocation = new SwerveModule(5, 6,
+        2);
+    m_backRightLocation = new SwerveModule(7, 8,
+        3);
+    
+    m_frontRightLocation.reset();
+    m_frontLeftLocation.reset();
+    m_backLeftLocation.reset();
+    m_backRightLocation.reset();
+
+    try {
+      gyro = new AHRS(SPI.Port.kMXP); 
+      gyro.reset();
+    } catch (RuntimeException ex ) {
+        System.out.println("--------------");
+        System.out.println("NavX not plugged in");
+        System.out.println("--------------");
+    }
+  }
+
+  public void updatePeriodic(double translateY, double translateX, double yaw) {
+
+    // speeds = ChassisSpeeds.fromFieldRelativeSpeeds(translateY * MAX_SPEED, translateX * MAX_SPEED * -1,
+    //     yaw * MAX_RADIANS, new Rotation2d(Math.toRadians(getGyroAngle())));
+    speeds = new ChassisSpeeds(translateY * MAX_SPEED, translateX *
+    MAX_SPEED * -1, yaw * MAX_RADIANS);
+
+    moduleState = kinematics.toSwerveModuleStates(speeds);
+
+    var optimized1 = SwerveModuleState.optimize(moduleState[0], m_frontRightLocation.currentAngle);
+    var optimized2 = SwerveModuleState.optimize(moduleState[1], m_frontLeftLocation.currentAngle);
+    var optimized3 = SwerveModuleState.optimize(moduleState[2], m_backLeftLocation.currentAngle);
+    var optimized4 = SwerveModuleState.optimize(moduleState[3], m_backRightLocation.currentAngle);
+
+
+    m_frontRightLocation.setModule(optimized1.angle, optimized1.speedMetersPerSecond);
+    m_frontLeftLocation.setModule(optimized2.angle, optimized2.speedMetersPerSecond);
+    m_backLeftLocation.setModule(optimized3.angle, optimized3.speedMetersPerSecond);
+    m_backRightLocation.setModule(optimized4.angle, optimized4.speedMetersPerSecond);
+
+    // m_frontRightLocation.setModule(moduleState[0].angle, moduleState[0].speedMetersPerSecond);
+    // m_frontLeftLocation.setModule(moduleState[1].angle, moduleState[1].speedMetersPerSecond);
+    // m_backLeftLocation.setModule(moduleState[2].angle, moduleState[2].speedMetersPerSecond);
+    // m_backRightLocation.setModule(optimized4.angle, optimized4.speedMetersPerSecond);
 
     
-    public SwerveDrive(double distanceFromOrigin){
-        
-        // (Y,X) format
-        Translation2d frontLeftLocation = new Translation2d(distanceFromOrigin, distanceFromOrigin);
-        Translation2d frontRightLocation = new Translation2d(distanceFromOrigin, -distanceFromOrigin);
-        Translation2d backLeftLocation = new Translation2d(-distanceFromOrigin, distanceFromOrigin);
-        Translation2d backRightLocation = new Translation2d(-distanceFromOrigin, -distanceFromOrigin);
-        
-        kinematics = new SwerveDriveKinematics(frontLeftLocation, frontRightLocation, backLeftLocation, backRightLocation);
 
-        try {
-            gyro = new AHRS(SPI.Port.kMXP);
-            gyro.zeroYaw();
-        } catch (RuntimeException ex ) {
-            System.out.println("--------------");
-            System.out.println("NavX not plugged in");
-            System.out.println("--------------");
-        }
+  }
 
-        MAX_SPEED = 0.15;
-        MAX_RADIANS = 3.14;
+  public double getDriveDistance(){
+    return m_frontRightLocation.getDrive();
+  }
 
-        moduleState = new SwerveModuleState[4];
-      //  m_frontRightLocation = new SwerveModule(Constants.frontRightTurn, Constants.frontRightDrive, Constants.frontRightEncoder);
-        m_frontLeftLocation = new SwerveModule(Constants.frontLeftTurn, Constants.frontLeftDrive, Constants.frontLeftEncoder);
-        m_backLeftLocation = new SwerveModule(Constants.backLeftTurn, Constants.backLeftDrive, Constants.backLeftEncoder);
-      //  m_backRightLocation = new SwerveModule(Constants.backRightTurn, Constants.backRightDrive, Constants.backRightEncoder);
+  public void resetDrive(){
+    m_frontRightLocation.driveRest();
+    m_frontLeftLocation.driveRest();
+    m_backLeftLocation.driveRest();
+    m_backRightLocation.driveRest();
+  }
 
-    }
+  public double getGyroAngle(){
+    double angle = gyro.getAngle();
+    return (angle >360) ? angle % 360 : angle;
+  }
 
+  public void stopAll(){
+    m_frontRightLocation.stop();
+    m_frontLeftLocation.stop();
+    m_backLeftLocation.stop();
+    m_backRightLocation.stop();
+  }
 
-    public void updatePeriodic(double translateY, double translateX, double yaw){
-        
-        speeds = ChassisSpeeds.fromFieldRelativeSpeeds(translateY * MAX_SPEED, translateX * MAX_SPEED * -1, yaw * MAX_RADIANS, new Rotation2d(Math.toRadians(getGyroAngle())));
-        //speeds = new ChassisSpeeds(-1 * translateY * MAX_SPEED, translateX * MAX_SPEED, yaw * MAX_RADIANS);
-        
-
-        moduleState = kinematics.toSwerveModuleStates(speeds);
-
-        SmartDashboard.putNumber("before optimize", moduleState[0].angle.getDegrees());
-
-        m_frontLeftLocation.update();
-      //  m_frontRightLocation.update();
-        m_backLeftLocation.update();
-     // m_backRightLocation.update();
-
-       /* var frontLeft = SwerveModuleState.optimize(moduleState[0], new Rotation2d(Math.toRadians(m_frontLeftLocation.convertedAngle())));
-        var frontRight = SwerveModuleState.optimize(moduleState[1], new Rotation2d(Math.toRadians(m_frontRightLocation.convertedAngle())));
-        var backLeft = SwerveModuleState.optimize(moduleState[2], new Rotation2d(Math.toRadians(m_backLeftLocation.convertedAngle())));
-        var backRight = SwerveModuleState.optimize(moduleState[3], new Rotation2d(Math.toRadians(m_backRightLocation.convertedAngle())));*/
-
-    
-        
-        m_frontLeftLocation.setModule(moduleState[0].angle, moduleState[0].speedMetersPerSecond);
-       // m_frontRightLocation.setModule(moduleState[1].angle, moduleState[1].speedMetersPerSecond);
-        m_backLeftLocation.setModule(moduleState[2].angle, moduleState[2].speedMetersPerSecond);
-       // m_backRightLocation.setModule(moduleState[3].angle, moduleState[3].speedMetersPerSecond);
-
-       SmartDashboard.putNumber("gyro converted", this.getGyroAngle());
-       SmartDashboard.putNumber("gyro raw", gyro.getAngle());
-        
-    }
-
-    public double getGyroAngle(){
-
-        //converts from 0 to 360 to 0 to 180 and 0 to -180
-        double angle = gyro.getYaw() % 360.0;
-        if(angle < 0) angle = 360 + angle;
-        if(angle > 180) angle = -(360 - angle);
-       
-        return angle;
-    }
-
-
-    public double getRawAngle() {
-      return gyro.getAngle();
-    }
+  public void resetGyro(){
+    gyro.reset();
+  }
 }

@@ -12,7 +12,10 @@ import frc.robot.commands.HoodCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.OuterIndexCommand;
 import frc.robot.commands.ShootCommand;
-import frc.robot.subsystems.AutoAim;
+
+// import frc.robot.subsystems.AutoAim;
+
+
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.InnerIndex;
@@ -42,10 +45,14 @@ public class Robot extends TimedRobot {
   public static OuterIndex outerIndex;
   public static Climber climber;
   public static Hood hood;
-  public static AutoAim autoAim;
+
+  // public static AutoAim autoAim;
   public static SwerveDrive swerveDrive;
   public static XboxController controller;
   public static XboxController swerveController;
+  RobotContainer m_RobotContainer;
+  Command m_autonomousCommand;
+
   
 
   @Override
@@ -60,11 +67,13 @@ public class Robot extends TimedRobot {
     outerIndex = new OuterIndex();
     climber = new Climber();
     hood = new Hood();
-    autoAim = new AutoAim();
+
+    // autoAim = new AutoAim();
     swerveDrive = new SwerveDrive(1.5);
     controller = new XboxController(0);
     swerveController = new XboxController(1);
-    RobotContainer m_RobotContainer = new RobotContainer();
+    m_RobotContainer = new RobotContainer();
+
 
 
 

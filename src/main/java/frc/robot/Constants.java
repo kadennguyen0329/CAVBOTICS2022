@@ -9,7 +9,8 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.OuterIndex;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveDrive;
-import frc.robot.subsystems.AutoAim;
+
+import frc.robot.subsystems.Limelight;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -50,6 +51,12 @@ public final class Constants {
     public static final int shooterIdOne = 14;
     public static final int shooterIdTwo = 10;
 
+    public static final double bigShooterVoltage = 5;
+    public static final double smallShooterVoltage = 5;
+    public static final double bigRPM = 2000;
+    public static final double smallRPM = 2300;
+
+
     // Swerve modules
     public static final int frontRightTurn = 1;
     public static final int frontRightDrive = 2;
@@ -71,6 +78,10 @@ public final class Constants {
     public static boolean intakeStatus = false;
     public static boolean outerIndexStatus = false;
     public static boolean innerIndexStatus = false;
+
+    public static boolean shooterStarted = false;
+    public static boolean shooterDelay = false;
+    public static double startTime = 0;
 
     
 }

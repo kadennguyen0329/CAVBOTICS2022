@@ -2,43 +2,33 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.subsystems.AutoAim;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Hood;
 
 public class HoodCommand extends CommandBase {
+    
     private Hood hood;
-    private AutoAim aim;
-    private double angle;
+    private Limelight limelight;
 
     public HoodCommand() {
-        hood = Robot.hood;
-        aim = Robot.autoAim;
-        angle = hood.getHoodAngle();
-        addRequirements(hood);
+        hood = RobotContainer.hood;
+        limelight = RobotContainer.limelight;
+        addRequirements(hood, limelight);
     }
 
     @Override
     public void initialize() {
-
     }
 
     @Override
     public void execute() {
-        // aim the shooter on left bumper
-        if (Robot.controller.getLeftBumper()) {
-            angle = aim.setHoodAim();
-            hood.setHoodAngle(angle);
-        }
-        if (Robot.controller.getRightBumper()) {
-            angle = aim.setHoodAim();
-            hood.setHoodAngle(angle);
-        }
+        hood.adjustAngle(limelight.getXDistance());
     }
 
     @Override
     public void end(boolean interrupted) {
-        //if (interrupted) 
+        // if (interrupted)
         hood.hoodReset();
     }
 

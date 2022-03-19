@@ -25,6 +25,7 @@ public class Hood extends SubsystemBase {
         pid.setOutputRange(-0.30, 0.30);
         pid.setP(0.18);
         conversion = hoodRange / hoodLength;
+        encoder.setPosition(0);
     }
 
     public double getHoodAngle() {
@@ -41,9 +42,18 @@ public class Hood extends SubsystemBase {
         pid.setReference((angle - 10) / conversion, com.revrobotics.CANSparkMax.ControlType.kPosition);
     }
 
+    public void adjustAngle(double distanceFromTarget)
+    {
+        double angle = 1.6 * distanceFromTarget + 8;
+        setHoodAngle(angle);
+    }
+
     public void hoodReset() {
-        this.setHoodAngle(0);
         encoder.setPosition(0);
+    }
+    
+    public void manualMove(double p){
+        hood.set(p);
     }
 
 }
