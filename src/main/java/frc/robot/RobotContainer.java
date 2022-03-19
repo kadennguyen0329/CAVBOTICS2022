@@ -34,6 +34,7 @@ public class RobotContainer {
   public static Limelight limelight;
   public static SwerveDrive swerveDrive;
   public static XboxController controller;
+  public static XboxController controller_2;
   public static XboxController swerveController;
   public static SwerveCommand swerveCommand;
   
@@ -62,23 +63,21 @@ public class RobotContainer {
     // // Y button shoot
    new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
     // // B button intake
-     new JoystickButton(controller, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
+     new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new IntakeCommand());
     // // X button inner index
-     new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
+     new JoystickButton(controller, XboxController.Button.kB.value).toggleWhenPressed(new InnerIndexCommand());
      // A button kick out ball
-     new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new KickOutBallsCommand());
-    // // Start button outer intake 
+     new JoystickButton(controller, XboxController.Button.kBack.value).toggleWhenPressed(new KickOutBallsCommand());
+    // // A button outer intake 
      new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
     // //Left bumper Extend Climber swerve controller
-    new JoystickButton(swerveController, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
+    new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
+    new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
     //left bumper decline hood
-    new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new DeclineHoodCommand());
+    new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value).whenHeld(new DeclineHoodCommand());
     //right bumper raise hood
-    new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RaiseHoodCommand());
-    //hood back button
-    new JoystickButton(controller, XboxController.Button.kBack.value).whenHeld(new HoodCommand());
-    //Right bumper retract climber swerve controller
-    new JoystickButton(swerveController, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
+    new JoystickButton(controller, XboxController.Axis.kLeftTrigger.value).whenHeld(new RaiseHoodCommand());
+    
     //start button, start swerve
     new JoystickButton(controller, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
 
