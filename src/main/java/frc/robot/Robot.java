@@ -79,6 +79,25 @@ public class Robot extends TimedRobot {
     NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
     m_RobotContainer = new RobotContainer();
 
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Killswitch").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto1").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("DeclineHoodCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("DoNothingCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("ExtendClimberCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("HoodCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("InnerIndexCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("IntakeCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("KickOutBallsCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("OneBallAuto").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("OuterIndexCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("RaiseHoodCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("RetractClimberCode").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("ShootCommand").setBoolean(false);
+    NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("SwerveCommand").setBoolean(false);
+
+
 
 
   }

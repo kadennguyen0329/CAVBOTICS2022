@@ -77,6 +77,7 @@ public class RobotContainer {
     new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
     new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
     
+    
     //left bumper decline hood
     // new JoystickButton(controller, 3).whenActive(new DeclineHoodCommand());
     // //right bumper raise hood
