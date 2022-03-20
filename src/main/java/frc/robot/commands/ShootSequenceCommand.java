@@ -38,8 +38,8 @@ public class ShootSequenceCommand extends CommandBase {
         if(limelight.getXDistance() <= 13)
         {
             System.out.println("Short Distance");
-            shooter.set(3.6);
-            if(shooter.getRPM() > 1550) {
+            shooter.set(3.8);
+            if(shooter.getRPM() > 1650) {
                 outerIndex.spin();
                 innerIndex.spin();
             }
@@ -47,8 +47,8 @@ public class ShootSequenceCommand extends CommandBase {
         else if (limelight.getXDistance() <= 18)
         {
             System.out.println("Medium Distance");
-            shooter.set(3.9);
-            if(shooter.getRPM() > 1700) {
+            shooter.set(4.25);
+            if(shooter.getRPM() > 1900) {
                 outerIndex.spin();
                 innerIndex.spin();
             }
@@ -56,7 +56,7 @@ public class ShootSequenceCommand extends CommandBase {
         else {
             System.out.println("Long Distaqnce");
             shooter.set(5.2);
-            if (shooter.getRPM() > 2360){
+            if (shooter.getRPM() > 2380){
                 outerIndex.spin();
                 innerIndex.spin();
             }

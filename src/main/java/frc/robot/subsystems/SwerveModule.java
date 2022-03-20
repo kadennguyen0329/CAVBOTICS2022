@@ -31,6 +31,8 @@ public class SwerveModule extends SubsystemBase {
         enc.setPositionConversionFactor(1);
         driveEnc = drive.getEncoder();
         driveEnc.setPositionConversionFactor(1);
+        turn.setSmartCurrentLimit(20, 20);
+        drive.setSmartCurrentLimit(20, 40);
         // enc = new AnalogEncoder(encoderPort);
         // enc.reset();
         // turn.enableVoltageCompensation(12);
@@ -147,7 +149,7 @@ public class SwerveModule extends SubsystemBase {
             } else{
                 turn.set(Math.min(0.15, setPoint));
             }
-            drive.set(speed / 8);
+            drive.set(speed / 4);
             this.setCurrentAngle();
         
     }
