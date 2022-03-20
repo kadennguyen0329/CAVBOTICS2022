@@ -76,8 +76,8 @@ public class Auto2 extends CommandBase {
             break;
 
             case 1:
-                if (Math.abs(swerveDrive.getGyroAngle()) < 153 ){
-                    swerveDrive.updatePeriodic(0, 0, 0.8);
+                if (Math.abs(swerveDrive.getGyroAngle()) < 134 ){
+                    swerveDrive.updatePeriodic(0, 0, 0.3);
                 } else{
                     intake.stopIntake();
                     swerveDrive.stopAll();
@@ -89,7 +89,7 @@ public class Auto2 extends CommandBase {
 
             case 2:   
                 hood.setHoodAngle(35);
-                shooter.set(4);
+                shooter.set(4.3);
                 if(shooter.getRPM() > 1900) {
                     outerIndex.spin();
                     innerIndex.spin();
@@ -100,8 +100,8 @@ public class Auto2 extends CommandBase {
 
          
             case 3:
-                if (Math.abs(swerveDrive.getDriveDistance()) < 4){
-                    swerveDrive.updatePeriodic(0, -0.08, 0);
+                if (Math.abs(swerveDrive.getDriveDistance()) < 5){
+                    swerveDrive.updatePeriodic(0, 0.3, 0);
                 } else{
                     swerveDrive.stopAll();
                     outerIndex.stop();

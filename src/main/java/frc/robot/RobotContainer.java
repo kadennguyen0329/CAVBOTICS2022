@@ -64,10 +64,10 @@ public class RobotContainer {
     // // Y button shoot
      new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
     // X button intake
-     new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new IntakeCommand());
+     new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
     // // B button inner index
     new JoystickButton(controller, XboxController.Button.kRightStick.value).whenPressed(new HoodCommand());
-    new JoystickButton(controller, XboxController.Button.kB.value).toggleWhenPressed(new InnerIndexCommand());
+    new JoystickButton(controller, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
      //Back button kick out ball
      new JoystickButton(controller, XboxController.Button.kBack.value).toggleWhenPressed(new KickOutBallsCommand());
     // // A button outer intake 
@@ -98,7 +98,8 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     //System.out.println("Runing command");
-    switch((int)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").getNumber(0)){
+    /*
+    switch((int)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").getNumber(3)){
       case 1:
       return new OneBallAuto(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
       case 2:
@@ -112,5 +113,8 @@ public class RobotContainer {
     
     
     }
+    */
+    return new Auto2(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+
   }
 }
