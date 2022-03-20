@@ -23,7 +23,7 @@ public class Hood extends SubsystemBase {
         encoder = hood.getEncoder();
         pid = hood.getPIDController();
         pid.setOutputRange(-0.17, 0.17);
-        pid.setP(0.18);
+        pid.setP(0.2);
         conversion = hoodRange / hoodLength;
         encoder.setPosition(0);
     }
@@ -44,7 +44,7 @@ public class Hood extends SubsystemBase {
 
     public void adjustAngle(double distanceFromTarget)
     {
-        double angle = 1.6 * distanceFromTarget + 8;
+        double angle = 2 * distanceFromTarget + 10;
         setHoodAngle(angle);
     }
 

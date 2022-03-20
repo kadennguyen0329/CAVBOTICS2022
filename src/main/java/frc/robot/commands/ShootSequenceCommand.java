@@ -35,25 +35,28 @@ public class ShootSequenceCommand extends CommandBase {
     @Override
     public void execute() {
         NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
-        if(limelight.getXDistance() <= 6)
+        if(limelight.getXDistance() <= 13)
         {
-            shooter.set(4.5);
-            if(shooter.getRPM() > 1900) {
+            System.out.println("Short Distance");
+            shooter.set(3.6);
+            if(shooter.getRPM() > 1550) {
                 outerIndex.spin();
                 innerIndex.spin();
             }
         }
-        else if (limelight.getXDistance() <= 12)
+        else if (limelight.getXDistance() <= 18)
         {
-            shooter.set(4.8);
-            if(shooter.getRPM() > 2100) {
+            System.out.println("Medium Distance");
+            shooter.set(3.9);
+            if(shooter.getRPM() > 1700) {
                 outerIndex.spin();
                 innerIndex.spin();
             }
         }
         else {
-            shooter.set(5);
-            if (shooter.getRPM() > 2300){
+            System.out.println("Long Distaqnce");
+            shooter.set(5.2);
+            if (shooter.getRPM() > 2360){
                 outerIndex.spin();
                 innerIndex.spin();
             }
