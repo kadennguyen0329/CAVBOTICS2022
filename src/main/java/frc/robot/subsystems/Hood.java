@@ -22,8 +22,8 @@ public class Hood extends SubsystemBase {
         hood = new CANSparkMax(Constants.hoodId, MotorType.kBrushless);
         encoder = hood.getEncoder();
         pid = hood.getPIDController();
-        pid.setOutputRange(-0.30, 0.30);
-        pid.setP(0.18);
+        pid.setOutputRange(-0.17, 0.17);
+        pid.setP(0.2);
         conversion = hoodRange / hoodLength;
         encoder.setPosition(0);
     }
@@ -44,14 +44,14 @@ public class Hood extends SubsystemBase {
 
     public void adjustAngle(double distanceFromTarget)
     {
-        double angle = 1.6 * distanceFromTarget + 8;
+        double angle = 2 * distanceFromTarget + 10;
         setHoodAngle(angle);
     }
 
     public void hoodReset() {
         encoder.setPosition(0);
     }
-    
+
     public void manualMove(double p){
         hood.set(p);
     }

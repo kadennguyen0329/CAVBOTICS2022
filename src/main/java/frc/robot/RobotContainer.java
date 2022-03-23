@@ -4,6 +4,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -33,10 +38,11 @@ public class RobotContainer {
   public static XboxController controller;
   public static XboxController swerveController;
   public static SwerveCommand swerveCommand;
-  
+  // The robot's subsystems and commands are defined here...
 
+
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-
     controller = new XboxController(0);
     swerveController = new XboxController(1);
     intake = new Intake();
@@ -48,34 +54,43 @@ public class RobotContainer {
     limelight = new Limelight();
     swerveDrive = new SwerveDrive(0.413);
     intake.retract();
+    hood.hoodReset();
     
     configureButtonBindings();
   }
 
+  /**
+   * Use this method to define your button->command mappings. Buttons can be created by
+   * instantiating a {@link GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   */
   private void configureButtonBindings() {
-  
-    // // Y button shoot
-   new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
-    // // B button intake
-     new JoystickButton(controller, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
-    // // X button inner index
-     new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
-     // A button kick out ball
-     new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new KickOutBallsCommand());
-    // // Start button outer intake 
-     new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
-    // //Left bumper Extend Climber swerve controller
-    new JoystickButton(swerveController, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
-    //left bumper decline hood
-    new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new DeclineHoodCommand());
-    //right bumper raise hood
-    new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RaiseHoodCommand());
-    //hood back button
-    new JoystickButton(controller, XboxController.Button.kBack.value).whenHeld(new HoodCommand());
-    //Right bumper retract climber swerve controller
-    new JoystickButton(swerveController, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
-    //start button, start swerve
-    new JoystickButton(controller, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
+// // Y button shoot
+new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
+// X button intake
+ new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
+// //Right stick hood set
+new JoystickButton(controller, XboxController.Button.kRightStick.value).whenPressed(new HoodCommand());
+//b button intake
+new JoystickButton(controller, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
+ //Back button kick out ball
+ new JoystickButton(controller, XboxController.Button.kBack.value).toggleWhenPressed(new KickOutBallsCommand());
+// // A button outer intake 
+ //new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
+ //new JoystickButton(controller, XboxController.Button.kRightkRightStick).toggleWhenPressed(new OuterIndexCommand());
+// //Left bumper Extend Climber
+new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
+new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
+
+
+//left bumper decline hood
+// new JoystickButton(controller, 3).whenActive(new DeclineHoodCommand());
+// //right bumper raise hood
+// new JoystickButton (controller, 2).whenActive(new RaiseHoodCommand());
+
+//start button, start swerve
+new JoystickButton(controller, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
 
 
   }
@@ -87,7 +102,17 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    //System.out.println("Runing command");
-    return new Auto2(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+    double routine = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").getDouble(1);
+
+    if(routine == 0){
+      return new OneBallAuto(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+    }
+    if(routine == 1){
+      return new Auto2(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+    }
+    System.out.println("Do nothing");
+      return new DoNothingCommand();
+      
+    
   }
 }

@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.InnerIndex;
@@ -33,25 +34,29 @@ public class ShootSequenceCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if(limelight.getXDistance() <= 6)
+        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
+        if(limelight.getXDistance() <= 13)
         {
-            shooter.set(4.5);
+            System.out.println("Short Distance");
+            shooter.set(3.8);
+            if(shooter.getRPM() > 1650) {
+                outerIndex.spin();
+                innerIndex.spin();
+            }
+        }
+        else if (limelight.getXDistance() <= 18)
+        {
+            System.out.println("Medium Distance");
+            shooter.set(4.25);
             if(shooter.getRPM() > 1900) {
                 outerIndex.spin();
                 innerIndex.spin();
             }
         }
-        else if (limelight.getXDistance() <= 12)
-        {
-            shooter.set(4.8);
-            if(shooter.getRPM() > 2100) {
-                outerIndex.spin();
-                innerIndex.spin();
-            }
-        }
         else {
-            shooter.set(5);
-            if (shooter.getRPM() > 2300){
+            System.out.println("Long Distaqnce");
+            shooter.set(5.2);
+            if (shooter.getRPM() > 2380){
                 outerIndex.spin();
                 innerIndex.spin();
             }
@@ -63,11 +68,12 @@ public class ShootSequenceCommand extends CommandBase {
         innerIndex.stop();
         outerIndex.stop();
         shooter.set(0);
+        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
     }
 
     @Override
     public boolean isFinished() {
-        return false;
+        return NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Killswitch").getBoolean(false);
     }
 
 }

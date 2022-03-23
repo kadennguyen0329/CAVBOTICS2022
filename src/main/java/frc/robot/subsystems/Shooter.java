@@ -19,20 +19,20 @@ public class Shooter extends SubsystemBase {
         shooterLeft.enableVoltageCompensation(12);
         shooterRight.enableVoltageCompensation(12);
 
-        shooterLeft.setOpenLoopRampRate(1.5);
-        shooterRight.setOpenLoopRampRate(1.5);
-        shooterLeft.setClosedLoopRampRate(1.5);
-        shooterRight.setClosedLoopRampRate(1.5);
+        shooterLeft.setOpenLoopRampRate(4);
+        shooterRight.setOpenLoopRampRate(4);
+        shooterLeft.setClosedLoopRampRate(4);
+        shooterRight.setClosedLoopRampRate(4);
 
-        enc = shooterLeft.getEncoder();
+        enc = shooterRight.getEncoder();
     }
 
     public void set(double voltage) {
-        shooterLeft.setVoltage(voltage);
-        shooterRight.setVoltage(-voltage);
+        //shooterLeft.setVoltage(voltage);
+        shooterRight.setVoltage(-voltage * 1.4);
     }
 
     public double getRPM() {
-        return enc.getVelocity();
+        return Math.abs(enc.getVelocity());
     }
 }
