@@ -155,7 +155,10 @@ public class Auto2 extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
-    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(false);
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(false);
+        outerIndex.stop();
+        intake.stopIntake();
+        innerIndex.stop();
 
     }
 
