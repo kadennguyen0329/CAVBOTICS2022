@@ -26,7 +26,9 @@ public class HoodCommand extends CommandBase {
 
     @Override
     public void execute() {
+        if(NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").getDouble(1) != 0){
         NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
+        }
 
         double mode = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);
 
