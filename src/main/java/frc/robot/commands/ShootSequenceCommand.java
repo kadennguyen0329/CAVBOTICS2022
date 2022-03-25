@@ -34,9 +34,7 @@ public class ShootSequenceCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if(NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").getDouble(1) != 0)
-            NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
-        else{
+        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
         if(limelight.getXDistance() <= 13)
         {
             System.out.println("Short Distance");
@@ -64,7 +62,6 @@ public class ShootSequenceCommand extends CommandBase {
             }
         }
     }
-}
 
     @Override
     public void end(boolean interrupted) {

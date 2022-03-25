@@ -30,12 +30,8 @@ public class ShootCommand extends CommandBase {
     @Override
     public void execute() {
         NetworkTableInstance.getDefault().getTable("/datatable").getEntry("ShootCommand").setBoolean(true);
-
-        if(NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").getDouble(1) != 0)
-            NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
-        
-        else{
-            SmartDashboard.putBoolean("shoot", true);
+        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
+        SmartDashboard.putBoolean("shoot", true);
         if (limelight.getXDistance() <= 6)
             shooter.set(4.5);
             
@@ -45,7 +41,7 @@ public class ShootCommand extends CommandBase {
 
         else
             shooter.set(5);
-        }
+            
 
     }
 

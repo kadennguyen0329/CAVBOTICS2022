@@ -129,24 +129,6 @@ public class Auto2 extends CommandBase {
                 step = 9;
             break;
 
-            //turn around again
-            case 6:
-                
-            break;
-
-            //autoaim again 
-
-            case 7:
-                
-            break;
-
-
-            //shoot again
-
-            case 8:
-
-            break;
-
             default:
             step = 9;
             break;
@@ -155,10 +137,7 @@ public class Auto2 extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
-        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(false);
-        outerIndex.stop();
-        intake.stopIntake();
-        innerIndex.stop();
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(false);
 
     }
 

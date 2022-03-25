@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -68,8 +69,7 @@ public class Robot extends TimedRobot {
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("SwerveCommand").setBoolean(false);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").setDouble(1);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);
-
-
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("batteryVoltage").setDouble(RobotController.getBatteryVoltage());
   }
 
   /**
@@ -86,6 +86,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("batteryVoltage").setDouble(RobotController.getBatteryVoltage());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
