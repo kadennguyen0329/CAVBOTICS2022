@@ -28,7 +28,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void set(double voltage) {
-        //shooterLeft.setVoltage(voltage);
+        shooterLeft.setVoltage(voltage);
         shooterRight.setVoltage(-voltage * 1.4);
     }
 

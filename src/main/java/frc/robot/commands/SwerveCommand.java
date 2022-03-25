@@ -51,13 +51,23 @@ public class SwerveCommand extends CommandBase {
       }
     } else{
 
-      if (Math.abs(remote.getRawAxis(0)) >= 0.1 || Math.abs(remote.getRawAxis(1)) >= 0.1 || Math.abs(remote.getRawAxis(2)) >= 0.1){
-        swerveDrive.updatePeriodic(remote.getRawAxis(0), remote.getRawAxis(1), remote.getRawAxis(2) * -1);
+
+      
+      if (Math.abs(remote.getLeftY()) >= 0.1 || Math.abs(remote.getLeftX()) >= 0.1 || Math.abs(remote.getRightX()) >= 0.1){
+        swerveDrive.updatePeriodic(remote.getLeftY(), remote.getLeftX(), remote.getRightX() * -1);
 
       } else{
         swerveDrive.stopAll();
 
       }
+
+      // if (Math.abs(remote.getRawAxis(0)) >= 0.1 || Math.abs(remote.getRawAxis(1)) >= 0.1 || Math.abs(remote.getRawAxis(2)) >= 0.1){
+      //   swerveDrive.updatePeriodic(remote.getRawAxis(0), remote.getRawAxis(1) * -1, remote.getRawAxis(2) * -1);
+
+      // } else{
+      //   swerveDrive.stopAll();
+
+      // }
     }
     
     

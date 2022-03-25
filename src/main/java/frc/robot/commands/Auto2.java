@@ -102,6 +102,7 @@ public class Auto2 extends CommandBase {
             case 3:
                     //swerveDrive.updatePeriodic(0, 0, 0);
                     shooter.set(0);
+                    swerveDrive.stopAll();
                     step = 9;
                
             break;
@@ -129,6 +130,7 @@ public class Auto2 extends CommandBase {
                 step = 9;
             break;
 
+            //turn around again
             default:
             step = 9;
             break;
@@ -138,7 +140,10 @@ public class Auto2 extends CommandBase {
     @Override
     public void end(boolean interrupted){
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(false);
-
+    outerIndex.stop();
+    intake.stopIntake();
+    innerIndex.stop();
+    step = 9;
     }
 
     @Override
