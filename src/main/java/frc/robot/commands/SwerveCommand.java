@@ -54,7 +54,7 @@ public class SwerveCommand extends CommandBase {
 
       
       if (Math.abs(remote.getLeftY()) >= 0.1 || Math.abs(remote.getLeftX()) >= 0.1 || Math.abs(remote.getRightX()) >= 0.1){
-        swerveDrive.updatePeriodic(remote.getLeftY(), remote.getLeftX(), remote.getRightX() * -1);
+        swerveDrive.updatePeriodic(remote.getLeftX() * -1, remote.getLeftY() * -1, remote.getRightX());
 
       } else{
         swerveDrive.stopAll();

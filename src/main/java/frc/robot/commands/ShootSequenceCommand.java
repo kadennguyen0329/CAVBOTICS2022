@@ -39,7 +39,7 @@ public class ShootSequenceCommand extends CommandBase {
         {
             System.out.println("Short Distance");
             shooter.set(3.8);
-            if(shooter.getRPM() > 1650) {
+            if(shooter.getRPM() > 500 /*1650*/) {
                 outerIndex.spin();
                 innerIndex.spin();
             }
@@ -48,7 +48,7 @@ public class ShootSequenceCommand extends CommandBase {
         {
             System.out.println("Medium Distance");
             shooter.set(4.25);
-            if(shooter.getRPM() > 1900) {
+            if(shooter.getRPM() > 500 /*1900*/) {
                 outerIndex.spin();
                 innerIndex.spin();
             }
@@ -56,7 +56,7 @@ public class ShootSequenceCommand extends CommandBase {
         else {
             System.out.println("Long Distaqnce");
             shooter.set(5.2);
-            if (shooter.getRPM() > 2380){
+            if (shooter.getRPM() > 500 /*2380*/){
                 outerIndex.spin();
                 innerIndex.spin();
             }
