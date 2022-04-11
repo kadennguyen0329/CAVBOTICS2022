@@ -34,33 +34,34 @@ public class ShootSequenceCommand extends CommandBase {
 
     @Override
     public void execute() {
-        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
-        if(limelight.getXDistance() <= 13)
-        {
-            System.out.println("Short Distance");
-            shooter.set(3.8);
-            if(shooter.getRPM() > 500 /*1650*/) {
-                outerIndex.spin();
-                innerIndex.spin();
-            }
-        }
-        else if (limelight.getXDistance() <= 18)
-        {
-            System.out.println("Medium Distance");
-            shooter.set(4.25);
-            if(shooter.getRPM() > 500 /*1900*/) {
-                outerIndex.spin();
-                innerIndex.spin();
-            }
-        }
-        else {
-            System.out.println("Long Distaqnce");
-            shooter.set(5.2);
-            if (shooter.getRPM() > 500 /*2380*/){
-                outerIndex.spin();
-                innerIndex.spin();
-            }
-        }
+        shooter.set(4);
+        // NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
+        // if(limelight.getXDistance() <= 13)
+        // {
+        //     System.out.println("Short Distance");
+        //     shooter.set(3.8);
+        //     if(shooter.getRPM() > 500 /*1650*/) {
+        //         outerIndex.spin();
+        //         innerIndex.spin();
+        //     }
+        // }
+        // else if (limelight.getXDistance() <= 18)
+        // {
+        //     System.out.println("Medium Distance");
+        //     shooter.set(4.25);
+        //     if(shooter.getRPM() > 500 /*1900*/) {
+        //         outerIndex.spin();
+        //         innerIndex.spin();
+        //     }
+        // }
+        // else {
+        //     System.out.println("Long Distaqnce");
+        //     shooter.set(5.2);
+        //     if (shooter.getRPM() > 500 /*2380*/){
+        //         outerIndex.spin();
+        //         innerIndex.spin();
+        //     }
+        // }
     }
 
     @Override
@@ -68,7 +69,7 @@ public class ShootSequenceCommand extends CommandBase {
         innerIndex.stop();
         outerIndex.stop();
         shooter.set(0);
-        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+        //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class SwerveCommand extends CommandBase {
     p = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("P").getNumber(0.004);
     i = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("I").getNumber(0);
     d = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("D").getNumber(0.00001);
-    swerveDrive.setPID(p, i, d);
+    //swerveDrive.setPID(p, i, d);
     if (RobotContainer.controller.getLeftStickButton()){
       NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
       if (light.hasTarget() == 1){
@@ -55,6 +55,7 @@ public class SwerveCommand extends CommandBase {
       
       if (Math.abs(remote.getLeftY()) >= 0.1 || Math.abs(remote.getLeftX()) >= 0.1 || Math.abs(remote.getRightX()) >= 0.1){
         swerveDrive.updatePeriodic(remote.getLeftX() * -1, remote.getLeftY() * -1, remote.getRightX());
+        //System.out.println("working");
 
       } else{
         swerveDrive.stopAll();
