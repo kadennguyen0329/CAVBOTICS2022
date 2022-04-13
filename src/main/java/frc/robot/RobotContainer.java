@@ -82,7 +82,7 @@ new JoystickButton(swerveController, XboxController.Button.kB.value).toggleWhenP
 // //Left bumper Extend Climber
 new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
 new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
-new JoystickButton(swerveController, XboxController.Button.kRightBumper.value).whenHeld(new LimeLightToggleCommand());
+new JoystickButton(swerveController, XboxController.Button.kRightBumper.value).toggleWhenPressed(new LimeLightToggleCommand());
 
 
 

@@ -21,12 +21,12 @@ public class HoodCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
+        //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
     }
 
     @Override
     public void execute() {
-        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
+        //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
 
         double mode = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);
 
@@ -46,7 +46,7 @@ public class HoodCommand extends CommandBase {
         // if (interrupted)
         // hood.hoodReset();
         NetworkTableInstance.getDefault().getTable("/datatable").getEntry("HoodCommand").setBoolean(false);
-        NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+        //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
 
     }
 

@@ -5,22 +5,22 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Limelight;
 
-public class LimeLightToggleCommand extends CommandBase{
+public class LimeLightToggleCommand extends CommandBase {
     private static Limelight limelight;
 
-    public LimeLightToggleCommand(){
+    public LimeLightToggleCommand() {
         limelight = RobotContainer.limelight;
         addRequirements(limelight);
-        
+
     }
 
     @Override
-    public void execute(){
+    public void execute() {
         NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
     }
 
     @Override
-    public void end(boolean interrupted){
+    public void end(boolean interrupted) {
         NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
         NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
 
@@ -42,12 +42,11 @@ public class LimeLightToggleCommand extends CommandBase{
 
         NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
 
-        
     }
 
     @Override
-    public boolean isFinished(){
+    public boolean isFinished() {
         return false;
     }
-    
+
 }
