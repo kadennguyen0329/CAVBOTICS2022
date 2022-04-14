@@ -149,8 +149,5 @@ public class Auto2 extends CommandBase {
     @Override
     public boolean isFinished(){
         return (step >= 9);
-    }
-
-    
-    
+    }  
 }
