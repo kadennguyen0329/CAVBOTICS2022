@@ -69,21 +69,21 @@ public class RobotContainer {
 // // Y button shoot
 new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
 // X button intake
- new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
+ //new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
 // //Right stick hood set
-new JoystickButton(controller, XboxController.Button.kRightStick.value).whenPressed(new HoodCommand());
+new JoystickButton(controller, XboxController.Button.kB.value).whenPressed(new HoodCommand());
 //b button intake
 new JoystickButton(swerveController, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
  //Back button kick out ball
- new JoystickButton(controller, XboxController.Button.kBack.value).toggleWhenPressed(new KickOutBallsCommand());
+ new JoystickButton(swerveController, XboxController.Button.kBack.value).toggleWhenPressed(new KickOutBallsCommand());
 // // A button outer intake 
  //new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
  //new JoystickButton(controller, XboxController.Button.kRightkRightStick).toggleWhenPressed(new OuterIndexCommand());
 // //Left bumper Extend Climber
 new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
 new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
-new JoystickButton(swerveController, XboxController.Button.kRightBumper.value).toggleWhenPressed(new LimeLightToggleCommand());
-
+new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new LimeLightToggleCommand());
+new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new LimeLightOffCommand());
 
 
 //left bumper decline hood
@@ -114,7 +114,5 @@ new JoystickButton(swerveController, XboxController.Button.kStart.value).toggleW
     }
     System.out.println("Do nothing");
       return new DoNothingCommand();
-      
-    
   }
 }

@@ -27,7 +27,7 @@ public class SwerveDrive extends SubsystemBase{
   public SwerveModule m_backRightLocation;
   private final double MAX_SPEED;
   private final double MAX_RADIANS;
-  public AHRS gyro;
+  public static AHRS gyro;
 
   public SwerveDrive(double distanceFromOrigin) {
 
@@ -40,7 +40,7 @@ public class SwerveDrive extends SubsystemBase{
     kinematics = new SwerveDriveKinematics(frontRightLocation, frontLeftLocation, backLeftLocation, backRightLocation);
 
     MAX_SPEED = 3;
-    MAX_RADIANS = 1.5;
+    MAX_RADIANS = 2;
 
     moduleState = new SwerveModuleState[4];
     m_frontRightLocation = new SwerveModule(1, 2,
@@ -109,8 +109,8 @@ public class SwerveDrive extends SubsystemBase{
   }
 
   public double getGyroAngle(){
-    double angle = gyro.getAngle();
-    return (angle >360) ? angle % 360 : angle;
+    double angle = gyro.getYaw();
+    return angle + 180;
   }
 
   public void stopAll(){

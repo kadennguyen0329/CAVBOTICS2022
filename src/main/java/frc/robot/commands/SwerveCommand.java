@@ -38,7 +38,7 @@ public class SwerveCommand extends CommandBase {
     d = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("D").getNumber(0.00001);
     //swerveDrive.setPID(p, i, d);
     if (RobotContainer.controller.getLeftStickButton()){
-      NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
+      //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
       if (light.hasTarget() == 1){
         double offset = light.getXOffset();
         if (Math.abs(offset) > 3){
@@ -76,9 +76,8 @@ public class SwerveCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+    //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("SwerveCommand").setBoolean(false);
-
   }
 
   @Override

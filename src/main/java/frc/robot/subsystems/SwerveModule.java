@@ -150,7 +150,7 @@ public class SwerveModule extends SubsystemBase {
             } else{
                 turn.set(Math.min(0.6, setPoint));
             }
-            drive.set(speed / 8);
+            drive.set(speed / 5.5);
             this.setCurrentAngle();
         
     }

@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
     // m_RobotContainer = new RobotContainer();
     
     CameraServer.startAutomaticCapture();
-    NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+    //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
 
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Killswitch").setBoolean(false);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto1").setBoolean(false);
@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("RaiseHoodCommand").setBoolean(false);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("RetractClimberCode").setBoolean(false);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("ShootCommand").setBoolean(false);
-    NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+    //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("SwerveCommand").setBoolean(false);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").setDouble(1);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);

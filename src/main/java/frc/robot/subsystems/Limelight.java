@@ -29,7 +29,6 @@ public class Limelight extends SubsystemBase {
 
     public double getXDistance() {
         double realAngle = 22 + getYOffset();
-        return 6.9 / Math.tan(Math.toRadians(realAngle));
+        return 6.7 / Math.tan(Math.toRadians(realAngle));
     }
-
 }
