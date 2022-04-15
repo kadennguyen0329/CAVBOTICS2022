@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import java.lang.invoke.ConstantCallSite;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -50,6 +51,8 @@ public class OneBallAuto extends CommandBase {
     @Override
     public void execute(){
         
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("OneBallAuto").setBoolean(true);
+
         switch(step){
 
             //shoots
@@ -109,7 +112,8 @@ public class OneBallAuto extends CommandBase {
         innerIndex.stop();
         shooter.set(0);
         swerveDrive.resetDrive();
-        
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("OneBallAuto").setBoolean(false);
+
 
     }
 

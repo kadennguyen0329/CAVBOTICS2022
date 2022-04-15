@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import java.lang.invoke.ConstantCallSite;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -50,10 +51,13 @@ public class Auto1 extends CommandBase {
     @Override
     public void execute(){
         
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto1").setBoolean(true);
+
+        
         switch(step){
 
             case 0:
-                swerveDrive.resetGyro();
+                swerveDrive.gyro.reset();
                 hood.setHoodAngle(20);
                 shooter.set(4.5);
                 if(shooter.getRPM() > 1900) {
@@ -89,9 +93,9 @@ public class Auto1 extends CommandBase {
                 intake.spinIntake();
                 outerIndex.spin();
 
-                if (Math.abs(swerveDrive.getDriveDistance()) > 48 ){
+                if (Math.abs(swerveDrive.getDriveDistance()) > 48){
                     swerveDrive.stopAll();
-                    //swerveDrive.updatePeriodic(0, 0, 0);
+                    //swerveDrive.updatePeriodic(0, 0, 0);]
                     intake.retract();
                     intake.stopIntake();
                     //outerIndex.stop();
@@ -165,6 +169,8 @@ public class Auto1 extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto1").setBoolean(false);
+
     }
 
     @Override

@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,9 +8,9 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.kauailabs.navx.frc.*;
 
 import com.revrobotics.*;
-import com.kauailabs.navx.frc.*;
 
 public class SwerveDrive extends SubsystemBase{
 
@@ -27,20 +23,22 @@ public class SwerveDrive extends SubsystemBase{
   public SwerveModule m_backRightLocation;
   private final double MAX_SPEED;
   private final double MAX_RADIANS;
-  public AHRS gyro;
+  public static AHRS gyro;
+  
+
 
   public SwerveDrive(double distanceFromOrigin) {
 
     // (Y,X) format
-    Translation2d frontRightLocation = new Translation2d(distanceFromOrigin, distanceFromOrigin);
-    Translation2d frontLeftLocation = new Translation2d(-distanceFromOrigin, distanceFromOrigin);
-    Translation2d backLeftLocation = new Translation2d(-distanceFromOrigin, -distanceFromOrigin);
-    Translation2d backRightLocation = new Translation2d(distanceFromOrigin, -distanceFromOrigin);
+    Translation2d frontRightLocation = new Translation2d(-distanceFromOrigin, distanceFromOrigin);
+    Translation2d frontLeftLocation = new Translation2d(distanceFromOrigin, distanceFromOrigin);
+    Translation2d backLeftLocation = new Translation2d(distanceFromOrigin, -distanceFromOrigin);
+    Translation2d backRightLocation = new Translation2d(-distanceFromOrigin, -distanceFromOrigin);
 
     kinematics = new SwerveDriveKinematics(frontRightLocation, frontLeftLocation, backLeftLocation, backRightLocation);
 
     MAX_SPEED = 3;
-    MAX_RADIANS = 1.5;
+    MAX_RADIANS = 5;
 
     moduleState = new SwerveModuleState[4];
     m_frontRightLocation = new SwerveModule(1, 2,
@@ -66,6 +64,7 @@ public class SwerveDrive extends SubsystemBase{
         System.out.println("NavX not plugged in");
         System.out.println("--------------");
     }
+
   }
 
   public void updatePeriodic(double translateY, double translateX, double yaw) {
@@ -102,10 +101,10 @@ public class SwerveDrive extends SubsystemBase{
   }
 
   public void resetDrive(){
-    m_frontRightLocation.driveRest();
-    m_frontLeftLocation.driveRest();
-    m_backLeftLocation.driveRest();
-    m_backRightLocation.driveRest();
+    m_frontRightLocation.driveReset();
+    m_frontLeftLocation.driveReset();
+    m_backLeftLocation.driveReset();
+    m_backRightLocation.driveReset();
   }
 
   public double getGyroAngle(){
@@ -120,7 +119,10 @@ public class SwerveDrive extends SubsystemBase{
     m_backRightLocation.stop();
   }
 
-  public void resetGyro(){
-    gyro.reset();
+  public void setPID(double p, double i, double d){
+    m_frontLeftLocation.setPID(p, i, d);
+    m_frontRightLocation.setPID(p, i, d);
+    m_backLeftLocation.setPID(p, i, d);
+    m_backRightLocation.setPID(p, i, d);
   }
 }

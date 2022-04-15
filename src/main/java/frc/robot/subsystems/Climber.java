@@ -19,13 +19,13 @@ public class Climber extends SubsystemBase {
     }
 
     public void extend() {
-        leftArm.set(-0.05);
-        rightArm.set(-0.05);
+        leftArm.set(-0.4);
+        rightArm.set(-0.4);
     }
 
     public void retract() {
-        leftArm.set(0.05);
-        rightArm.set(0.05);
+        leftArm.set(0.2);
+        rightArm.set(0.2);
     }
 
     public void stop() {

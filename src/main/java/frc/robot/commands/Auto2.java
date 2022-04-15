@@ -1,5 +1,8 @@
 package frc.robot.commands;
 import java.lang.invoke.ConstantCallSite;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -42,11 +45,14 @@ public class Auto2 extends CommandBase {
     public void initialize(){
         hood.hoodReset();
         intake.extend();
-        swerveDrive.resetGyro();
+        swerveDrive.gyro.reset();
     }
 
     @Override
     public void execute(){
+        
+        NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(true);
+
 
         switch(step){
             case 0:
@@ -65,17 +71,17 @@ public class Auto2 extends CommandBase {
                     System.out.println("Drove 4 feet");
                 } else{
                     swerveDrive.updatePeriodic(0.018, 0.4, 0);
+                    
                 }
         
             break;
 
             case 1:
-                if (Math.abs(swerveDrive.getGyroAngle()) < 153 ){
-                    swerveDrive.updatePeriodic(0, 0, 0.8);
+                if (Math.abs(swerveDrive.getGyroAngle()) < 134 ){
+                    swerveDrive.updatePeriodic(0, 0, 0.3);
                 } else{
                     intake.stopIntake();
                     swerveDrive.stopAll();
-                    swerveDrive.resetDrive();
                     outerIndex.stop();
                     step = 2;
                 }   
@@ -83,7 +89,7 @@ public class Auto2 extends CommandBase {
 
             case 2:   
                 hood.setHoodAngle(35);
-                shooter.set(4);
+                shooter.set(4.3);
                 if(shooter.getRPM() > 1900) {
                     outerIndex.spin();
                     innerIndex.spin();
@@ -94,15 +100,10 @@ public class Auto2 extends CommandBase {
 
          
             case 3:
-                if (Math.abs(swerveDrive.getDriveDistance()) < 4){
-                    swerveDrive.updatePeriodic(0, -0.08, 0);
-                } else{
-                    swerveDrive.stopAll();
-                    outerIndex.stop();
-                    innerIndex.stop();
+                    //swerveDrive.updatePeriodic(0, 0, 0);
                     shooter.set(0);
                     step = 9;
-                }    
+               
             break;
 
             case 4:
@@ -154,6 +155,8 @@ public class Auto2 extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(false);
+
     }
 
     @Override
