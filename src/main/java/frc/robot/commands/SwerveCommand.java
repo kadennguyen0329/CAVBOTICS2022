@@ -41,35 +41,41 @@ public class SwerveCommand extends CommandBase {
     d = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("D").getNumber(0.00001);
     //swerveDrive.setPID(p, i, d);
     if (RobotContainer.swerveController.getAButton()){
+      double mode = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);
       //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
       System.out.println("Aligning left and right");
-      if (light.hasTarget() == 1){
-
-        if(light.getXDistance() <= 13)
-        {
-            System.out.println("Short Distance");
-            shooter.set(3);
-        }
-        else if (light.getXDistance() <= 18)
-        {
-            System.out.println("Medium Distance");
-            shooter.set(3.2);
-        }
-        else {
-            System.out.println("Long Distance");
-            shooter.set(4);
-        }
-        System.out.println("Found target");
-        double offset = light.getXOffset();
-        while (Math.abs(offset) > 2){
-          if (offset < 0){
-            swerveDrive.updatePeriodic(0, 0, -0.07 * Math.sqrt(Math.abs(offset)));
-          } else{
-            swerveDrive.updatePeriodic(0, 0, 0.07 * Math.sqrt(Math.abs(offset)));
+      if (mode == 0){
+        if (light.hasTarget() == 1){
+          if(light.getXDistance() <= 13)
+          {
+              System.out.println("Short Distance");
+              shooter.set(3);
           }
-          offset = light.getXOffset();
+          else if (light.getXDistance() <= 18)
+          {
+              System.out.println("Medium Distance");
+              shooter.set(3.2);
+          }
+          else {
+              System.out.println("Long Distance");
+              shooter.set(4);
+          }
+          System.out.println("Found target");
+          double offset = light.getXOffset();
+          while (Math.abs(offset) > 2){
+            if (offset < 0){
+              swerveDrive.updatePeriodic(0, 0, -0.07 * Math.sqrt(Math.abs(offset)));
+            } else{
+              swerveDrive.updatePeriodic(0, 0, 0.07 * Math.sqrt(Math.abs(offset)));
+            }
+            offset = light.getXOffset();
+          }
+          System.out.println("Exited loop");
+        } else{
+          shooter.set(4);
         }
-        System.out.println("Exited loop");
+      } else{
+        shooter.set(4);
       }
     } 
     else{

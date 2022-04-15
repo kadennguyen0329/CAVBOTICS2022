@@ -107,9 +107,9 @@ new JoystickButton(swerveController, XboxController.Button.kStart.value).toggleW
     double routine = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").getDouble(1);
 
     if(routine == 0){
-      return new OneBallAuto(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
+      return new Auto1(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
     }
-    if(routine == 1){
+    if(routine == 1){ 
       return new Auto2(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
     }
     System.out.println("Do nothing");

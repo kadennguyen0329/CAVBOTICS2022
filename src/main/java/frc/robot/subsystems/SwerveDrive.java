@@ -23,7 +23,7 @@ public class SwerveDrive extends SubsystemBase{
   public SwerveModule m_backRightLocation;
   private final double MAX_SPEED;
   private final double MAX_RADIANS;
-  public AHRS gyro;
+  public static AHRS gyro;
   
 
 

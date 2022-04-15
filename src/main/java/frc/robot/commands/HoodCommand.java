@@ -28,18 +28,19 @@ public class HoodCommand extends CommandBase {
     public void execute() {
         System.out.println("Hood activated");
         //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
-
         double mode = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);
-
         if(mode == 0){
-            hood.adjustAngle(limelight.getXDistance());
+            if (limelight.hasTarget() == 1){
+                hood.adjustAngle(limelight.getXDistance());
+            // } else{
+            //     hood.adjustAngle(30);
+            }
         }
         if(mode == 1){
-            hood.setHoodAngle(20);
+            hood.setHoodAngle(30);
         }
         // hood.adjustAngle(limelight.getXDistance());
         NetworkTableInstance.getDefault().getTable("/datatable").getEntry("HoodCommand").setBoolean(true);
-
     }
 
     @Override
