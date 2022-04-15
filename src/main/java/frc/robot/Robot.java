@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.SwerveDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -89,6 +90,7 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("batteryVoltage").setDouble(RobotController.getBatteryVoltage());
+    //System.out.println(RobotContainer.swerveDrive.getGyroAngle());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -103,6 +105,9 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
+    RobotContainer.swerveDrive.gyro.reset();
+    System.out.println("swerve reset ran in Robot");
+    
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
