@@ -71,13 +71,18 @@ public class SwerveCommand extends CommandBase {
         }
         System.out.println("Exited loop");
       }
-    } else{
-      if (Math.abs(remote.getLeftY()) >= 0.1 || Math.abs(remote.getLeftX()) >= 0.1 || Math.abs(remote.getRightX()) >= 0.1){
-        swerveDrive.updatePeriodic(remote.getLeftX() * -1, remote.getLeftY() * -1, remote.getRightX());
-        //System.out.println("working");
-      } else{
-        swerveDrive.stopAll();
-      }
+    } 
+    else{
+      double gyroStrafe = (remote.getRightY()) * Math.sin(Math.toRadians(-swerveDrive.gyro.getAngle())) - (remote.getRightX()) * Math.cos(Math.toRadians(-swerveDrive.gyro.getAngle()));
+      double gyroForward = (remote.getRightY()) * Math.cos(Math.toRadians(-swerveDrive.gyro.getAngle())) + (remote.getRightX()) * Math.sin(Math.toRadians(-swerveDrive.gyro.getAngle()));
+      swerveDrive.updatePeriodic(gyroForward, gyroStrafe, remote.getLeftX());
+    }
+      // if (Math.abs(remote.getLeftY()) >= 0.1 || Math.abs(remote.getLeftX()) >= 0.1 || Math.abs(remote.getRightX()) >= 0.1){
+      //   swerveDrive.updatePeriodic(remote.getLeftX() * -1, remote.getLeftY() * -1, remote.getRightX());
+      //   //System.out.println("working");
+      // } else{
+      //   swerveDrive.stopAll();
+      // }
       // if (Math.abs(remote.getRawAxis(0)) >= 0.1 || Math.abs(remote.getRawAxis(1)) >= 0.1 || Math.abs(remote.getRawAxis(2)) >= 0.1){
       //   swerveDrive.updatePeriodic(remote.getRawAxis(0), remote.getRawAxis(1) * -1, remote.getRawAxis(2) * -1);
 
@@ -85,7 +90,6 @@ public class SwerveCommand extends CommandBase {
       //   swerveDrive.stopAll();
 
       // }
-    }
   }
 
   @Override
