@@ -52,7 +52,7 @@ public class RobotContainer {
     climber = new Climber();
     hood = new Hood();
     limelight = new Limelight();
-    swerveDrive = new SwerveDrive(0.413);
+    swerveDrive = new SwerveDrive(0.2934);
     intake.retract();
     hood.hoodReset();
     
@@ -75,7 +75,7 @@ new JoystickButton(controller, XboxController.Button.kB.value).whenPressed(new H
 //b button intake
 new JoystickButton(swerveController, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
  //Back button kick out ball
- new JoystickButton(swerveController, XboxController.Button.kBack.value).toggleWhenPressed(new KickOutBallsCommand());
+ new JoystickButton(swerveController, XboxController.Button.kY.value).whileHeld(new KickOutBallsCommand());
 // // A button outer intake 
  //new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
  //new JoystickButton(controller, XboxController.Button.kRightkRightStick).toggleWhenPressed(new OuterIndexCommand());
@@ -92,7 +92,7 @@ new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed
 // new JoystickButton (controller, 2).whenActive(new RaiseHoodCommand());
 
 //start button, start swerve
-new JoystickButton(swerveController, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
+new JoystickButton(swerveController, XboxController.Button.kX.value).toggleWhenPressed(new SwerveCommand());
 new JoystickButton(swerveController, XboxController.Button.kLeftBumper.value).whileActiveOnce(new GyroResetCommand());
 
 
