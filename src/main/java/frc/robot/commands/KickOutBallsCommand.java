@@ -49,7 +49,7 @@ public class KickOutBallsCommand extends CommandBase{
 
   @Override
   public boolean isFinished() {
-    return false;
+    return NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Killswitch").getBoolean(false); 
   }
     
 }
