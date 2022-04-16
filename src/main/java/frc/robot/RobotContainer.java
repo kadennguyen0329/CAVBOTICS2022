@@ -93,6 +93,7 @@ new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed
 
 //start button, start swerve
 new JoystickButton(swerveController, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
+new JoystickButton(swerveController, XboxController.Button.kLeftBumper.value).whileActiveOnce(new GyroResetCommand());
 
 
   }

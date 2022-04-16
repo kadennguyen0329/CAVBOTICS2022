@@ -79,9 +79,9 @@ public class SwerveCommand extends CommandBase {
       }
     } 
     else{
-      double gyroStrafe = (remote.getRightY()) * Math.sin(Math.toRadians(-swerveDrive.gyro.getAngle())) - (remote.getRightX()) * Math.cos(Math.toRadians(-swerveDrive.gyro.getAngle()));
-      double gyroForward = (remote.getRightY()) * Math.cos(Math.toRadians(-swerveDrive.gyro.getAngle())) + (remote.getRightX()) * Math.sin(Math.toRadians(-swerveDrive.gyro.getAngle()));
-      swerveDrive.updatePeriodic(gyroForward, gyroStrafe, remote.getLeftX());
+      // double gyroStrafe = (remote.getRightY()) * Math.sin(Math.toRadians(-swerveDrive.gyro.getAngle())) - (remote.getRightX()) * Math.cos(Math.toRadians(-swerveDrive.gyro.getAngle()));
+      // double gyroForward = (remote.getRightY()) * Math.cos(Math.toRadians(-swerveDrive.gyro.getAngle())) + (remote.getRightX()) * Math.sin(Math.toRadians(-swerveDrive.gyro.getAngle()));
+      swerveDrive.updatePeriodic(-remote.getRightX(), -remote.getRightY(), remote.getLeftX());
     }
       // if (Math.abs(remote.getLeftY()) >= 0.1 || Math.abs(remote.getLeftX()) >= 0.1 || Math.abs(remote.getRightX()) >= 0.1){
       //   swerveDrive.updatePeriodic(remote.getLeftX() * -1, remote.getLeftY() * -1, remote.getRightX());

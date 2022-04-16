@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     RobotContainer.swerveDrive.gyro.reset();
-    // swerveDrive.gyro.setAngleAdjustment(90);
+    swerveDrive.gyro.setAngleAdjustment(90);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -77,6 +77,8 @@ public class Robot extends TimedRobot {
     // NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").setDouble(1);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").setDouble(0);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("batteryVoltage").setDouble(RobotController.getBatteryVoltage());
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("robotMode").setDouble(0);
+
     SmartDashboard.putNumber("Distance", RobotContainer.limelight.getXDistance());
   }
 
@@ -131,6 +133,8 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+      NetworkTableInstance.getDefault().getTable("/datatable").getEntry("robotMode").setDouble(1);
+
     }
   }
 

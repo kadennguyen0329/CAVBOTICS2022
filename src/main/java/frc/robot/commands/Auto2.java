@@ -22,6 +22,7 @@ public class Auto2 extends CommandBase {
     private Timer timer;
     private double power;
     private int step;
+    private double startTime;
 
     public Auto2(Limelight a, Hood h, InnerIndex i, Intake in, OuterIndex o, Shooter s, SwerveDrive swerve){
         autoaim = a;
@@ -34,6 +35,7 @@ public class Auto2 extends CommandBase {
         timer = new Timer();
         power = 0;
         step = 0;
+        startTime = 0;
         addRequirements(autoaim, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
         swerveDrive.m_frontRightLocation.reset();
         swerveDrive.m_frontLeftLocation.reset();
@@ -77,7 +79,8 @@ public class Auto2 extends CommandBase {
             break;
 
             case 1:
-                if (Math.abs(swerveDrive.getGyroAngle()) < 134 ){
+            //134
+                if (Math.abs(swerveDrive.getGyroAngle()) < 148 ){
                     swerveDrive.updatePeriodic(0, 0, 0.3);
                 } else{
                     intake.stopIntake();
@@ -88,9 +91,10 @@ public class Auto2 extends CommandBase {
             break;
 
             case 2:   
-                hood.setHoodAngle(35);
-                shooter.set(4.3);
-                if(shooter.getRPM() > 1900) {
+                hood.setHoodAngle(43);
+                shooter.set(4);
+                if(shooter.getRPM() > 1800) {
+                    startTime = System.currentTimeMillis();
                     outerIndex.spin();
                     innerIndex.spin();
                     swerveDrive.resetDrive();
@@ -101,7 +105,12 @@ public class Auto2 extends CommandBase {
          
             case 3:
                     //swerveDrive.updatePeriodic(0, 0, 0);
+                    while (Math.abs(startTime - System.currentTimeMillis()) < 1000){
+                        continue;
+                    }
                     shooter.set(0);
+                    outerIndex.stop();
+                    innerIndex.stop();
                     step = 9;
                
             break;
@@ -123,9 +132,9 @@ public class Auto2 extends CommandBase {
             break;
 
             case 5:
-                outerIndex.stop();
+                // outerIndex.stop();
                 intake.stopIntake();
-                innerIndex.stop();
+                // innerIndex.stop();
                 step = 9;
             break;
 
@@ -156,12 +165,14 @@ public class Auto2 extends CommandBase {
     @Override
     public void end(boolean interrupted){
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto2").setBoolean(false);
+    shooter.set(0);
 
     }
 
     @Override
     public boolean isFinished(){
-        return (step >= 9);
+        //return (step >= 9);
+        return step >= 10;
     }
 
     
