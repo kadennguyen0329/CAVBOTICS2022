@@ -95,6 +95,9 @@ new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed
 new JoystickButton(swerveController, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
 new JoystickButton(swerveController, XboxController.Button.kLeftBumper.value).whileActiveOnce(new GyroResetCommand());
 
+new JoystickButton(swerveController, XboxController.Button.kA.value).whenHeld(new ShootSequenceCommand());
+new JoystickButton(swerveController, XboxController.Button.kA.value).whenHeld(new HoodCommand());
+
 
   }
 

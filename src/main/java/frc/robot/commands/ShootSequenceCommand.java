@@ -36,32 +36,36 @@ public class ShootSequenceCommand extends CommandBase {
     public void execute() {
         
         NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
-        if(limelight.getXDistance() <= 13)
+        if(Math.abs(RobotContainer.limelight.getXOffset()) < 2)
         {
-            System.out.println("Short Distance");
-            shooter.set(3.7);
-            if(shooter.getRPM() > 1580) {
-                outerIndex.spin();
-                innerIndex.spin();
+            if(limelight.getXDistance() <= 13)
+            {
+                System.out.println("Short Distance");
+                shooter.set(3.7);
+                if(shooter.getRPM() > 1580) {
+                    outerIndex.spin();
+                    innerIndex.spin();
+                }
+            }
+            else if (limelight.getXDistance() <= 18)
+            {
+                System.out.println("Medium Distance");
+                shooter.set(4.1);
+                if(shooter.getRPM() > 1900) {
+                    outerIndex.spin();
+                    innerIndex.spin();
+                }
+            }
+            else {
+                System.out.println("Long Distaqnce");
+                shooter.set(5.2);
+                if (shooter.getRPM() > 2200){
+                    outerIndex.spin();
+                    innerIndex.spin();
+                }
             }
         }
-        else if (limelight.getXDistance() <= 18)
-        {
-            System.out.println("Medium Distance");
-            shooter.set(4.1);
-            if(shooter.getRPM() > 1900) {
-                outerIndex.spin();
-                innerIndex.spin();
-            }
-        }
-        else {
-            System.out.println("Long Distaqnce");
-            shooter.set(5.2);
-            if (shooter.getRPM() > 2200){
-                outerIndex.spin();
-                innerIndex.spin();
-            }
-        }
+       
         // outerIndex.spin();
         // innerIndex.spin();
     }

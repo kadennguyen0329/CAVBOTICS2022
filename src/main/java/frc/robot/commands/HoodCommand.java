@@ -29,7 +29,9 @@ public class HoodCommand extends CommandBase {
         System.out.println("Hood activated");
         //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
         double mode = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);
-        if(mode == 0){
+        
+        
+        if(mode == 0 && Math.abs(limelight.getXOffset()) < 2){
             if (limelight.hasTarget() == 1){
                 hood.adjustAngle(limelight.getXDistance());
             // } else{
