@@ -57,8 +57,8 @@ public class Auto1 extends CommandBase {
         switch(step){
             
             case 0:
-            hood.setHoodAngle(35);
-                shooter.set(3.8);
+            hood.setHoodAngle(27);
+                shooter.set(3);
                 double startTime = System.currentTimeMillis();
                 while (Math.abs(startTime - System.currentTimeMillis()) < 3000){
                     continue;

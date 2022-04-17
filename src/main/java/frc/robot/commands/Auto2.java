@@ -73,7 +73,7 @@ public class Auto2 extends CommandBase {
                     step = 1;
                     System.out.println("Drove 4 feet");
                 } else{
-                    swerveDrive.updatePeriodic(0.018, 0.4, 0);
+                    swerveDrive.updatePeriodic(-0.014, 0.4, 0);
                     
                 }
         
@@ -81,7 +81,7 @@ public class Auto2 extends CommandBase {
 
             case 1:
             //134
-                if (Math.abs(swerveDrive.getGyroAngle()) < 148 ){
+                if (Math.abs(swerveDrive.getGyroAngle()) < 128 ){
                     swerveDrive.updatePeriodic(0, 0, 0.3);
                 } else{
                     intake.stopIntake();

@@ -69,7 +69,7 @@ public class Robot extends TimedRobot {
     // swerveController = new XboxController(1);
     // m_RobotContainer = new RobotContainer();
     
-    CameraServer.startAutomaticCapture();
+    //CameraServer.startAutomaticCapture();
     //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
 
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Killswitch").setBoolean(false);
