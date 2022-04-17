@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.SwerveDrive;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.util.net.PortForwarder;
+
 
 
 /**
@@ -42,6 +44,14 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     RobotContainer.swerveDrive.gyro.reset();
+
+    //visit 172.22.11.2:5801
+    PortForwarder.add(5800, "limelight.local", 5800);
+    PortForwarder.add(5801, "limelight.local", 5801);
+    PortForwarder.add(5802, "limelight.local", 5802);
+    PortForwarder.add(5803, "limelight.local", 5803);
+    PortForwarder.add(5804, "limelight.local", 5804);
+    PortForwarder.add(5805, "limelight.local", 5805);
     // swerveDrive.gyro.setAngleAdjustment(90);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our

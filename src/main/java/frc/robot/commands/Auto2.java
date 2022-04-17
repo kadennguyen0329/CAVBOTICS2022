@@ -62,6 +62,7 @@ public class Auto2 extends CommandBase {
                     intake.extend();
                     Constants.intakeStatus = true;
                 }
+               
                 intake.spinIntake();
                 outerIndex.spin();
 
@@ -91,7 +92,7 @@ public class Auto2 extends CommandBase {
             break;
 
             case 2:   
-                hood.setHoodAngle(43);
+                hood.setHoodAngle(35);
                 shooter.set(4);
                 if(shooter.getRPM() > 1800) {
                     startTime = System.currentTimeMillis();

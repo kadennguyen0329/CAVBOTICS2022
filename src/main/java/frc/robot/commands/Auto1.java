@@ -57,7 +57,7 @@ public class Auto1 extends CommandBase {
         switch(step){
             
             case 0:
-            hood.setHoodAngle(30);
+            hood.setHoodAngle(35);
                 shooter.set(3.8);
                 double startTime = System.currentTimeMillis();
                 while (Math.abs(startTime - System.currentTimeMillis()) < 3000){
@@ -72,6 +72,7 @@ public class Auto1 extends CommandBase {
                 outerIndex.stop();
                 innerIndex.stop();
                 shooter.set(0);
+                step = 9;
             break;        
 
             default:
