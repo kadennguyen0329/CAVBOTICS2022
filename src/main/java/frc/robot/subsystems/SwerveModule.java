@@ -146,11 +146,11 @@ public class SwerveModule extends SubsystemBase {
 
             double setPoint = cont.calculate(getAngle(), angle.getDegrees());
             if (setPoint < 0){
-                turn.set(Math.max(setPoint, -0.6));
+                turn.set(Math.max(setPoint, -0.4));
             } else{
-                turn.set(Math.min(0.6, setPoint));
+                turn.set(Math.min(0.4, setPoint));
             }
-            drive.set(speed / 5.5);
+            drive.set(speed / 3);
             this.setCurrentAngle();
         
     }

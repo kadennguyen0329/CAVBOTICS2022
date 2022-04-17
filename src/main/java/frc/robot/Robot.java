@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.SwerveDrive;
+import edu.wpi.first.wpilibj.XboxController;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,6 +27,9 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   private static SwerveDrive swerveDrive;
+
+  private static XboxController remote;
+
 
 
   /**
@@ -54,7 +59,7 @@ public class Robot extends TimedRobot {
     // swerveController = new XboxController(1);
     // m_RobotContainer = new RobotContainer();
     
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
     //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
 
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Killswitch").setBoolean(false);
@@ -125,6 +130,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    swerveDrive = RobotContainer.swerveDrive;
+    remote = RobotContainer.swerveController;
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -136,7 +143,14 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    if (Math.abs(remote.getRawAxis(0)) >= 0.1 || Math.abs(remote.getRawAxis(1)) >= 0.1 || Math.abs(remote.getRawAxis(2)) >= 0.1){
+      swerveDrive.updatePeriodic(remote.getRawAxis(0), remote.getRawAxis(1), -remote.getRawAxis(2));
+    } 
+    else {
+      swerveDrive.stopAll();
+    }
+  }
 
   @Override
   public void testInit() {

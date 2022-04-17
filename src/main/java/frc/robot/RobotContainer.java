@@ -38,11 +38,13 @@ public class RobotContainer {
   public static XboxController controller;
   public static XboxController swerveController;
   public static SwerveCommand swerveCommand;
+  public static int status;
   // The robot's subsystems and commands are defined here...
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    status = 0;
     controller = new XboxController(0);
     swerveController = new XboxController(1);
     intake = new Intake();
@@ -52,7 +54,7 @@ public class RobotContainer {
     climber = new Climber();
     hood = new Hood();
     limelight = new Limelight();
-    swerveDrive = new SwerveDrive(0.413);
+    swerveDrive = new SwerveDrive(0.2923);
     intake.retract();
     hood.hoodReset();
     
@@ -67,21 +69,21 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 // // Y button shoot
-new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
+//new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
 // X button intake
- //new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
+//new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
 // //Right stick hood set
-new JoystickButton(controller, XboxController.Button.kB.value).whenPressed(new HoodCommand());
+new JoystickButton(controller, XboxController.Button.kB.value).whenPressed(new AutoAimCommand());
 //b button intake
 new JoystickButton(swerveController, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
  //Back button kick out ball
- new JoystickButton(swerveController, XboxController.Button.kBack.value).toggleWhenPressed(new KickOutBallsCommand());
+new JoystickButton(swerveController, XboxController.Button.kY.value).whileHeld(new KickOutBallsCommand());
 // // A button outer intake 
- //new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
- //new JoystickButton(controller, XboxController.Button.kRightkRightStick).toggleWhenPressed(new OuterIndexCommand());
+//new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
+//new JoystickButton(controller, XboxController.Button.kRightkRightStick).toggleWhenPressed(new OuterIndexCommand());
 // //Left bumper Extend Climber
-new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new ExtendClimberCommand());
-new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new RetractClimberCommand());
+new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new ExtendClimberCommand());
+new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new RetractClimberCommand());
 new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new LimeLightToggleCommand());
 new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new LimeLightOffCommand());
 
