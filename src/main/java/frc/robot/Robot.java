@@ -82,6 +82,8 @@ public class Robot extends TimedRobot {
     // NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").setDouble(1);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").setDouble(0);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("batteryVoltage").setDouble(RobotController.getBatteryVoltage());
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("robotMode").setDouble(0);
+
     SmartDashboard.putNumber("Distance", RobotContainer.limelight.getXDistance());
   }
 
@@ -130,6 +132,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("robotMode").setDouble(1);
     swerveDrive = RobotContainer.swerveDrive;
     remote = RobotContainer.swerveController;
     // This makes sure that the autonomous stops running when

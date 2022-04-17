@@ -28,11 +28,11 @@ public class Intake extends SubsystemBase {
     }
 
     public void spinIntake() {
-        intake.set(-0.47);
+        intake.set(-0.57);
     }
 
     public void reverseIntake(){
-        intake.set(0.47);
+        intake.set(0.40);
     }
 
     public void extend() {

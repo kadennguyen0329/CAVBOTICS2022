@@ -55,111 +55,24 @@ public class Auto1 extends CommandBase {
 
         
         switch(step){
-
+            
             case 0:
-                swerveDrive.gyro.reset();
-                hood.setHoodAngle(20);
-                shooter.set(4.5);
-                if(shooter.getRPM() > 1900) {
-                    outerIndex.spin();
-                    innerIndex.spin();
-                    step = 1;
-                    shooter.set(0);
+            hood.setHoodAngle(30);
+                shooter.set(3.8);
+                double startTime = System.currentTimeMillis();
+                while (Math.abs(startTime - System.currentTimeMillis()) < 3000){
+                    continue;
                 }
-            break;
-
-
-            //turn 180
-            case 1:
-                //System.out.println("gyro angle: " + swerveDrive.getGyroAngle());
-                if (Math.abs(swerveDrive.getGyroAngle()) < 173){
-                    swerveDrive.updatePeriodic(0, 0, 0.6);
-                } else{
-                    System.out.println("This casues stop: " + swerveDrive.getGyroAngle());
-                    //swerveDrive.updatePeriodic(0, 0, 0);
-                    swerveDrive.stopAll();
-                    swerveDrive.resetDrive();
-                    innerIndex.stop();
-                    step = 2;
-                }
-            break;
-
-                //turn around 180 degrees
-            case 2:
-                if (!Constants.intakeStatus){
-                    intake.extend();
-                    Constants.intakeStatus = true;
-                }
-                intake.spinIntake();
                 outerIndex.spin();
-
-                if (Math.abs(swerveDrive.getDriveDistance()) > 48 ){
-                    swerveDrive.stopAll();
-                    //swerveDrive.updatePeriodic(0, 0, 0);]
-                    intake.retract();
-                    intake.stopIntake();
-                    //outerIndex.stop();
-                    Constants.intakeStatus = false;
-                    step = 3;
-                    System.out.println("Drove 4 feet");
-                } else{
-                    swerveDrive.updatePeriodic(0, 0.2, 0);
+                innerIndex.spin();
+                startTime = System.currentTimeMillis();
+                while (Math.abs(startTime - System.currentTimeMillis()) < 1500){
+                    continue;
                 }
-            break;
-
-         
-            case 3:
-                if (Math.abs(swerveDrive.getGyroAngle()) > 13){
-                    swerveDrive.updatePeriodic(0, 0, -0.6);
-                } else{
-                    swerveDrive.stopAll();
-                    swerveDrive.resetDrive();
-                    outerIndex.stop();
-                    step = 4;
-                }         
-            break;
-
-            //move forward several meters
-
-            case 4:
-                if (Math.abs(swerveDrive.getDriveDistance()) < 10){
-                    swerveDrive.updatePeriodic(0, 0.15, 0);
-                } else{
-                    swerveDrive.stopAll();
-                    hood.setHoodAngle(32);
-                    shooter.set(5);
-                    if(shooter.getRPM() > 2100) {
-                        outerIndex.spin();
-                        innerIndex.spin();
-                        shooter.set(0);
-                        step = 5;
-                    }
-                }
-            break;
-
-            case 5:
                 outerIndex.stop();
-                intake.stopIntake();
-                step = 9;
-            break;
-
-            //turn around again
-            case 6:
-                
-            break;
-
-            //autoaim again 
-
-            case 7:
-                
-            break;
-
-
-            //shoot again
-
-            case 8:
-
-            break;
+                innerIndex.stop();
+                shooter.set(0);
+            break;        
 
             default:
             step = 9;
@@ -170,6 +83,9 @@ public class Auto1 extends CommandBase {
     @Override
     public void end(boolean interrupted){
         NetworkTableInstance.getDefault().getTable("/datatable").getEntry("Auto1").setBoolean(false);
+        shooter.set(0);
+        // outerIndex.stop();
+        // innerIndex.stop();
 
     }
 
