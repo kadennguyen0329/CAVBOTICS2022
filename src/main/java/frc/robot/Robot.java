@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
 
   private static XboxController remote;
 
-  // private Limelight light;
+  private Limelight light;
 
 
 
@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     RobotContainer.swerveDrive.gyro.reset();
-    // light = RobotContainer.limelight;
+    light = RobotContainer.limelight;
 
     //visit 172.22.11.2:5801
     PortForwarder.add(5800, "limelight.local", 5800);
@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").setDouble(0);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("batteryVoltage").setDouble(RobotController.getBatteryVoltage());
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("robotMode").setDouble(0);
-    // NetworkTableInstance.getDefault().getTable("/datatable").getEntry("distance").setDouble(light.getXDistance());
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("distance").setDouble(light.getXDistance());
 
     SmartDashboard.putNumber("Distance", RobotContainer.limelight.getXDistance());
   }
