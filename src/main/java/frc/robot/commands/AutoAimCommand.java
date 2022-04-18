@@ -11,6 +11,7 @@ import frc.robot.subsystems.InnerIndex;
 import frc.robot.subsystems.OuterIndex;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class AutoAimCommand extends CommandBase {
@@ -51,31 +52,37 @@ public class AutoAimCommand extends CommandBase {
       double turnStartTime = 0;
       if (mode == 0){
         if (light.hasTarget() == 1){
-          if(light.getXDistance() <= 13)
+          double dist = 0;
+          if(light.getXDistance() <= 2)
           {
               System.out.println("Short Distance");
-              shooter.set(3.3);
+              dist = 1;
+              shooter.set(3.7);
               startTime = System.currentTimeMillis();
           }
-          else if (light.getXDistance() <= 18)
+          else if (light.getXDistance() <= 7)
           {
               System.out.println("Medium Distance");
-              shooter.set(3.8);
+              SmartDashboard.putNumber("Distance", 2);
+              dist = 2;
+              shooter.set(3.9);
               startTime = System.currentTimeMillis();
           }
           else {
               System.out.println("Long Distance");
+              dist = 3;
               shooter.set(4.2);
               startTime = System.currentTimeMillis();
           }
+          SmartDashboard.putNumber("distance", dist);
           System.out.println("Found target");
           double offset = light.getXOffset();
           turnStartTime = System.currentTimeMillis();
           while (Math.abs(offset) > 2){
             if (offset < 0){
-              swerveDrive.updatePeriodic(0, 0, -0.05 * Math.sqrt(Math.abs(offset)));
+              swerveDrive.updatePeriodic(0, 0, -0.037 * Math.sqrt(Math.abs(offset)));
             } else{
-              swerveDrive.updatePeriodic(0, 0, 0.05 * Math.sqrt(Math.abs(offset)));
+              swerveDrive.updatePeriodic(0, 0, 0.035 * Math.sqrt(Math.abs(offset)));
             }
             offset = light.getXOffset();
           }

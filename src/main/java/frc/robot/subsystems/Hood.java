@@ -44,7 +44,7 @@ public class Hood extends SubsystemBase {
 
     public void adjustAngle(double distanceFromTarget)
     {
-        double angle = 2 * distanceFromTarget + 10;
+        double angle = 2.5 * distanceFromTarget + 10;
         setHoodAngle(angle);
     }
 
