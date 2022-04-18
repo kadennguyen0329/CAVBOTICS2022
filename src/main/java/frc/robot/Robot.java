@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.SwerveDrive;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.util.net.PortForwarder;
@@ -32,6 +33,9 @@ public class Robot extends TimedRobot {
 
   private static XboxController remote;
 
+  private Limelight light;
+
+
 
 
   /**
@@ -44,6 +48,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     RobotContainer.swerveDrive.gyro.reset();
+    light = RobotContainer.limelight;
 
     //visit 172.22.11.2:5801
     PortForwarder.add(5800, "limelight.local", 5800);
@@ -93,6 +98,7 @@ public class Robot extends TimedRobot {
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").setDouble(0);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("batteryVoltage").setDouble(RobotController.getBatteryVoltage());
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("robotMode").setDouble(0);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("distance").setDouble(light.getXDistance());
 
     SmartDashboard.putNumber("Distance", RobotContainer.limelight.getXDistance());
   }
@@ -111,6 +117,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("distance").setDouble(light.getXDistance());
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("batteryVoltage").setDouble(RobotController.getBatteryVoltage());
     //System.out.println(RobotContainer.swerveDrive.getGyroAngle());
   }
