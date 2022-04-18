@@ -57,7 +57,7 @@ public class AutoAimCommand extends CommandBase {
           {
               System.out.println("Short Distance");
               dist = 1;
-              shooter.set(3.7);
+              shooter.set(NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shortDistShooter").getDouble(3.7));
               startTime = System.currentTimeMillis();
           }
           else if (light.getXDistance() <= 7)
@@ -65,13 +65,13 @@ public class AutoAimCommand extends CommandBase {
               System.out.println("Medium Distance");
               SmartDashboard.putNumber("Distance", 2);
               dist = 2;
-              shooter.set(3.9);
+              shooter.set(NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shortDistShooter").getDouble(3.9));
               startTime = System.currentTimeMillis();
           }
           else {
               System.out.println("Long Distance");
               dist = 3;
-              shooter.set(4.2);
+              shooter.set(NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shortDistShooter").getDouble(4.2));
               startTime = System.currentTimeMillis();
           }
           SmartDashboard.putNumber("distance", dist);
@@ -80,9 +80,9 @@ public class AutoAimCommand extends CommandBase {
           turnStartTime = System.currentTimeMillis();
           while (Math.abs(offset) > 2){
             if (offset < 0){
-              swerveDrive.updatePeriodic(0, 0, -0.037 * Math.sqrt(Math.abs(offset)));
+              swerveDrive.updatePeriodic(0, 0, (-((NetworkTableInstance.getDefault().getTable("/datatable").getEntry("rightTurning").getDouble(37))/1000)) * Math.sqrt(Math.abs(offset)));
             } else{
-              swerveDrive.updatePeriodic(0, 0, 0.035 * Math.sqrt(Math.abs(offset)));
+              swerveDrive.updatePeriodic(0, 0, (-(NetworkTableInstance.getDefault().getTable("/datatable").getEntry("rightTurning").getDouble(35))/1000) * Math.sqrt(Math.abs(offset)));
             }
             offset = light.getXOffset();
           }
