@@ -99,9 +99,9 @@ public class Robot extends TimedRobot {
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("batteryVoltage").setDouble(RobotController.getBatteryVoltage());
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("robotMode").setDouble(0);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("distance").setDouble(light.getXDistance());
-    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shortDistShooter").setDouble(3.7);
-    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("midDistShooter").setDouble(3.9);
-    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("longDistShooter").setDouble(4.2);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shortDist").setDouble(3.7);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("midDist").setDouble(3.9);
+    NetworkTableInstance.getDefault().getTable("/datatable").getEntry("longDist").setDouble(4.2);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("leftTurning").setDouble(37);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("rightTurning").setDouble(35);
 
